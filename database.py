@@ -22,7 +22,7 @@ def createInventory():
 
     mycursor = mydb.cursor()
 
-    mycursor.execute("CREATE TABLE inventory (Product_ID VARCHAR(45), Quantity INT, Wholesale_Price FLOAT, Sale_Price FLOAT, Supplier_ID VARCHAR(45))")
+    mycursor.execute("CREATE TABLE IF NOT EXISTS inventory (Product_ID VARCHAR(45), Quantity INT, Wholesale_Price FLOAT, Sale_Price FLOAT, Supplier_ID VARCHAR(45))")
 
 def createOrders():
     
@@ -35,26 +35,10 @@ def createOrders():
 
     mycursor = mydb.cursor()
 
-    mycursor.execute("CREATE TABLE orders (Date , Cust_Email VARCHAR(45), Cust_Location INT, Product_ID VARCHAR(45), Quantity INT)")
+    mycursor.execute("CREATE TABLE IF NOT EXISTS orders (Date DATE, Cust_Email VARCHAR(45), Cust_Location INT, Product_ID VARCHAR(45), Quantity INT)")
 
-
-def checkDB():
-
-    mydb = mc.connect(
-        host="localhost",
-        user="root",
-        password=""
-    )
-
-    mycursor = mydb.cursor()
-
-    mycursor.execute("SHOW DATABASES LIKE 'project'")
-
-    if mycursor == None:
-        createDB()
-
-def checkInventory():
-
+def createEmployees():
+    
     mydb = mc.connect(
         host="localhost",
         user="root",
@@ -64,13 +48,10 @@ def checkInventory():
 
     mycursor = mydb.cursor()
 
-    mycursor.execute("SHOW TABLES LIKE 'inventory'")
+    mycursor.execute("CREATE TABLE IF NOT EXISTS employees (username VARCHAR(45), password VARCHAR(45))")
 
-    if mycursor == None:
-        createInventory()
-
-def checkOrders():
-
+def createCustomers():
+    
     mydb = mc.connect(
         host="localhost",
         user="root",
@@ -80,14 +61,13 @@ def checkOrders():
 
     mycursor = mydb.cursor()
 
-    mycursor.execute("SHOW TABLES LIKE 'orders'")
-
-    if mycursor == None:
-        createOrders()
+    mycursor.execute("CREATE TABLE IF NOT EXISTS customers (cust_email VARCHAR(45), username VARCHAR(45), password VARCHAR(45))")
 
 def main():
-    checkDB()
-    checkInventory()
-    checkOrders()
+    createDB()
+    createInventory()
+    createOrders()
+    createEmployees()
+    createCustomers()
 
 main()
