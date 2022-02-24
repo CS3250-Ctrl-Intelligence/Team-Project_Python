@@ -24,7 +24,6 @@
    </property>
    <property name="font">
     <font>
-     <family>Arial Black</family>
      <pointsize>12</pointsize>
      <bold>true</bold>
     </font>
@@ -44,7 +43,6 @@ background-color:qlineargradient(spread:pad, x1:0, y1:0.636, x2:0, y2:0.999591, 
     </property>
     <property name="font">
      <font>
-      <family>Arial Black</family>
       <pointsize>12</pointsize>
       <bold>true</bold>
      </font>
@@ -60,27 +58,27 @@ background-color:qlineargradient(spread:pad, x1:0, y1:0.636, x2:0, y2:0.999591, 
     </attribute>
     <column>
      <property name="text">
+      <string>Date</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Customer Email</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Customer Location</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
       <string>Product ID</string>
      </property>
     </column>
     <column>
      <property name="text">
-      <string>Quantity</string>
-     </property>
-    </column>
-    <column>
-     <property name="text">
-      <string>Wholesale Price</string>
-     </property>
-    </column>
-    <column>
-     <property name="text">
-      <string>Sale Price</string>
-     </property>
-    </column>
-    <column>
-     <property name="text">
-      <string>Supplier ID</string>
+      <string>Product Quantity</string>
      </property>
     </column>
    </widget>
@@ -95,7 +93,6 @@ background-color:qlineargradient(spread:pad, x1:0, y1:0.636, x2:0, y2:0.999591, 
     </property>
     <property name="font">
      <font>
-      <family>Arial Black</family>
       <pointsize>36</pointsize>
       <bold>true</bold>
      </font>
@@ -104,7 +101,7 @@ background-color:qlineargradient(spread:pad, x1:0, y1:0.636, x2:0, y2:0.999591, 
      <string notr="true">color: rgb(255, 255, 255);</string>
     </property>
     <property name="text">
-     <string>Inventory</string>
+     <string>Orders</string>
     </property>
    </widget>
    <widget class="QPushButton" name="pushButton_import">
@@ -118,7 +115,6 @@ background-color:qlineargradient(spread:pad, x1:0, y1:0.636, x2:0, y2:0.999591, 
     </property>
     <property name="font">
      <font>
-      <family>Arial Black</family>
       <pointsize>11</pointsize>
       <bold>true</bold>
      </font>
@@ -146,30 +142,10 @@ background-color:qlineargradient(spread:pad, x1:0, y1:0.636, x2:0, y2:0.999591, 
      <string>Fetch Data</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_delete">
+   <widget class="QPushButton" name="pushButton_back">
     <property name="geometry">
      <rect>
-      <x>720</x>
-      <y>40</y>
-      <width>131</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>Arial Black</family>
-      <pointsize>12</pointsize>
-      <bold>true</bold>
-     </font>
-    </property>
-    <property name="text">
-     <string>Delete Data</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="pushButton_update">
-    <property name="geometry">
-     <rect>
-      <x>580</x>
+      <x>190</x>
       <y>40</y>
       <width>131</width>
       <height>31</height>
@@ -182,7 +158,7 @@ background-color:qlineargradient(spread:pad, x1:0, y1:0.636, x2:0, y2:0.999591, 
      </font>
     </property>
     <property name="text">
-     <string>Update Data</string>
+     <string>Go Back</string>
     </property>
    </widget>
   </widget>
