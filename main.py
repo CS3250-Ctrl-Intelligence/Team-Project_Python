@@ -5,6 +5,7 @@ from PyQt6.QtWidgets import QDialog, QApplication, QWidget, QTableWidgetItem
 import mysql.connector as mc
 import csv
 import database
+import time
 
 class WelcomeScreen(QDialog):
     def __init__(self):
@@ -14,18 +15,35 @@ class WelcomeScreen(QDialog):
         self.pushButton_newAcc.clicked.connect(self.goToCreate)
 
     def goToLogin(self):
-        login = LoginScreen()
+        login = UserLoginChoice()
         widget.addWidget(login)
         widget.setCurrentIndex(widget.currentIndex()+1)
 
     def goToCreate(self):
-        createAcc = CreateAccScreen()
-        widget.addWidget(createAcc)
+        createChoice = CreateChoiceScreen()
+        widget.addWidget(createChoice)
         widget.setCurrentIndex(widget.currentIndex()+1)
 
-class LoginScreen(QDialog):
+class UserLoginChoice(QDialog):
     def __init__(self):
-        super(LoginScreen, self).__init__()
+        super(UserLoginChoice, self).__init__()
+        loadUi("userLogin.ui",self)
+        self.pushButton_employee.clicked.connect(self.employeeLogin)
+        self.pushButton_customer.clicked.connect(self.customerLogin)
+
+    def employeeLogin(self):
+        login = EmployeeLoginScreen()
+        widget.addWidget(login)
+        widget.setCurrentIndex(widget.currentIndex()+1)
+
+    def customerLogin(self):
+        login = CustomerLoginScreen()
+        widget.addWidget(login)
+        widget.setCurrentIndex(widget.currentIndex()+1)
+
+class EmployeeLoginScreen(QDialog):
+    def __init__(self):
+        super(EmployeeLoginScreen, self).__init__()
         loadUi("login.ui",self)
         self.pushButton_login.clicked.connect(self.loginFunc)
 
@@ -47,7 +65,7 @@ class LoginScreen(QDialog):
             )
 
             mycursor = mydb.cursor()
-            query = "SELECT username,password from users where username like '" + username + "'and password like '" + password +  "'"
+            query = "SELECT username,password from employees where username like '" + username + "'and password like '" + password +  "'"
             mycursor.execute(query)
 
             result = mycursor.fetchone()
@@ -60,14 +78,68 @@ class LoginScreen(QDialog):
         except mc.Error as e:
             self.label_result.setText("Error")
 
-class CreateAccScreen(QDialog):
+
+class CustomerLoginScreen(QDialog):
     def __init__(self):
-        super(CreateAccScreen, self).__init__()
-        loadUi("createacc.ui",self)
+        super(CustomerLoginScreen, self).__init__()
+        loadUi("login.ui",self)
+        self.pushButton_login.clicked.connect(self.loginFunc)
+
+    def goToDashboard(self):
+        dashboard = DashboardScreen()
+        widget.addWidget(dashboard)
+        widget.setCurrentIndex(widget.currentIndex()+1)
+
+
+    def loginFunc(self):
+        try:
+            username = self.lineEdit_username.text()
+            password = self.lineEdit_password.text()
+            mydb = mc.connect(
+                host="localhost",
+                user="root",
+                password="",
+                database="project"
+            )
+
+            mycursor = mydb.cursor()
+            query = "SELECT username,password from customers where username like '" + username + "'and password like '" + password +  "'"
+            mycursor.execute(query)
+
+            result = mycursor.fetchone()
+
+            if result ==None:
+                self.label_result.setText("Incorrect email or password")
+
+            else:
+                self.goToDashboard()
+        except mc.Error as e:
+            self.label_result.setText("Error")
+
+class CreateChoiceScreen(QDialog):
+    def __init__(self):
+        super(CreateChoiceScreen, self).__init__()
+        loadUi("userCreate.ui",self)
+        self.pushButton_employee.clicked.connect(self.employeeCreate)
+        self.pushButton_customer.clicked.connect(self.customerCreate)
+
+    def employeeCreate(self):
+        create = CreateEmpScreen()
+        widget.addWidget(create)
+        widget.setCurrentIndex(widget.currentIndex()+1)
+
+    def customerCreate(self):
+        create = CreateCustScreen()
+        widget.addWidget(create)
+        widget.setCurrentIndex(widget.currentIndex()+1)
+
+class CreateEmpScreen(QDialog):
+    def __init__(self):
+        super(CreateEmpScreen, self).__init__()
+        loadUi("createEmployee.ui",self)
         self.pushButton_signup.clicked.connect(self.signup)
 
     def signup(self):
-
         username = self.lineEdit_username.text()
         password = self.lineEdit_password.text()
         confPassword = self.lineEdit_confpassword.text()
@@ -87,20 +159,69 @@ class CreateAccScreen(QDialog):
             )
 
                 mycursor = mydb.cursor()
-                query = 'INSERT INTO users(username, password)' 'VALUES(%s, %s)'
+                query = 'INSERT INTO employees(username, password)' 'VALUES(%s, %s)'
                 value = (username, password)
 
                 mycursor.execute(query, value)
 
                 mydb.commit()
-                self.label_result.setText("User added to database")
+
 
         
             except mc.Error as e:
                 self.label_result.setText("Error inserting data")
 
-            dashboard = DashboardScreen()
-            widget.addWidget(dashboard)
+            self.label_result.setText("Employee created, returning to main screen")
+            time.sleep(4)
+
+            welcome = WelcomeScreen()
+            widget.addWidget(welcome)
+            widget.setCurrentIndex(widget.currentIndex()+1)
+
+class CreateCustScreen(QDialog):
+    def __init__(self):
+        super(CreateCustScreen, self).__init__()
+        loadUi("createCustomer.ui",self)
+        self.pushButton_signup.clicked.connect(self.signup)
+
+    def signup(self):
+        email = self.lineEdit_custEmail.text()
+        username = self.lineEdit_username.text()
+        password = self.lineEdit_password.text()
+        confPassword = self.lineEdit_confpassword.text()
+        if len(email)==0 or len(username)==0 or len(password)==0 or len(confPassword)==0:
+            self.label_result.setText("Please fill in all fields.")
+
+        elif password != confPassword:
+            self.label_result.setText("Passwords do not match")
+
+        else:
+            try:
+                mydb = mc.connect(
+                    host="localhost",
+                    user="root",
+                    password="",
+                    database="project"
+            )
+
+                mycursor = mydb.cursor()
+                query = 'INSERT INTO customers(cust_email, username, password)' 'VALUES(%s, %s, %s)'
+                value = (email, username, password)
+
+                mycursor.execute(query, value)
+
+                mydb.commit()
+
+
+        
+            except mc.Error as e:
+                self.label_result.setText("Error inserting data")
+
+            self.label_result.setText("Customer created, returning to main screen")
+            time.sleep(4)
+
+            welcome = WelcomeScreen()
+            widget.addWidget(welcome)
             widget.setCurrentIndex(widget.currentIndex()+1)
 
 class DashboardScreen(QDialog):
