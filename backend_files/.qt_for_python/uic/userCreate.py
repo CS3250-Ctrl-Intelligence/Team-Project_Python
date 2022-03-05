@@ -1,4 +1,4 @@
-# Form implementation generated from reading ui file 'c:\Users\Marin\Documents\Team-Project_Python\dashboard.ui'
+# Form implementation generated from reading ui file 'c:\Users\Marin\Team-Project_Python\backend_files\userCreate.ui'
 #
 # Created by: PyQt6 UI code generator 6.1.0
 #
@@ -20,7 +20,7 @@ class Ui_login_window(object):
         self.widget.setObjectName("widget")
         self.label_login = QtWidgets.QLabel(self.widget)
         self.label_login.setEnabled(True)
-        self.label_login.setGeometry(QtCore.QRect(20, 10, 371, 71))
+        self.label_login.setGeometry(QtCore.QRect(270, 130, 661, 121))
         font = QtGui.QFont()
         font.setPointSize(36)
         font.setBold(True)
@@ -29,18 +29,18 @@ class Ui_login_window(object):
         self.label_login.setStyleSheet("color:white;\n"
 "font: 900 36pt \"Arial Black\";")
         self.label_login.setObjectName("label_login")
-        self.pushButton_inv = QtWidgets.QPushButton(self.widget)
-        self.pushButton_inv.setGeometry(QtCore.QRect(70, 140, 261, 171))
-        self.pushButton_inv.setStyleSheet("border-radius:20px;\n"
+        self.pushButton_employee = QtWidgets.QPushButton(self.widget)
+        self.pushButton_employee.setGeometry(QtCore.QRect(180, 310, 361, 191))
+        self.pushButton_employee.setStyleSheet("border-radius:20px;\n"
 "background-color: rgb(255, 255, 255);\n"
 "font: 900 14pt \"Arial Black\";")
-        self.pushButton_inv.setObjectName("pushButton_inv")
-        self.pushButton_custOrders = QtWidgets.QPushButton(self.widget)
-        self.pushButton_custOrders.setGeometry(QtCore.QRect(370, 140, 241, 171))
-        self.pushButton_custOrders.setStyleSheet("border-radius:20px;\n"
+        self.pushButton_employee.setObjectName("pushButton_employee")
+        self.pushButton_customer = QtWidgets.QPushButton(self.widget)
+        self.pushButton_customer.setGeometry(QtCore.QRect(620, 310, 361, 191))
+        self.pushButton_customer.setStyleSheet("border-radius:20px;\n"
 "background-color: rgb(255, 255, 255);\n"
 "font: 900 14pt \"Arial Black\";")
-        self.pushButton_custOrders.setObjectName("pushButton_custOrders")
+        self.pushButton_customer.setObjectName("pushButton_customer")
 
         self.retranslateUi(login_window)
         QtCore.QMetaObject.connectSlotsByName(login_window)
@@ -48,6 +48,6 @@ class Ui_login_window(object):
     def retranslateUi(self, login_window):
         _translate = QtCore.QCoreApplication.translate
         login_window.setWindowTitle(_translate("login_window", "Dialog"))
-        self.label_login.setText(_translate("login_window", "DASHBOARD"))
-        self.pushButton_inv.setText(_translate("login_window", "View Inventory"))
-        self.pushButton_custOrders.setText(_translate("login_window", "View Customer Orders"))
+        self.label_login.setText(_translate("login_window", "CHOOSE WHO YOU ARE"))
+        self.pushButton_employee.setText(_translate("login_window", "EMPLOYEE"))
+        self.pushButton_customer.setText(_translate("login_window", "CUSTOMER"))
