@@ -1,4 +1,4 @@
-# Form implementation generated from reading ui file 'c:\Users\Marin\Documents\Team-Project_Python\deleteData.ui'
+# Form implementation generated from reading ui file 'c:\Users\Marin\Documents\Team-Project_Python\Back-end Files\deleteData.ui'
 #
 # Created by: PyQt6 UI code generator 6.1.0
 #

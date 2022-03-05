@@ -1,4 +1,4 @@
-# Form implementation generated from reading ui file 'c:\Users\Marin\Documents\Team-Project_Python\addData.ui'
+# Form implementation generated from reading ui file 'c:\Users\Marin\Documents\Team-Project_Python\Back-end Files\addData.ui'
 #
 # Created by: PyQt6 UI code generator 6.1.0
 #
