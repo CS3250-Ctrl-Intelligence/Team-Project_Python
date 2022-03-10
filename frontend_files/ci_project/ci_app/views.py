@@ -1,5 +1,8 @@
 from django.shortcuts import render
 from ci_app.models.team_member import TeamMember
+from ci_app.models.product import Product
+from ci_app.models.customer import Customer
+from ci_app.models.customer_order import CustomerOrder
 # Create your views here.
 
 def about(request):
@@ -11,8 +14,25 @@ def about(request):
 def home(request):
     return render(request,'home.html')
 
-def buy(request):
-    return render(request,'buy.html')
+def store(request):
+    item_list = Product.objects.order_by('product_id')
+    item_dict = {'item_inv': item_list}
+    return render(request,'store.html',item_dict)
+
+def cart(request):
+
+    if request.user.is_authenticated:
+       customer = request.user.customer
+       order,created = CustomerOrder.objects.get_or_create(customer = customer)
+       items = order.customerorderitem_set.all()
+    else:
+        items = []
+
+    cart_dict={'order_items':items}
+    return render(request,'cart.html',cart_dict)
+
+def checkout(request):
+    return render(request,'checkout.html')
 
 def contactUs(request):
     return render(request,'contactUs.html')

@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="row">
+    <hr>
+    <div class ="col-lg-6" >
+        <div class="box-element">
+            <h2>Shipping Information</h2>
+            <form class="form">
+                <div class="user-info">
+                    <div class="form-field">
+                        <input required class="form-control" type="text" name="Name" placeholder="Name">
+                    </div>
+                    <div class="form-field">
+                        <input required class="form-control" type="email" name="Email" placeholder="Email">
+                    </div>
+                </div>
+                <div class="shipping-info">
+                    <div class="form-field">
+                        <input class="form-control" type="text" name="Street" placeholder="Street">
+                    </div>
+                    <div class="form-field">
+                        <input class="form-control" type="text" name="Apt/Suite/Other" placeholder="Apt/Suite/Other">
+                    </div>
+                    <div class="form-field">
+                        <input class="form-control" type="text" name="Zipcode" placeholder="Zipcode">
+                    </div>
+                    <div class="form-field">
+                        <input class="form-control" type="text" name="City" placeholder="City">
+                    </div>
+                    <div class="form-field">
+                        <input class="form-control" type="text" name="State" placeholder="State">
+                    </div>
+
+                </div>
+                <br>
+                <input type="submit" value="Continue">
+            </form>
+        </div>         
+    </div>
+    <!--Order Summar-->
+    <div class ="col-lg-6" >
+        <div class="box-element">
+            <a class ="btn btn-outline-primary"href="{% url 'cart' %}">Return to Cart</a>
+            <hr>
+            <h2>OrderSummar</h2>
+            <hr>
+            <div class ="cart-row">
+                <div class="item"><img class ="placeholder"src="{% static 'images/placeholder.jpg' %}" alt="placeholder"></div>
+                <div class="item">AADFASDF</div>
+                <div class="item">$20</div>
+                <div class="item">x3</div>
+                <hr>
+                <div class="item">Items: 5</div>
+                <div class="item">Total: 7</div>
+            </div>
+        </div>         
+    </div>
+</div>
+    
+{% endblock %}
