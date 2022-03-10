@@ -1,4 +1,66 @@
-.team-title {
+/**/
+.box-element {
+    box-shadow: hsl(0, 0%, 80%) 0 0 16px;
+    background-color: #ffff;
+    border-radius: 4px;
+    padding: 10px;
+}
 
- color: red;
+.cart-row {
+    display: flex;
+    align-items: flex-strech;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #ececec;
+}
+.quantity {
+    display: inline-block;
+    font-weight: 700;
+    padding-right:10px;
+}
+.change-qtt {
+    width:12px;
+    cursor:pointer;
+    display:block;
+}
+.placeholder {
+    width:100px;
+}
+.item {
+    flex: 2;
+}
+.checkout {
+    float: right;
+    margin: 5px 5px 5px 800px;
+}
+
+.form-field {
+    width:300px;
+    display: inline-block;
+    padding:5px;
+}
+
+
+
+
+.nav {
+    background-color: brown;
+}
+
+
+.team-pict {
+    padding: 0px;
+}
+
+.welcome {
+    padding: 0px;
+    background-color:aqua;
+}
+.team1 {
+    height:100px;
+}
+
+
+#title {
+    background-color: brown;
 }

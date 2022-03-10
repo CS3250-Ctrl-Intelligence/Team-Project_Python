@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="row">
+    <div class = "col-lg-12">
+        <br>
+        <div class ="box-element">
+            <a class="btn btn-outline-dark" href="{% url 'store' %}"> Continue Shopping</a>
+
+            <br>
+
+            <table>
+                <tr>
+                    <th> <h5>Item: </h5></th>
+                    <th> <h5>Total: </h5></th>
+                    <th>
+                        <a class="checkout btn btn-outline-dark"href="{% url 'checkout' %}">Check out</a>
+                    </th>
+                </tr>
+            </table>
+        </div >
+        <br>
+        <div class= "box-element">
+            <div class ="cart-row">
+                <div class="item"></div>
+                <div class="item">Product ID</div>
+                <div class="item">Price</div>
+                <div class="item">Quantity</div>
+                <div class="item">Total</div>
+            </div>
+            {% for items in order_items %}
+            <div class ="cart-row">
+                <div class="item"><img class ="placeholder"src="{% static 'images/placeholder.jpg' %}" alt="placeholder"></div>
+                <div class="item">{{items.product.product_id}}</div>
+                <div class="item">${{items.product.sale_price}}</div>
+                <div class="item">
+                    <p class="quantity">{{items.product.quantity}}</p>
+                    <div class="quantity"> 
+                        <img class="change-qtt" src="{% static 'images/up.png' %}" alt="up">
+                        <img class="change-qtt" src="{% static 'images/down.png' %}" alt="up">
+                    </div>
+                </div>
+                <div class="item"></div>
+            </div>
+            {% endfor %}
+        </div>        
+    </div>
+        
+</div>
+{% endblock %}

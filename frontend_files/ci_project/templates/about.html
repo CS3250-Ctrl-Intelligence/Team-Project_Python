@@ -42,7 +42,7 @@
                     {% for team in team_member %}
                     <h1> {{ team.first_name}} {{ team.last_name}}</h1>
                     <p> {{team.story}} </p> 
-                    <img src="{{ team.photo.url }}"  alt="{{ team.first_name }}" style="width:500px; height: 500px;" >
+                    <img src="{{ team.photoURL }}"  alt="{{ team.first_name }}" style="width:500px; height: 500px;" >
                     <br>
                     {% endfor %}
                 {% else %}
