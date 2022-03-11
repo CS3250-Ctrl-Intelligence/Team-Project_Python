@@ -44,17 +44,19 @@
         <div class="box-element">
             <a class ="btn btn-outline-primary"href="{% url 'cart' %}">Return to Cart</a>
             <hr>
-            <h2>OrderSummar</h2>
+            <h2>OrderSummary</h2>
             <hr>
+                {% for items in order_items %}
             <div class ="cart-row">
                 <div class="item"><img class ="placeholder"src="{% static 'images/placeholder.jpg' %}" alt="placeholder"></div>
-                <div class="item">AADFASDF</div>
-                <div class="item">$20</div>
-                <div class="item">x3</div>
+                <div class="item">{{items.product.product_id}}</div>
+                <div class="item">${{items.product.sale_price}}</div>
+                <div class="item">{{items.quantity}}</div>
                 <hr>
-                <div class="item">Items: 5</div>
-                <div class="item">Total: 7</div>
+                <div class="item">Items: {{order.get_cart_items}}</div>
+                <div class="item">Total: {{order.get_cart_total}}</div>
             </div>
+                {% endfor %}
         </div>         
     </div>
 </div>

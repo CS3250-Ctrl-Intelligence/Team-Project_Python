@@ -1,4 +1,4 @@
-/**/
+/*cart.html css*/
 .box-element {
     box-shadow: hsl(0, 0%, 80%) 0 0 16px;
     background-color: #ffff;
@@ -41,12 +41,10 @@
 }
 
 
-
-
+/*base.html css*/
 .nav {
     background-color: brown;
 }
-
 
 .team-pict {
     padding: 0px;
@@ -56,6 +54,7 @@
     padding: 0px;
     background-color:aqua;
 }
+
 .team1 {
     height:100px;
 }
@@ -63,4 +62,9 @@
 
 #title {
     background-color: brown;
+}
+
+.logo {
+    width: 50px;
+    height: 50px;
 }
