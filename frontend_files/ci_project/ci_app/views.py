@@ -20,19 +20,26 @@ def store(request):
     return render(request,'store.html',item_dict)
 
 def cart(request):
-
     if request.user.is_authenticated:
-       customer = request.user.customer
-       order,created = CustomerOrder.objects.get_or_create(customer = customer)
-       items = order.customerorderitem_set.all()
+        customer = request.user.customer
+        order, created = CustomerOrder.objects.get_or_create(customer = customer)
+        items = order.customerorderitem_set.all()
     else:
         items = []
-
-    cart_dict={'order_items':items}
+        order={'get_cart_total':0,'get_cart_items':0}
+    cart_dict={'order_items':items,'order':order}
     return render(request,'cart.html',cart_dict)
 
 def checkout(request):
-    return render(request,'checkout.html')
+    if request.user.is_authenticated:
+        customer = request.user.customer
+        order, created = CustomerOrder.objects.get_or_create(customer = customer)
+        items = order.customerorderitem_set.all()
+    else:
+        items = []
+        order={'get_cart_total':0,'get_cart_items':0}
+    checkout_dict={'order_items':items,'order':order}
+    return render(request,'checkout.html',checkout_dict)
 
 def contactUs(request):
     return render(request,'contactUs.html')

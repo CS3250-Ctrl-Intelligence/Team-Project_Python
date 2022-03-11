@@ -6,13 +6,11 @@
         <br>
         <div class ="box-element">
             <a class="btn btn-outline-dark" href="{% url 'store' %}"> Continue Shopping</a>
-
             <br>
-
             <table>
                 <tr>
-                    <th> <h5>Item: </h5></th>
-                    <th> <h5>Total: </h5></th>
+                    <th> <h5>Item: {{order.get_cart_items}}</h5></th>
+                    <th> <h5>Total: $ {{order.get_cart_total}}</h5></th>
                     <th>
                         <a class="checkout btn btn-outline-dark"href="{% url 'checkout' %}">Check out</a>
                     </th>
@@ -34,13 +32,13 @@
                 <div class="item">{{items.product.product_id}}</div>
                 <div class="item">${{items.product.sale_price}}</div>
                 <div class="item">
-                    <p class="quantity">{{items.product.quantity}}</p>
+                    <p class="quantity">{{items.quantity}}</p>
                     <div class="quantity"> 
                         <img class="change-qtt" src="{% static 'images/up.png' %}" alt="up">
                         <img class="change-qtt" src="{% static 'images/down.png' %}" alt="up">
                     </div>
                 </div>
-                <div class="item"></div>
+                <div class="item">$ {{items.get_total}}</div>
             </div>
             {% endfor %}
         </div>        
