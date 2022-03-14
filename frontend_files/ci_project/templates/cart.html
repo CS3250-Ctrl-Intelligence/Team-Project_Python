@@ -1,18 +1,29 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
+
+
+{% if not cart_items %}
+<div class="container">
+
+    <h2>Your shopping cart is empty</h2>
+</div>
+
+
+{% else %}
 <div class="row">
     <div class = "col-lg-12">
         <br>
         <div class ="box-element">
-            <a class="btn btn-outline-dark" href="{% url 'store' %}"> Continue Shopping</a>
+            <a class="btn btn-outline-dark" href="{% url 'shop' %}"> Continue Shopping</a>
             <br>
             <table>
                 <tr>
-                    <th> <h5>Item: {{order.get_cart_items}}</h5></th>
-                    <th> <h5>Total: $ {{order.get_cart_total}}</h5></th>
+                    <th> <h5>Total: $ {{total}}</h5></th>
+                    <th> <h5>Tax: $ {{tax}}</h5></th>
+                    <th> <h5>Grand Total: $ {{grand_total}}</h5></th>
                     <th>
-                        <a class="checkout btn btn-outline-dark"href="{% url 'checkout' %}">Check out</a>
+                        <a class="checkout btn btn-outline-dark"href="">Check out</a>
                     </th>
                 </tr>
             </table>
@@ -26,23 +37,31 @@
                 <div class="item">Quantity</div>
                 <div class="item">Total</div>
             </div>
-            {% for items in order_items %}
+            
+                {% for item_in_cart in cart_items %}
             <div class ="cart-row">
                 <div class="item"><img class ="placeholder"src="{% static 'images/placeholder.jpg' %}" alt="placeholder"></div>
-                <div class="item">{{items.product.product_id}}</div>
-                <div class="item">${{items.product.sale_price}}</div>
-                <div class="item">
-                    <p class="quantity">{{items.quantity}}</p>
-                    <div class="quantity"> 
-                        <img class="change-qtt" src="{% static 'images/up.png' %}" alt="up">
-                        <img class="change-qtt" src="{% static 'images/down.png' %}" alt="up">
-                    </div>
+                <div class="item">{{item_in_cart.product.product_id}}</div>
+                <div class="item">$ {{item_in_cart.product.price}}</div>
+                <div class="input-group-append">
+                <a href="{% url 'cart_remove' item_in_cart.product.id %}" class="btn btn-light" type="button" id="button-plus"> <i class="fa fa-minus"></i> </a>
                 </div>
-                <div class="item">$ {{items.get_total}}</div>
+					    <input type="text" class="" style="width:28px; height:26px;" value="{{item_in_cart.quantity}}">
+					<div class="input-group-append">
+				<a href="{% url 'cart_add' item_in_cart.product.id %}" class="btn btn-light" type="button" id="button-minus"> <i class="fa fa-plus"></i> </a>
+                </div>           
+
+                <div class="item">$ {{item_in_cart.sub_total}}</div>
+                <div>
+                    <a href="{% url 'cart_item_remove' item_in_cart.product.id %}" class="btn btn-light" type="button">Delete  </a>
+                </div>
             </div>
             {% endfor %}
         </div>        
     </div>
         
 </div>
+{% endif %}
+
+
 {% endblock %}
