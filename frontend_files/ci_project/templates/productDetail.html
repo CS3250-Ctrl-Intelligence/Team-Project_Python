@@ -1,0 +1,48 @@
+
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container">
+    <div class="card mb-3" style="max-width: 540px;">
+        <div class="row g-0">
+          <div class="col-md-4">
+            <img src="" class="placeholder img-fluid rounded-start" alt="...">
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title">{{product_detail.product_id}}</h5>
+              <h6 class="card-title">$ {{product_detail.price}}</h6>
+              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+              <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+              <label for="select">Qty</label>
+                <select id="select">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                </select>
+                {% if product_detail.quantity <= 0 %}
+                    <h5 class="text-danger">Out of Stock</h5>
+                {% else %}
+                  {% if in_cart %}
+                    <a href="#" class="btn btn-success">Added to Cart</a>
+                  {% else %}
+                  <a href="{% url 'cart_add' product_detail.id %}" class="btn btn-primary">Add to Cart</a>
+                  {% endif %}
+                {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+</div>
+<h3>Customer reviews</h3>
+<div class="container">
+
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, 
+    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in 
+    voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+</div>
+
+
+{% endblock %}

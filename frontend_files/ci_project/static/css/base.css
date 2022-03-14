@@ -42,9 +42,6 @@
 
 
 /*base.html css*/
-.nav {
-    background-color: brown;
-}
 
 .team-pict {
     padding: 0px;
@@ -68,3 +65,76 @@
     width: 50px;
     height: 50px;
 }
+.bi {
+    vertical-align: -.125em;
+    fill: currentColor;
+  }
+
+
+/* footer CSS */
+.footer-section {
+    padding-left: 30%;
+  }
+
+.footer {
+    position: fixed;
+    padding: 10px 10px 0px 10px;
+    bottom: 0;
+    height: 40px;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 0;
+}
+
+/* Contact Us CSS */
+html, body {
+  background: #f1f1f1;
+  font-family: 'Merriweather', sans-serif;
+  padding: 1em;
+}
+
+h1 {
+   text-align: center;
+   color: hsl(239, 100%, 18%);
+}
+
+form {
+   max-width: 600px;
+   text-align: center;
+   margin: 20px auto;
+  }
+
+input, textarea {
+    border:0; outline:0;
+    padding: 1em;
+    display: block;
+    width: 100%;
+    margin-top: 1em;
+    font-family: 'Merriweather', sans-serif;
+    resize: none;
+  }
+  
+.submit-button {
+    background-color: hsl(239, 100%, 18%);
+    color: white;
+}
+  
+textarea {
+    height: 126px;
+}
+html,body {
+    min-height: 1000px;
+}
+/* .body {
+   
+} */
+/* --- Footer --- */
+.footerbar { 
+    position: relative;
+    width: 100%;
+    bottom: 0;
+    color: white;
+
+    font-size: 12px; 
+}
+
