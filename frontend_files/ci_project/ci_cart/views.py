@@ -1,8 +1,8 @@
 from django.http import HttpResponse
 from django.shortcuts import render,redirect,get_object_or_404
+from django.contrib.auth.decorators import login_required
 
 from ci_shop.models import Product
-
 from ci_cart.models import Cart,CartItem
 # Create your views here.
 
@@ -37,10 +37,13 @@ def cart_add(request, product_id):
     return redirect('cart')
 
 
-def cart(request, total=0, quantity = 0, cart_items = None):
+def cart(request, total=0, quantity = 0, cart_items = None,tax=0, grand_total = 0):
     try:
-        cart = Cart.objects.get(cart_id = _cart_session(request))
-        cart_items = CartItem.objects.filter(cart = cart, is_active= True)
+        if request.user.is_authenticated:
+           cart_items = CartItem.objects.filter(user=request.user, is_active= True)
+        else: 
+            cart = Cart.objects.get(cart_id = _cart_session(request))
+            cart_items = CartItem.objects.filter(cart = cart, is_active= True)
         # loop through the items in cart to find total and quantity
         for cart_item in cart_items:
             total += (cart_item.product.price * cart_item.quantity)
@@ -49,7 +52,14 @@ def cart(request, total=0, quantity = 0, cart_items = None):
         grand_total = total+tax
     except Cart.DoesNotExist:
         pass #just ignore
-    return render(request,'cart.html',{'total':total,'quantity':quantity,'cart_items': cart_items,'tax':tax,'grand_total':grand_total,})
+    context ={
+    'total':total,
+    'quantity':quantity,
+    'cart_items': cart_items,
+    'tax':tax,
+    'grand_total':grand_total,
+    }
+    return render(request,'cart.html',context)
 
 
 def cart_remove(request,product_id):
@@ -73,5 +83,24 @@ def cart_item_remove(request,product_id):
     return redirect('cart')
 
 
-
-    
+@login_required(login_url='login')
+def checkout(request, total=0, quantity = 0, cart_items = None,tax=0, grand_total = 0):
+    try:
+        cart = Cart.objects.get(cart_id = _cart_session(request))
+        cart_items = CartItem.objects.filter(cart = cart, is_active= True)
+        # loop through the items in cart to find total and quantity
+        for cart_item in cart_items:
+            total += (cart_item.product.price * cart_item.quantity)
+            quantity += cart_item.quantity
+        tax = (2* total)/100 #.2 tax
+        grand_total = total+tax
+    except Cart.DoesNotExist:
+        pass #just ignore
+    context ={
+    'total':total,
+    'quantity':quantity,
+    'cart_items': cart_items,
+    'tax':tax,
+    'grand_total':grand_total,
+    }
+    return render(request,'checkout.html',context)

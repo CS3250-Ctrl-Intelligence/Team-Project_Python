@@ -23,10 +23,14 @@ urlpatterns = [
     path('contactUs/',views.contactUs,name='contactUs'),
     path('about/',views.about,name='about'),
     path('admin/', admin.site.urls),
+    # Cart
     path('',include('ci_cart.urls')),
+    # Shop
     path('',include('ci_shop.urls')),
+    # Account
     path('account/',include('ci_account.urls')),
-    
+    # Order
+    path('order/',include('ci_order.urls')),
 ]
 
 

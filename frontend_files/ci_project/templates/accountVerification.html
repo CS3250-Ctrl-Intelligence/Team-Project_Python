@@ -1,0 +1,11 @@
+<!-- autoscape provide protection against cross site scripting-->
+
+{% autoescape off %}
+
+Hello {{user.first_name}},
+
+Please click on the following link to confirm your registration.
+http://{{domain}}{% url 'activate' uidb64=uid token=token %}
+
+
+{% endautoescape %}
