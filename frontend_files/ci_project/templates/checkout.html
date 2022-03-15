@@ -4,61 +4,84 @@
 
 <div class="row">
     <hr>
-    <div class ="col-lg-6" >
-        <div class="box-element">
-            <h2>Shipping Information</h2>
-            <form class="form">
-                <div class="user-info">
-                    <div class="form-field">
-                        <input required class="form-control" type="text" name="Name" placeholder="Name">
-                    </div>
-                    <div class="form-field">
-                        <input required class="form-control" type="email" name="Email" placeholder="Email">
-                    </div>
-                </div>
-                <div class="shipping-info">
-                    <div class="form-field">
-                        <input class="form-control" type="text" name="Street" placeholder="Street">
-                    </div>
-                    <div class="form-field">
-                        <input class="form-control" type="text" name="Apt/Suite/Other" placeholder="Apt/Suite/Other">
-                    </div>
-                    <div class="form-field">
-                        <input class="form-control" type="text" name="Zipcode" placeholder="Zipcode">
-                    </div>
-                    <div class="form-field">
-                        <input class="form-control" type="text" name="City" placeholder="City">
-                    </div>
-                    <div class="form-field">
-                        <input class="form-control" type="text" name="State" placeholder="State">
-                    </div>
+    
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="cart-body">
+                <h4 class="card=title mb-4">Billing Address</h4>
+                <form action="" method="POST">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <label for="">First Name</label>
+                            <input type="text" name="first_name" class="form-control" required>
+                        </div>
+                        <div class="col-lg-6">
+                            <label for="">Last Name</label>
+                            <input type="text" name="last_name" class="form-control" required>
+                        </div>
+                        <div class="col-lg-12">
+                            <label for="">Email Address</label>
+                            <input type="email" name="email" class="form-control" required>
+                        </div>
+                        <div class="col-lg-12">
+                            <label for="">Address</label>
+                            <input type="text" name="address" class="form-control" required>
+                        </div>
+                        <div class="col-lg-3">
+                            <label for="">City</label>
+                            <input type="text" name="city" class="form-control" required>
+                        </div>
+                        <div class="col-lg-3">
+                            <label for="">State</label>
+                            <input type="text" name="state" class="form-control" required>
+                        </div>
+                        <div class="col-lg-3">
+                            <label for="">Country</label>
+                            <input type="text" name="country" class="form-control" required>
+                        </div>
+                        <div class="col-lg-3">
+                            <label for="">Zip</label>
+                            <input type="text" name="zip" class="form-control" required>
+                        </div>
 
-                </div>
-                <br>
-                <input type="submit" value="Continue">
-            </form>
-        </div>         
+                    </div>
+                
+            </div>
+        </div>
     </div>
     <!--Order Summar-->
-    <div class ="col-lg-6" >
+    <div class="col-lg-6">
         <div class="box-element">
-            <a class ="btn btn-outline-primary"href="{% url 'cart' %}">Return to Cart</a>
+            <a class="btn btn-outline-primary" href="{% url 'shop' %}">Continue Shopping</a>
             <hr>
             <h2>OrderSummary</h2>
+
             <hr>
-                {% for items in order_items %}
-            <div class ="cart-row">
-                <div class="item"><img class ="placeholder"src="{% static 'images/placeholder.jpg' %}" alt="placeholder"></div>
-                <div class="item">{{items.product.product_id}}</div>
-                <div class="item">${{items.product.sale_price}}</div>
-                <div class="item">{{items.quantity}}</div>
+            <div class="cart-row">
+                {% for item_in_cart in cart_items %}
+                <div class="item"><img class="placeholder" src="{% static 'images/placeholder.jpg' %}"
+                        alt="placeholder"></div>
+                <div class="item">{{item_in_cart.product.product_id}}</div>
+                <div class="item">${{item_in_cart.product.price}}</div>
+                <div class="item">{{item_in_cart.quantity}}</div>
                 <hr>
-                <div class="item">Items: {{order.get_cart_items}}</div>
-                <div class="item">Total: {{order.get_cart_total}}</div>
-            </div>
                 {% endfor %}
-        </div>         
+            </div>
+            <div>
+            
+                <button type="submit" name="submit" class="btn btn-primary">Place Order</button>
+            </div>
+        </div>
+        
+        <hr>
+        <div class="box-element">
+            <div class="item">Total: $ {{total}}</div>
+        <div class="item">Tax: $ {{tax}}</div>
+        <div class="item">Grand Total: $ {{grand_total}}</div>
+        </div>
     </div>
+</form>
 </div>
-    
+
 {% endblock %}

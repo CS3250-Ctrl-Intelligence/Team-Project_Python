@@ -12,54 +12,76 @@
 
 {% else %}
 <div class="row">
-    <div class = "col-lg-12">
+    <div class="col-lg-12">
         <br>
-        <div class ="box-element">
+        <div class="box-element">
             <a class="btn btn-outline-dark" href="{% url 'shop' %}"> Continue Shopping</a>
             <br>
             <table>
                 <tr>
-                    <th> <h5>Total: $ {{total}}</h5></th>
-                    <th> <h5>Tax: $ {{tax}}</h5></th>
-                    <th> <h5>Grand Total: $ {{grand_total}}</h5></th>
                     <th>
-                        <a class="checkout btn btn-outline-dark"href="">Check out</a>
+                        <h5>Total: $ {{total}}</h5>
+                    </th>
+                    <th>
+                        <h5>Tax: $ {{tax}}</h5>
+                    </th>
+                    <th>
+                        <h5>Grand Total: $ {{grand_total}}</h5>
+                    </th>
+                    <th>
+                        <a href="{% url 'checkout' %}" class="checkout btn btn-outline-dark" href="">Check out</a>
                     </th>
                 </tr>
             </table>
-        </div >
+        </div>
         <br>
-        <div class= "box-element">
-            <div class ="cart-row">
+        <div class="box-element">
+            <div class="cart-row">
                 <div class="item"></div>
                 <div class="item">Product ID</div>
                 <div class="item">Price</div>
                 <div class="item">Quantity</div>
                 <div class="item">Total</div>
             </div>
-            
-                {% for item_in_cart in cart_items %}
-            <div class ="cart-row">
-                <div class="item"><img class ="placeholder"src="{% static 'images/placeholder.jpg' %}" alt="placeholder"></div>
+
+            {% for item_in_cart in cart_items %}
+            <div class="cart-row">
+                <div class="item"><img class="placeholder" src="{% static 'images/placeholder.jpg' %}"
+                        alt="placeholder"></div>
                 <div class="item">{{item_in_cart.product.product_id}}</div>
                 <div class="item">$ {{item_in_cart.product.price}}</div>
                 <div class="input-group-append">
-                <a href="{% url 'cart_remove' item_in_cart.product.id %}" class="btn btn-light" type="button" id="button-plus"> <i class="fa fa-minus"></i> </a>
+                    <a href="{% url 'cart_remove' item_in_cart.product.id %}" class="btn btn-light" type="button"
+                        id="button-plus">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-dash-lg" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M2 8a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11A.5.5 0 0 1 2 8Z" />
+                        </svg>
+                    </a>
                 </div>
-					    <input type="text" class="" style="width:28px; height:26px;" value="{{item_in_cart.quantity}}">
-					<div class="input-group-append">
-				<a href="{% url 'cart_add' item_in_cart.product.id %}" class="btn btn-light" type="button" id="button-minus"> <i class="fa fa-plus"></i> </a>
-                </div>           
+                <p type="text" style="width:28px; height:26px;" value="{{item_in_cart.quantity}}">
+                    {{item_in_cart.quantity}} </p>
+                <div class="input-group-append">
+                    <a href="{% url 'cart_add' item_in_cart.product.id %}" class="btn btn-light" type="button"
+                        id="button-minus">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-plus" viewBox="0 0 16 16">
+                            <path
+                                d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
+                        </svg>
+                    </a>
+                </div>
 
                 <div class="item">$ {{item_in_cart.sub_total}}</div>
                 <div>
-                    <a href="{% url 'cart_item_remove' item_in_cart.product.id %}" class="btn btn-light" type="button">Delete  </a>
+                    <a href="{% url 'cart_item_remove' item_in_cart.product.id %}" class="btn btn-light"
+                        type="button">Delete </a>
                 </div>
             </div>
             {% endfor %}
-        </div>        
+        </div>
     </div>
-        
+
 </div>
 {% endif %}
 
