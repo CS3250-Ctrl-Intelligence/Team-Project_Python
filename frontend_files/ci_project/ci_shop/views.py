@@ -1,12 +1,11 @@
-
 from itertools import product
 from django.shortcuts import get_object_or_404, render
+from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from ci_shop.models import Product
 from ci_category.models import Category
 from ci_cart.models import CartItem,Cart
-
 from ci_cart.views import _cart_session
-# Create your views here.
+
 
 
 def shop(request,category_slug=None):
@@ -16,13 +15,30 @@ def shop(request,category_slug=None):
     if category_slug != None:
         categories = get_object_or_404(Category, slug = category_slug )
         products = Product.objects.all().filter(category = categories, in_stock = True)
+        # Implement paginator seperate the amount of product available for view each page
+        paginator = Paginator(products,4)
+        page = request.GET.get('page')
+        paged_products = paginator.get_page(page)
+
         # count number of products, not quantity of each
         product_count = products.count()
     else:
-        products = Product.objects.all().filter(in_stock = True)
+        # Query all products in database where in_stock is True
+        products = Product.objects.all().filter(in_stock = True).order_by('id')
+        # Implement paginator seperate the amount of product available for view each page
+        paginator = Paginator(products,4)
+        page = request.GET.get('page')
+        paged_products = paginator.get_page(page)
+
         product_count = products.count()
 
-    return render(request, 'shop.html', {'products':products,'product_count':product_count})
+        context={
+            'products':paged_products,
+            'product_count':product_count,
+            }
+                    
+
+    return render(request, 'shop.html', context)
 
 def product_detail(request,category_slug, product_slug):
     #category__slug means the slug attribute of category
