@@ -1,13 +1,11 @@
+from email.message import EmailMessage
 from django.http import HttpResponse
 from django.shortcuts import render,redirect
 from django.contrib import messages,auth
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 
-from ci_account.forms import RegistrationForm
-from ci_account.models import Account
-from ci_cart.views import _cart_session
-from ci_cart.models import Cart,CartItem
+
 
 # Email verification
 from django.contrib.sites.shortcuts import get_current_site
@@ -16,7 +14,11 @@ from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 from django.utils.encoding import force_bytes
 from django.contrib.auth.tokens import default_token_generator
 from django.core.mail import EmailMessage
-from email.message import EmailMessage
+
+from ci_account.forms import RegistrationForm
+from ci_account.models import Account
+from ci_cart.views import _cart_session
+from ci_cart.models import Cart,CartItem
 
 
 def register(request):

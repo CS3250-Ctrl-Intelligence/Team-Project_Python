@@ -3,13 +3,15 @@
 {% block content %}
 
 <div class="row">
+    <a class="btn btn-outline-primary " href="{% url 'shop' %}">Continue Shopping</a>
+    <h1>Checkout</h1>
     <hr>
     
     <div class="col-lg-6">
         <div class="card">
             <div class="cart-body">
                 <h4 class="card=title mb-4">Billing Address</h4>
-                <form action="" method="POST">
+                <form action="{% url 'place_order' %}" method="POST">
                     {% csrf_token %}
                     <div class="row">
                         <div class="col-lg-6">
@@ -53,21 +55,19 @@
     <!--Order Summar-->
     <div class="col-lg-6">
         <div class="box-element">
-            <a class="btn btn-outline-primary" href="{% url 'shop' %}">Continue Shopping</a>
-            <hr>
             <h2>OrderSummary</h2>
 
             <hr>
+            {% for item_in_cart in cart_items %}
             <div class="cart-row">
-                {% for item_in_cart in cart_items %}
                 <div class="item"><img class="placeholder" src="{% static 'images/placeholder.jpg' %}"
                         alt="placeholder"></div>
                 <div class="item">{{item_in_cart.product.product_id}}</div>
                 <div class="item">${{item_in_cart.product.price}}</div>
                 <div class="item">{{item_in_cart.quantity}}</div>
                 <hr>
-                {% endfor %}
             </div>
+            {% endfor %}
             <div>
             
                 <button type="submit" name="submit" class="btn btn-primary">Place Order</button>
