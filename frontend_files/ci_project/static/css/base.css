@@ -1,3 +1,195 @@
+
+/* -----------Base-------------- */
+/* navigation menu */
+
+/* .logo {
+    width: 52px;
+    height: 52px;
+} */
+
+#title {
+    color: white!important;
+}
+.navbar-brand {
+    font-size: 3.5rem;
+    font-weight: bold;
+    color: white !important;
+    
+}
+.nav-content {
+    font-size: 1.5rem;
+    color: white !important;
+    text-decoration: none;
+}
+
+.nav-pad {   
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+.span-margin {
+    width:auto;
+}
+
+.cart {
+    width: 52px;
+    height: 52px;
+}
+.cart-icon {
+    font-size: 0.5rem;
+}
+
+
+.br-pad {
+    display: block;
+    margin: 50px 0 ;
+}
+
+
+/* Footer */
+.github{
+    font-size: 2rem;
+    color:white;
+}
+
+.fa-github:hover {
+    
+    color:black;
+}
+
+.link-underline {
+    text-decoration: none;
+}
+
+.link-color {
+    font-size: 1.5rem;
+    color:rgb(64, 64, 88);
+}
+
+/* Background */
+
+.background-pict {
+    background: url('background-pict.jpg');
+}
+
+
+h1,h2,h3,h4,h5,h6,p {
+    color: white;
+}
+
+h1 {
+    font-size: 3.5rem;
+}
+
+.heading-center {
+    text-align: center;
+    color:white;
+}
+/* --------Shop----------- */
+/* Shop */
+
+.product-image {
+    width: 234px;
+    height: 312px;
+}
+
+
+
+/* ---------------------About us------------ */
+/* About */
+
+.quote {
+    width:50%;
+    margin:auto;
+}
+.quote-style {
+    color: white;
+    height:500px;
+}
+
+.quote-left {
+    position: relative;
+    text-align: left;
+    top:50px;
+    right:150px;
+}
+
+.quote-right {
+    position: relative;
+    text-align:right;
+    top: 200px;
+    left:150px;
+}
+
+.welcome {
+    width:75%;
+    margin:auto;
+    color:white;
+    text-align: center;
+}
+
+/* parent div rotated 45 degree*/
+.square {
+    
+    width: 500px;
+    height: 500px;
+    margin: 125px auto auto auto;    
+    -ms-transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+    overflow: hidden;
+}
+
+/* the image is the background and it is rotated again to its initial position */
+.rotate-image {
+ 
+    background: url(https://circaworks.com/wp-content/uploads/2020/12/what-makes-a-good-team.jpg);
+    width: 800px;
+    height: 800px;
+    
+    margin: -190px -50px -50px -124px;
+    -ms-transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+    background-size: cover;
+    background-position: 50%;
+}
+
+.value {
+    width: 50%;
+    margin: auto;
+    text-align: center;
+    padding-top: 100px;
+}
+
+.developer {
+    height:552px;
+}
+
+
+
+.team-member {
+    display: flex;
+    flex-direction: row-reverse;
+    text-align: left; 
+    line-height: 2;
+ 
+}
+
+.fullname {
+    font-size: 3.5rem;
+}
+
+.bio {
+    font-size: 2rem;
+}
+
+.picture-float {
+    background-color: white;
+    width:75% ; 
+    height: 75%;  
+} 
+
+/* Cart */
 /*cart.html css*/
 .box-element {
     box-shadow: hsl(0, 0%, 80%) 0 0 16px;
@@ -6,13 +198,14 @@
     padding: 10px;
 }
 
-.cart-row {
+/* .cart-row {
     display: flex;
     align-items: flex-strech;
     padding-bottom: 10px;
     margin-bottom: 10px;
-    border-bottom: 1px solid #ececec;
-}
+    border-bottom: 1px solid #ececec; 
+} 
+*/
 .quantity {
     display: inline-block;
     font-weight: 700;
@@ -23,15 +216,9 @@
     cursor:pointer;
     display:block;
 }
-.placeholder {
-    width:100px;
-}
+
 .item {
-    flex: 2;
-}
-.checkout {
-    float: right;
-    margin: 5px 5px 5px 800px;
+    flex:2;
 }
 
 .form-field {
@@ -40,101 +227,6 @@
     padding:5px;
 }
 
-
-/*base.html css*/
-
-.team-pict {
-    padding: 0px;
+.contrast-on-white {
+    color: #000;
 }
-
-.welcome {
-    padding: 0px;
-    background-color:aqua;
-}
-
-.team1 {
-    height:100px;
-}
-
-
-#title {
-    background-color: brown;
-}
-
-.logo {
-    width: 50px;
-    height: 50px;
-}
-.bi {
-    vertical-align: -.125em;
-    fill: currentColor;
-  }
-
-
-/* footer CSS */
-.footer-section {
-    padding-left: 30%;
-  }
-
-.footer {
-    position: fixed;
-    padding: 10px 10px 0px 10px;
-    bottom: 0;
-    height: 40px;
-    width: 100%;
-    text-align: center;
-    margin-bottom: 0;
-}
-
-/* Contact Us CSS */
-html, body {
-  background: #f1f1f1;
-  font-family: 'Merriweather', sans-serif;
-  padding: 1em;
-}
-
-h1 {
-   text-align: center;
-   color: hsl(239, 100%, 18%);
-}
-
-form {
-   max-width: 600px;
-   text-align: center;
-   margin: 20px auto;
-  }
-
-input, textarea {
-    border:0; outline:0;
-    padding: 1em;
-    display: block;
-    width: 100%;
-    margin-top: 1em;
-    font-family: 'Merriweather', sans-serif;
-    resize: none;
-  }
-  
-.submit-button {
-    background-color: hsl(239, 100%, 18%);
-    color: white;
-}
-  
-textarea {
-    height: 126px;
-}
-html,body {
-    min-height: 1000px;
-}
-/* .body {
-   
-} */
-/* --- Footer --- */
-.footerbar { 
-    position: relative;
-    width: 100%;
-    bottom: 0;
-    color: white;
-
-    font-size: 12px; 
-}
-

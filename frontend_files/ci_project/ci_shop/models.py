@@ -8,8 +8,10 @@ class Product(models.Model):
     quantity = models.IntegerField()
     wholesale_cost = models.DecimalField(max_digits=7, decimal_places=2)
     price = models.DecimalField(max_digits=7, decimal_places=2)
+    supplier_id = models.CharField(max_length=100, null = True)    
     slug = models.SlugField(max_length = 200,unique = True)
     in_stock = models.BooleanField(default = True)
+    featured = models.BooleanField(default = False)
     # CASCADE = when the category is deleted, the products tied to that category is also deleted
     category = models.ForeignKey(Category,on_delete=models.CASCADE)
 

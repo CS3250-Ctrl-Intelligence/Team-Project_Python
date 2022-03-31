@@ -32,12 +32,10 @@ def shop(request,category_slug=None):
 
         product_count = products.count()
 
-        context={
+    context={
             'products':paged_products,
             'product_count':product_count,
             }
-                    
-
     return render(request, 'shop.html', context)
 
 def product_detail(request,category_slug, product_slug):

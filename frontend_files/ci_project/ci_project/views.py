@@ -1,8 +1,10 @@
 from django.shortcuts import render
 
+from ci_shop.models import Product
 
 def home(request):
-    return render(request,'home.html')
+    data=Product.objects.filter(featured =True).order_by('-id')
+    return render(request,'home.html',{'data':data})
 
 
 def contactUs(request):
@@ -11,5 +13,6 @@ def contactUs(request):
 
 
 def about(request):
-    return render(request,'about.html')
+
+    return render(request,'about.html',)
 

@@ -3,7 +3,52 @@
 {% block content %}
 
 
-    <title>Home!</title>
-    <h1>This is the home page</h1>
-    
+
+    <div class="jumbotron">
+        <!--Adds special large formating to welcome message for added effect-->
+        <h2 class="display-4">Hello, <b>{{user.first_name}}</b></h2>
+        <p class="lead">Thank you for choosing Ctrl Intelligence for your product needs.</p>
+        <hr class="my-4">
+    </div>
+
+      <h2 style="color:white"> Featured Products <h2>
+    <!--Adds featured products to homepage by adding a card layout and loading products from ci_shop.product and filtering by featured (see views.py) -->
+    <div class="row">
+        {% for product in data%}
+        <div class="col-lg-2 col-md-4">
+            <figure class="card card-product-grid" style="width: 6.25cm;">
+                <div class="img-wrap">
+
+                    <img class="product-image" src="{% static 'images/chip.png' %}">
+
+                </div> <!-- img-wrap.// -->
+                <figcaption class="info-wrap">
+                    <div class="fix-height">
+                        <a href="{{ product.get_url }}" class="title">{{product.product_id}}</a>
+                        <div class="price-wrap mt-2">
+                            <span class="price">$ {{product.price}}</span>
+
+                        </div> <!-- price-wrap.// -->
+                    </div>
+                    <a href="{% url 'cart_add' product.id %}" class="btn btn-block btn-success">Add to cart</a>
+                </figcaption>
+            </figure>
+        </div> <!-- col.// -->
+        {%endfor%}
+    </div> <!-- row end.// -->
+
+    <h2>Contact Us</h2>
+<form class="contact">
+    <!--adds contact us fields-->
+    <div class="left-contact">
+        <input type="text" id="input=name" placeholder="Full Name" style="width: 7.3cm;"><br>
+        <input type="email" id="input-email" placeholder="Email Address" style="width: 7.3cm;"><br>
+        <input type="tel" id="input-phone" placeholder="Phone Number" style="width: 7.3cm;"><br>
+    </div>
+    <div class="right-contact">
+        <textarea name="message" id="input-message" cols="30" rows="10" placeholder="Enter your message..."></textarea>
+    </div>
+    <input type="submit" id="submit-button">
+</form>
+
 {% endblock %}
