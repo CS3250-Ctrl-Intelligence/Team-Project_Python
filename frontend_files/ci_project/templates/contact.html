@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<!-- Contact Form -->
+<h1>Contact Us</h1>
+<link rel="stylesheet" href="{% static 'css/contact.css' %}">
+<form action="" method="POST" class="contact">
+    {% csrf_token %}
+    <div class="left-contact">
+        <input type="text" name="input-name" id="input-name" placeholder="Full Name">
+        <input type="email" name="input-email" id="input-email" placeholder="Email Address">
+        <input type="text" name="input-subject" id="input-subject" placeholder="Subject">
+    </div>
+    <div class="right-contact">
+        <textarea name="message" id="input-message" cols="30" rows="10" placeholder="Enter your message..."></textarea>
+    </div>
+    <input type="submit" class="btn submit-btn" id="submit-button" value="Submit">
+</form>
+
+{% endblock %}

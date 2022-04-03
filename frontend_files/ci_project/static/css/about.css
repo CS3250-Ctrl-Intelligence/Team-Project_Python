@@ -1,0 +1,111 @@
+/* About */
+.heading {
+    padding-top: 15px;
+    text-align: center;
+    font-size: 4rem;
+}
+
+.quote {
+    width:50%;
+    margin:auto;
+}
+.quote-style {
+    
+    height:500px;
+}
+
+.quote-left {
+    position: relative;
+    text-align: left;
+    top:50px;
+    right:150px;
+}
+
+.quote-right {
+    position: relative;
+    text-align:right;
+    top: 200px;
+    left:150px;
+}
+
+.welcome {
+    width:75%;
+    margin:auto;
+    
+    text-align: center;
+}
+
+/* parent div rotated 45 degree*/
+.square {
+    
+    width: 500px;
+    height: 500px;
+    margin: 125px auto auto auto;    
+    -ms-transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+    overflow: hidden;
+}
+
+/* the image is the background and it is rotated again to its initial position */
+.rotate-image {
+ 
+    background: url(https://circaworks.com/wp-content/uploads/2020/12/what-makes-a-good-team.jpg);
+    width: 800px;
+    height: 800px;
+    
+    margin: -190px -50px -50px -124px;
+    -ms-transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+    background-size: cover;
+    background-position: 50%;
+}
+
+.value {
+    width: 50%;
+    margin: auto;
+    text-align: center;
+    padding-top: 100px;
+}
+
+.developer {
+    height:552px;
+}
+
+
+
+.team-member {
+    display: flex;
+    flex-direction: row-reverse;
+    text-align: left; 
+    line-height: 2;
+ 
+}
+
+.fullname {
+    font-size: 3.5rem;
+}
+
+.bio {
+    font-size: 2rem;
+}
+
+.picture-float {
+    background-color: white;
+    width:75% ; 
+    height: 75%;  
+} 
+
+
+/* Background */
+.background {
+    background-image: linear-gradient(to bottom right, rgb(78, 84, 173),rgba(80, 217, 255,0.2),rgba(10, 9, 73, 0.8));
+    background-repeat: no-repeat;
+    background-position: center;
+    /*filter:blur(4px);
+    -webkit-filter: blur(4px);*/
+    /* background-attachment: fixed; */
+    
+
+}

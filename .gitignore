@@ -10,6 +10,6 @@ __pycache__/
 
 
 # ingore viretual environement and settings files
-frontend_files/ci_project/ci_project/settings.py
+#frontend_files/ci_project/ci_project/settings.py
 env/
 myenv/

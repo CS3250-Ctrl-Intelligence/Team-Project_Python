@@ -1,5 +1,5 @@
 from django.shortcuts import render
-
+from django.core.mail import send_mail
 from ci_shop.models import Product
 
 def home(request):
@@ -8,7 +8,21 @@ def home(request):
 
 
 def contactUs(request):
-    return render(request,'contactUs.html')
+    if request.method == 'POST':
+        name = request.POST.get('input-name')
+        email = request.POST.get('input-email')
+        subject = request.POST.get('input-subject')
+        message = request.POST.get('message')
+
+        data = {
+            'name': name,
+            'email': email,
+            'subject': subject,
+            'message': message
+        }
+        message = '''\nNew message: {}\nFrom: {} {}'''.format(data['message'], data['name'], data['email'])
+        send_mail(data['subject'], message, '', ['controlintel19@gmail.com '])
+    return render(request,'contact.html')
 
 
 

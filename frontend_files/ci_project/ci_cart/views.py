@@ -59,7 +59,9 @@ def cart(request, total=0, quantity = 0, cart_items = None,tax=0, grand_total = 
             total += (cart_item.product.price * cart_item.quantity)
             quantity += cart_item.quantity
         tax = (2* total)/100 #.2 tax
-        grand_total = total+tax
+        tax=round(tax,2)
+        grand_total = total+round(tax,2)
+    
     except ObjectDoesNotExist:
         pass #just ignore
     context ={
@@ -89,12 +91,13 @@ def cart_remove(request,product_id):
     return redirect('cart')
 
 def cart_item_remove(request,product_id):
-
-    
-    cart = Cart.objects.get(cart_id = _cart_session(request))
-    product = get_object_or_404(Product,id = product_id)
-    cart_item = CartItem.objects.get(product = product, cart = cart)
-
+    if request.user.is_authenticated:
+        product = get_object_or_404(Product,id = product_id)
+        cart_item = CartItem.objects.get(user=request.user,product = product)
+    else:
+        cart = Cart.objects.get(cart_id = _cart_session(request))
+        product = get_object_or_404(Product,id = product_id)
+        cart_item = CartItem.objects.get(product = product, cart = cart)
     cart_item.delete()
     return redirect('cart')
 
@@ -112,8 +115,10 @@ def checkout(request, total=0, quantity = 0, cart_items = None,tax=0, grand_tota
         for cart_item in cart_items:
             total += (cart_item.product.price * cart_item.quantity)
             quantity += cart_item.quantity
-        tax = (2* total)/100 #.2 tax
-        grand_total = total+tax
+        tax = (2* total)/100 #.2 tax        
+        tax=round(tax,2)
+        grand_total = total+round(tax,2)
+    
     except Cart.DoesNotExist:
         pass #just ignore
 

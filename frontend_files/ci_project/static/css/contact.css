@@ -1,0 +1,50 @@
+/* Contact Us CSS */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+  background: #f1f1f1;
+  font-family: 'Merriweather', sans-serif;
+}
+
+h1 {
+   text-align: center;
+   margin-top: 150px;
+   color: black;
+}
+
+form {
+   max-width: 600px;
+   text-align: center;
+   margin: 20px auto;
+  }
+
+.submit-btn {
+    background-color: black;
+    border: none;
+    width: 100%;
+    padding: 1rem;
+    margin-top: 1rem;
+    color: orange;
+    cursor: pointer;
+}
+
+.submit-btn:hover {
+    background-color: rgb(125, 126, 128);
+}
+
+input, textarea {
+    border:0; outline:0;
+    padding: 1em;
+    display: block;
+    width: 100%;
+    margin-top: 1em;
+    font-family: 'Merriweather', sans-serif;
+    resize: none;
+  }
+  
+textarea {
+    height: 126px;
+}

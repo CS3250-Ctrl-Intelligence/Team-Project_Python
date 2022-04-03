@@ -22,17 +22,17 @@
   <script
     src="https://www.paypal.com/sdk/js?client-id=AcrsDZD_-zYS2KqqUK4BpfbHpufj7KkJjMtBYY5rK2R-NosuVjIiy_DkhjyXoL652Co8xMsAxUO8ViKY&currency=USD&disable-funding=card,paylater,venmo">
   </script>
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&display=swap" rel="stylesheet"> 
 
   <!-- Website Title -->
   <title>Ctrl Intelligence</title>
-
-  <!-- Website favicon -->
-  <link rel="logo icon" type="image/jpg" href="{% static 'images/favicon.ico' %}" />
-
 </head>
 
-<body class="background-pict" style="overflow-x:hidden;">
-    <nav class="navbar navbar-expand-lg navbar-light nav-pad" >
+<body class="" style="overflow-x:hidden;">
+    <nav class="bg-black text-white navbar navbar-expand-lg  nav-pad navbar-dark " >
       <div class="container-fluid">
         <a class="navbar-brand" href="{% url 'home' %}" >Ctrl Intelligence</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
@@ -61,10 +61,9 @@
         </li>
       </ul>
       <span class="navbar-text span-margin">
-        
         {% if user.id is None %}
         <div class=" widget-header">
-          <h5 class="title text-muted">Welcome guest!</h5>
+          <h5 style="font-size: 15px; " class="nav-content title text-muted">Welcome guest!</h5>
           <div>
             <a class="nav-content" href="{% url 'login' %}">Login</a> <span class="nav-content"> | </span>
             <a class="nav-content" href="{% url 'register' %}">Register</a>
@@ -73,7 +72,7 @@
         </div>
         {% else %}
         <div class="nav-content widget-header">
-          <h5 class="title text-muted">Welcome {{user.first_name}}</h5>
+          <h5 style="font-size: 15px;" class="nav-content title text-muted">Welcome {{user.first_name}}</h5>
           <div>
             <a class="nav-content" href="#">Dashboard</a> <span class="nav-content"> | </span>
             <a class="nav-content" href="{% url 'logout' %}">Logout</a>
@@ -90,17 +89,16 @@
     </div>
   </div>
 </nav>
-<br>
 
 
   <!-- Body Contents -->
-  <main>
+  <main class="d-flex flex-column min-vh-100">
     {% block content %}
     {% endblock %}
   </main>
 
   <!-- Footer -->
-  <footer class="bg-secondary text-white text-center ">
+  <footer class="mt-auto bg-black text-white text-center ">
     <!-- Grid container -->
     <div class="container p-4">
       <!--Grid row-->
@@ -123,7 +121,7 @@
         <!--Grid column-->
 
         <!--Grid column-->
-        <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+        <div class="col-lg-3 col-md-6 mb-4 mb-md-0" >
           <h5 class="text-uppercase mb-0">Links</h5>
 
           <ul class="list-unstyled">
@@ -134,7 +132,7 @@
               <a class="link-color link-underline" href="{% url 'about' %}" class="text-white">About us</a>
             </li>
             <li>
-              <a class="link-color link-underline" href="{% url 'contactUs'%}" class="text-white">Contact us</a>
+              <a class="link-color link-underline" href="{% url 'contact' %}" class="text-white">Contact Us</a>
             </li>
           </ul>
         </div>
