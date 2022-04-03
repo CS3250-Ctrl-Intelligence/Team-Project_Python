@@ -26,7 +26,7 @@ def shop(request,category_slug=None):
         # Query all products in database where in_stock is True
         products = Product.objects.all().filter(in_stock = True).order_by('id')
         # Implement paginator seperate the amount of product available for view each page
-        paginator = Paginator(products,4)
+        paginator = Paginator(products,10)
         page = request.GET.get('page')
         paged_products = paginator.get_page(page)
 

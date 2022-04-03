@@ -1,17 +1,20 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-<section class="section-content padding-y">
-    <div class="heading-center container">
-        <h2>Shop</h2>
-    </div>
 
-    <div class="overflow-auto">
-        <div class="container">
-            <div class="row">
-                <aside class="col-md-3">
+<link rel="stylesheet" href="{% static 'css/shop.css' %}">
 
-                    <!-- Filter Menu -->
+    
+        <h2 class="heading">Shop</h2>
+    
+ 
+
+    
+        <div class="" style="padding-right: 100px; padding-left: 150px; ">
+            <div class="row" >
+                <div class="col-lg-3" style="width: 300px;">
+
+                    <!------------------------------------- Filter Menu ------------------------------------>
                     <div class="card">
                         <!-- Category Filter -->
                         <article class="filter-group">
@@ -69,43 +72,45 @@
                             </div>
                         </article> <!-- filter-group .// -->
                     </div> <!-- card.// -->
-                </aside> <!-- col.// -->
+                </div> <!-- col.// -->
 
-                <main class="col-md-9">
 
+                <!---------------------------------------------- Product View  --------------------------------------------->
+                
+                <div class="col-lg-9">
                     <header class="border-bottom mb-4 pb-3">
                         <div class="form-inline">
                             <span class="mr-md-auto">{{product_count}} Items found </span>
 
                         </div>
                     </header><!-- sect-heading -->
-
-                    <div class="row">
-                        {% for product in products%}
-                        <div class="col-md-4">
-                            <figure class="card card-product-grid">
-                                <div class="img-wrap">
-
-                                    <img class="product-image" src="{% static 'images/chip.png' %}">
-
-                                </div> <!-- img-wrap.// -->
-                                <figcaption class="info-wrap">
-                                    <div class="fix-height">
-                                        <a href="{{ product.get_url }}" class="title">{{product.product_id}}</a>
-                                        <div class="price-wrap mt-2">
-                                            <span class="price">$ {{product.price}}</span>
-
-                                        </div> <!-- price-wrap.// -->
-                                    </div>
-                                    <a href="{% url 'cart_add' product.id %}" class="btn btn-block btn-success">Add to cart</a>
-                                </figcaption>
-                            </figure>
+                    <div class="row" >
+                        {% for product in products %}
+                        <div class=" col-lg-3 col-md-6" style="margin-bottom:50px;padding-left:50px;border:none; width: auto; height: auto;">
+                        <a href="{{product.get_url}}" style="text-decoration: none; color:black;">
+                                <div style="padding-bottom: 15px;"class=" bg-transparent card card-product-grid" >
+                                    <div >
+                                        <img  style="padding-left:10px;"class="product-image" src="{% static 'css/headphone.png' %}">                     
+                                   </div> <!-- img-wrap.// -->
+                                    
+                                        <div class="fix-height" style="text-align: center;">
+                                         <h4>{{product.product_id}} </h4>
+                                         <span class="price" style="font-size: 1rem; font-weight: 500; padding-right:7px;">  $ {{product.price}}   </span>
+                                         <!-- <div style="padding-left:27%;"> -->
+                                            <a href="{% url 'cart_add' product.id %}" class="btn btn-block btn-success">Add to cart</a>  
+                                             
+                                         
+                                        </div>
+                                </div> <!-- card-->
+                            </a>
                         </div> <!-- col.// -->
                         {%endfor%}
                     </div> <!-- row end.// -->
 
+                </div>
+                    
                     <!-- Implement django paginaytor to help seperate data across several pages, with "Previous/Next" links-->
-                    <nav class="mt-4" aria-label="Page navigation sample">
+                    <nav class="mt-4" aria-label="Page navigation sample" style="padding-left: 50%; padding-right: 50%;">
                         {% if products.has_other_pages %}
                         <ul class="pagination">
                             <!-- check to see if the current page has any previous pages-->
@@ -138,12 +143,11 @@
                         {% endif %}
                     </nav>
 
-                </main> <!-- col.// -->
+                
 
-            </div>
+            </div> <!-- Main Row -->
 
         </div> <!-- container .//  -->
-    </div>
-</section>
+    
 
 {% endblock %}
