@@ -15,7 +15,7 @@
                 <div class="row no-gutters">
                     <div class="col-md-6 col-lg-3 ">
                         <div>
-                            <img class="picture-float" src="{% static 'css/headphone.png' %}" alt="product-pict" style="width:300px; padding-bottom: 20px;">
+                            <img class="picture-float" src="{% static 'css/headphones.png' %}" alt="product-pict" style="width:300px; padding-bottom: 20px;">
                         </div>
                         <div>
                             <h4 style=" padding-left: 10px;">Return by mail only</h4>
@@ -121,47 +121,80 @@
         your items and reflects each item's most recent price. </p>
 </div>
 
-
-
-
-
 <!-- Script from paypal-->
 <script>
-    var amount = document.getElementById("myVar").value;
+    function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                // Does this cookie string begin with the name we want?
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+    return cookieValue;
+    }
+    const csrftoken = getCookie('csrftoken');
 
-    console.log(amount);
+    var amount ="{{grand_total}}"
+    var url ="{% url 'payments' %}"
+    var orderID = "{{order.order_number}}";
+    var payment_method="Paypal";
+    var redirect_url ="{% url 'order_complete' %}"
+
     // Render the PayPal button into #paypal-button-container
     paypal.Buttons({
 
         // Set up the transaction
-        createOrder: function (data, actions) {
+        createOrder: function(data, actions) {
             return actions.order.create({
                 purchase_units: [{
                     amount: {
-                        value: Math.round(amount * 100) / 100
+                        value: amount,
                     }
                 }]
             });
         },
 
         // Finalize the transaction
-        onApprove: function (data, actions) {
-            return actions.order.capture().then(function (orderData) {
-                // Successful capture! For demo purposes:
-                console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
-                var transaction = orderData.purchase_units[0].payments.captures[0];
-                alert('Transaction ' + transaction.status + ': ' + transaction.id +
-                    '\n\nSee console for all available details');
-
-                // Replace the above to show a success message within this page, e.g.
-                // const element = document.getElementById('paypal-button-container');
-                // element.innerHTML = '';
-                // element.innerHTML = '<h3>Thank you for your payment!</h3>';
-                // Or go to another URL:  actions.redirect('thank_you.html');
+        onApprove: function(data, actions) {
+            return actions.order.capture().then(function(orderData) {
+                console.log(orderData);
+ 
+               sendData();
+               // Implement sendData funciton using fetch to resources to backend
+               // data will be sent to the payment view as a dictionary to process
+                    function sendData(){
+                        fetch(url,{
+                            method :"POST",
+                            headers: {
+                                "Content-type": "application/json",
+                                "X-CSRFToken": csrftoken,
+ 
+                            },
+                            body: JSON.stringify({
+                                orderID: orderID,
+                                transID: orderData.id,
+                                payment_method: payment_method,
+                                status: orderData.status,
+                            }),
+                        })
+                        .then((response) => response.json())
+                        .then((data) => {
+                        //    console.log('Sucess',data);
+                        // Redirect to to order_complete html
+                        window.location.href = redirect_url +'?order_number='+ data.order_number+'&payment_id='+data.transID;
+                        });
+                    }
             });
         }
 
 
     }).render('#paypal-button-container');
 </script>
+
 {% endblock %}

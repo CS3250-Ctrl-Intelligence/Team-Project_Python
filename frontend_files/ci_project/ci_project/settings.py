@@ -28,9 +28,9 @@ SECRET_KEY = 'django-insecure-h8fsew66u%t8+prl=yuaq3oja0rrgp^t!_#bu2bxw&5=-+hxg!
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['34.125.101.189']
+# ALLOWED_HOSTS = ['34.125.101.189']
 
-
+ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
@@ -86,27 +86,27 @@ WSGI_APPLICATION = 'ci_project.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': os.environ['DATABASE_NAME'],
-#         'USER': os.environ['USER_NAME'],
-#         'PASSWORD': os.environ['PASSWORD'],
-#         'HOST': os.environ['DATABASE_SERVER'],
-#         'PORT': os.environ['DATABASE_PORT'],
-#     }
-# }
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'mydb',
-        'USER': 'admin',
-        'PASSWORD': '123',
-        'HOST': 'localhost',
-        'PORT': '',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.environ['DATABASE_NAME'],
+        'USER': os.environ['USER_NAME'],
+        'PASSWORD': os.environ['PASSWORD'],
+        'HOST': os.environ['DATABASE_SERVER'],
+        'PORT': os.environ['DATABASE_PORT'],
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'mydb',
+#         'USER': 'admin',
+#         'PASSWORD': '123',
+#         'HOST': 'localhost',
+#         'PORT': '',
+#     }
+# }
 
 
 # Password validation
@@ -142,6 +142,7 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
+
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS =[STATIC_DIR,]
