@@ -11,7 +11,7 @@
     <div class="box-element col-lg-4" style="padding: 0px 30px 30px 30px;">
         <div class="box-element card mt-4">
             <div class="cart-body" style="padding: 20px 20px 20px 20px;">
-                <h4 class="card-title mb-4">Billing Address</h4>
+                <h4 class="card-title mb-4">Shipping Address</h4>
                 <form action="{% url 'place_order' %}" method="POST">
                     {% csrf_token %}
                     <div class="row">
@@ -127,6 +127,8 @@
     </div>
 </form>
 </div>
+
+
 
 {% endblock %}
 
