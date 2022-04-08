@@ -19,10 +19,12 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
   </script>
-  <script
-    src="https://www.paypal.com/sdk/js?client-id=AcrsDZD_-zYS2KqqUK4BpfbHpufj7KkJjMtBYY5rK2R-NosuVjIiy_DkhjyXoL652Co8xMsAxUO8ViKY&currency=USD&disable-funding=card,paylater,venmo">
-  </script>
-<!-- Fonts -->
+  <script src="https://www.paypal.com/sdk/js?client-id=AcrsDZD_-zYS2KqqUK4BpfbHpufj7KkJjMtBYY5rK2R-NosuVjIiy_DkhjyXoL652Co8xMsAxUO8ViKY&currency=USD&disable-funding=card,paylater,venmo"></script>
+  <!-- AcrsDZD_-zYS2KqqUK4BpfbHpufj7KkJjMtBYY5rK2R-NosuVjIiy_DkhjyXoL652Co8xMsAxUO8ViKY -->
+
+
+  <!-- Fonts -->
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&display=swap" rel="stylesheet"> 
@@ -74,7 +76,7 @@
         <div class="nav-content widget-header">
           <h5 style="font-size: 15px;" class="nav-content title text-muted">Welcome {{user.first_name}}</h5>
           <div>
-            <a class="nav-content" href="#">Dashboard</a> <span class="nav-content"> | </span>
+            <a class="nav-content" href="{% url 'dashboard' %}">Dashboard</a> <span > | </span>
             <a class="nav-content" href="{% url 'logout' %}">Logout</a>
             
             <a type="button" role="button" href="{% url 'cart' %}" class="btn btn-outline-light"> {{cart_count}}<i class="fa-solid fa-cart-shopping"></i></a>
@@ -96,6 +98,49 @@
     {% block content %}
     {% endblock %}
   </main>
+
+<!-- Chat Bot -->
+
+<link rel="stylesheet" href="{% static 'css/chatbot.css' %}" />
+<head>
+    <meta charset="UTF-8">
+    <title>Chatbot</title>
+</head>
+<body>
+<div class="container">
+    <div class="chatbox">
+        <div class="chatbox__support">
+            <div class="chatbox__header">
+                <div class="chatbox__image--header">
+                    <img src="https://img.icons8.com/color/48/000000/circled-user-female-skin-type-5--v1.png" alt="image">
+                </div>
+                <div class="chatbox__content--header">
+                    <h4 class="chatbox__heading--header">Chat support</h4>
+                    <p class="chatbox__description--header">Hi. My name is Sofi. How can I help you?</p>
+                </div>
+            </div>
+            <div class="chatbox__messages">
+                <div></div>
+            </div>
+            <div class="chatbox__footer">
+                <input type="text" placeholder="Write a message...">
+                <button class="chatbox__send--footer send__button">Send</button>
+            </div>
+        </div>
+        <div class="chatbox__button">
+            <button><img src="{% static 'images/chat.png'%}" width="30px"></button>
+        </div>
+    </div>
+</div>
+
+    <script >
+        $SCRIPT_ROOT = {request.script_root|tojson|safe };
+    </script>
+
+    <script type="text/javascript" src="{% static 'js/app.js' %}"></script>
+
+</body>
+</html>
 
   <!-- Footer -->
   <footer class="mt-auto bg-black text-white text-center ">

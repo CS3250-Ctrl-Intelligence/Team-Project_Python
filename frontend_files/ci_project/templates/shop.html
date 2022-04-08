@@ -4,150 +4,158 @@
 
 <link rel="stylesheet" href="{% static 'css/shop.css' %}">
 
-    
-        <h2 class="heading">Shop</h2>
-    
- 
 
-    
-        <div class="" style="padding-right: 100px; padding-left: 150px; ">
-            <div class="row" >
-                <div class="col-lg-3" style="width: 300px;">
-
-                    <!------------------------------------- Filter Menu ------------------------------------>
-                    <div class="card">
-                        <!-- Category Filter -->
-                        <article class="filter-group">
-                            <header class="card-header">
-                                <h6 class="title">Categories</h6>
-                            </header>
-                            <div class="filter-content collapse show" id="collapse_1" style="">
-                                <div class="card-body">
-                                    <ul class="list-menu">
-                                        <li><a href="{% url 'shop' %}">All Products </a></li>
-                                        {% for category in links%}
-                                        <li><a href="{{category.get_url}}">{{category.name}} </a></li>
-                                        {% endfor %}
-                                    </ul>
-                                </div> <!-- card-body.// -->
-                            </div>
-                        </article> <!-- filter-group  .// -->
-
-                        <!-- Price Filter -->
-                        <article class="filter-group">
-                            <header class="card-header">
-                                <h6 class="title">Price range </h6>
-                            </header>
-                            <div class="filter-content collapse show" id="collapse_3" style="">
-                                <div class="card-body">
-                                    <div class="form-row">
-                                        <div class="form-group col-md-6">
-                                            <label>Min</label>
-                                            <!-- <input class="form-control" placeholder="$0" type="number"> -->
-                                            <select class="mr-2 form-control">
-                                                <option value="0">$0</option>
-                                                <option value="50">$50</option>
-                                                <option value="100">$100</option>
-                                                <option value="150">$150</option>
-                                                <option value="200">$200</option>
-                                                <option value="500">$500</option>
-                                                <option value="1000">$1000</option>
-                                            </select>
-                                        </div>
-                                        <div class="form-group text-right col-md-6">
-                                            <label>Max</label>
-                                            <select class="mr-2 form-control">
-                                                <option value="50">$50</option>
-                                                <option value="100">$100</option>
-                                                <option value="150">$150</option>
-                                                <option value="200">$200</option>
-                                                <option value="500">$500</option>
-                                                <option value="1000">$1000</option>
-                                                <option value="2000">$2000+</option>
-                                            </select>
-                                        </div>
-                                    </div> <!-- form-row.// -->
-                                    <button class="btn btn-block btn-primary">Apply</button>
-                                </div><!-- card-body.// -->
-                            </div>
-                        </article> <!-- filter-group .// -->
-                    </div> <!-- card.// -->
-                </div> <!-- col.// -->
+<h2 class="heading">Shop</h2>
 
 
-                <!---------------------------------------------- Product View  --------------------------------------------->
-                
-                <div class="col-lg-9">
-                    <header class="border-bottom mb-4 pb-3">
-                        <div class="form-inline">
-                            <span class="mr-md-auto">{{product_count}} Items found </span>
 
-                        </div>
-                    </header><!-- sect-heading -->
-                    <div class="row" >
-                        {% for product in products %}
-                        <div class=" col-lg-3 col-md-6" style="margin-bottom:50px;padding-left:50px;border:none; width: auto; height: auto;">
-                        <a href="{{product.get_url}}" style="text-decoration: none; color:black;">
-                                <div style="padding-bottom: 15px;"class=" bg-transparent card card-product-grid" >
-                                    <div >
-                                        <img  style="padding-left:10px;"class="product-image" src="{% static 'css/headphone.png' %}">                     
-                                   </div> <!-- img-wrap.// -->
-                                    
-                                        <div class="fix-height" style="text-align: center;">
-                                         <h4>{{product.product_id}} </h4>
-                                         <span class="price" style="font-size: 1rem; font-weight: 500; padding-right:7px;">  $ {{product.price}}   </span>
-                                         <!-- <div style="padding-left:27%;"> -->
-                                            <a href="{% url 'cart_add' product.id %}" class="btn btn-block btn-success">Add to cart</a>  
-                                             
-                                         
-                                        </div>
-                                </div> <!-- card-->
-                            </a>
-                        </div> <!-- col.// -->
-                        {%endfor%}
-                    </div> <!-- row end.// -->
+
+<div class="" style="padding-right: 100px; padding-left: 150px; ">
+    <div class="row">
+        <div class="col-lg-3" style="width: 300px;">
+
+            <!------------------------------------- Filter Menu ------------------------------------>
+            <div class="card">
+                <!-- Category Filter -->
+                <article class="filter-group">
+                    <header class="card-header">
+                        <h6 class="title">Categories</h6>
+                    </header>
+                    <div class="filter-content collapse show" id="collapse_1" style="">
+                        <div class="card-body">
+                            <ul class="list-menu">
+                                <li><a href="{% url 'shop' %}">All Products </a></li>
+                                {% for category in links%}
+                                <li><a href="{{category.get_url}}">{{category.name}} </a></li>
+                                {% endfor %}
+                            </ul>
+                        </div> <!-- card-body.// -->
+                    </div>
+                </article> <!-- filter-group  .// -->
+
+                <!-- Price Filter -->
+                <article class="filter-group">
+                    <header class="card-header">
+                        <h6 class="title">Price range </h6>
+                    </header>
+                    <div class="filter-content collapse show" id="collapse_3" style="">
+                        <div class="card-body">
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label>Min</label>
+                                    <!-- <input class="form-control" placeholder="$0" type="number"> -->
+                                    <select class="mr-2 form-control">
+                                        <option value="0">$0</option>
+                                        <option value="50">$50</option>
+                                        <option value="100">$100</option>
+                                        <option value="150">$150</option>
+                                        <option value="200">$200</option>
+                                        <option value="500">$500</option>
+                                        <option value="1000">$1000</option>
+                                    </select>
+                                </div>
+                                <div class="form-group text-right col-md-6">
+                                    <label>Max</label>
+                                    <select class="mr-2 form-control">
+                                        <option value="50">$50</option>
+                                        <option value="100">$100</option>
+                                        <option value="150">$150</option>
+                                        <option value="200">$200</option>
+                                        <option value="500">$500</option>
+                                        <option value="1000">$1000</option>
+                                        <option value="2000">$2000+</option>
+                                    </select>
+                                </div>
+                            </div> <!-- form-row.// -->
+                            <button class="btn btn-block btn-primary">Apply</button>
+                        </div><!-- card-body.// -->
+                    </div>
+                </article> <!-- filter-group .// -->
+            </div> <!-- card.// -->
+        </div> <!-- col.// -->
+
+
+        <!---------------------------------------------- Product View  --------------------------------------------->
+
+        <div class="col-lg-9">
+            <header class="border-bottom mb-4 pb-3">
+                <div class="form-inline">
+                    <span class="mr-md-auto">{{product_count}} Items found </span>
 
                 </div>
-                    
-                    <!-- Implement django paginaytor to help seperate data across several pages, with "Previous/Next" links-->
-                    <nav class="mt-4" aria-label="Page navigation sample" style="padding-left: 50%; padding-right: 50%;">
-                        {% if products.has_other_pages %}
-                        <ul class="pagination">
-                            <!-- check to see if the current page has any previous pages-->
-                            {% if products.has_previous %}
-                            <li class="page-item "><a class="page-link"
-                                    href="?page={{products.previous_page_number}}">Previous</a></li>
-                            {% else %}
-                            <!-- Disable link to go to previous page-->
-                            <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
-                            {% endif %}
-                            {% for i in products.paginator.page_range%}
-                            {% if products.number == i %}
-                            <!--Page currently in-->
-                            <li class="page-item active"><a class="page-link" href="#">{{i}}</a></li>
-                            {% else %}
-                            <!-- {Pages currentlt not in}-->
-                            <li class="page-item"><a class="page-link" href="?page={{i}}">{{i}}</a></li>
-                            {% endif %}
-                            {% endfor %}
-                            <!-- check to see if the current page has any next pages-->
-                            {% if products.has_next %}
-                            <li class="page-item"><a class="page-link"
-                                    href="?page={{products.next_page_number}}">Next</a>
-                            </li>
-                            {% else %}
-                            <!-- Disable link to go to next page-->
-                            <li class="page-item disabled"><a class="page-link" href="#">Next</a></li>
-                            {% endif %}
-                        </ul>
-                        {% endif %}
-                    </nav>
+            </header><!-- sect-heading -->
+            <div class="row">
+                {% for product in products %}
+                <div class=" col-lg-3 col-md-6"
+                    style="margin-bottom:50px;padding-left:50px;border:none; width: auto; height: auto;">
+                    <a href="{{product.get_url}}" style="text-decoration: none; color:black;">
+                        <div style="padding-bottom: 15px;" class=" bg-transparent card card-product-grid">
+                            <div>
+                                <img style="padding-left:10px;" class="product-image"
+                                    src="{% static 'css/headphones.png' %}">
+                            </div> <!-- img-wrap.// -->
 
-                
+                            <div class="fix-height" style="text-align: center;">
+                                <h4>{{product.product_id}} </h4>
+                                <span class="price" style="font-size: 1rem; font-weight: 500; padding-right:7px;"> $
+                                    {{product.price}} </span>
+                                <!-- <div style="padding-left:27%;"> -->
+                                {% if product.quantity <= 0 %}
+                                <h5 class="text-danger">Out of Stock</h5>
+                                {% else %}
+                                <a href="{% url 'cart_add' product.id %}" class="btn btn-primary">Add to Cart</a>
+                                {% endif %}
 
-            </div> <!-- Main Row -->
+                                
 
-        </div> <!-- container .//  -->
-    
+
+                            </div>
+                        </div> <!-- card-->
+                    </a>
+                </div> <!-- col.// -->
+                {%endfor%}
+            </div> <!-- row end.// -->
+
+        </div>
+
+        <!-- Implement django paginaytor to help seperate data across several pages, with "Previous/Next" links-->
+        <nav class="mt-4" aria-label="Page navigation sample" style="padding-left: 50%; padding-right: 50%;">
+            {% if products.has_other_pages %}
+            <ul class="pagination">
+                <!-- check to see if the current page has any previous pages-->
+                {% if products.has_previous %}
+                <li class="page-item "><a class="page-link" href="?page={{products.previous_page_number}}">Previous</a>
+                </li>
+                {% else %}
+                <!-- Disable link to go to previous page-->
+                <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
+                {% endif %}
+                {% for i in products.paginator.page_range%}
+                {% if products.number == i %}
+                <!--Page currently in-->
+                <li class="page-item active"><a class="page-link" href="#">{{i}}</a></li>
+                {% else %}
+                <!-- {Pages currentlt not in}-->
+                <li class="page-item"><a class="page-link" href="?page={{i}}">{{i}}</a></li>
+                {% endif %}
+                {% endfor %}
+                <!-- check to see if the current page has any next pages-->
+                {% if products.has_next %}
+                <li class="page-item"><a class="page-link" href="?page={{products.next_page_number}}">Next</a>
+                </li>
+                {% else %}
+                <!-- Disable link to go to next page-->
+                <li class="page-item disabled"><a class="page-link" href="#">Next</a></li>
+                {% endif %}
+            </ul>
+            {% endif %}
+        </nav>
+
+
+
+    </div> <!-- Main Row -->
+
+</div> <!-- container .//  -->
+
 
 {% endblock %}
