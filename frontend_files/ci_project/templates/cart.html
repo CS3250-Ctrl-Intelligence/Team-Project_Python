@@ -87,11 +87,12 @@
                                 </a>
                                 
                                 {{item_in_cart.quantity}} 
-                                <a href="{% url 'cart_add' item_in_cart.product.id %}" type="button" id="button-minus" style="text-decoration: none; color: black;">
-                                    <i class="fa-solid fa-plus"></i>                
-                                </a>
+                                
                                 <span style="padding-left:125px;">Price: $ {{item_in_cart.product.price}}</span>
                             </h3>
+                            <a href="{% url 'cart_add' item_in_cart.product.id %}" type="button" id="button-minus" style="text-decoration: none; color: black;">
+                                <i class="fa-solid fa-plus"></i>                
+                            </a>
                         </div>
     
                                 

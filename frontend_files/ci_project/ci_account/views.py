@@ -125,6 +125,9 @@ def dashboard(request):
 @login_required(login_url='login')
 def my_orders(request):
     orders=Order.objects.filter(user=request.user, is_ordered = True).order_by('-created_at')
+    print(orders.query)
+    for i in orders:
+        print(i.created_at)
     context ={
         'orders':orders,
     }
@@ -135,7 +138,7 @@ def my_orders(request):
 def order_detail(request,order_id):
     order_detail = OrderItem.objects.filter(order__order_number=order_id)
     order= Order.objects.get(order_number=order_id)
-    subtotal = 0
+    
     for i in order_detail:
         subtotal+= i.price * i.quantity
     subtotal = round(subtotal,2)

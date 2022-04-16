@@ -1,0 +1,41 @@
+{% load static %}
+<html>
+  <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  {% comment  %}
+  <link rel="stylesheet"  href="{% static 'css/bootstrap.min.css' %}" type="text/css">
+
+  {% endcomment %}
+
+<title>dummy chatbot</title>
+</head>
+
+<body>
+<br class="row">
+<div class="container">
+<div class="row">
+  <div class="card col border-warning mb-3" style="height: 40rem;">
+    <div class="card-body ">
+      <center><h3 class="title text-warning">Jarvis</h3></center>
+      <form method="POST" action="">
+        {% csrf_token %}
+          
+          <div class="row justify-content-end">
+            user :<div class=" card bg-warning p-1" >{{ user}}<br></div>
+          </div>
+
+          <div class="row justify-content-start">
+            Jarvis :<div class=" card bg-warning  p-1" style="width:auto ; height: auto;">{{ bot}}<br></div>
+          </div>
+        
+        <div class="row justify-content-around d-flex align-items-end" style="height: 36rem;">
+          <input type="text" name="input" name="input" class="col-8  form-control border-warning"></input>
+          <button class="btn btn-warning col-3">Send</button>
+        </div>
+    
+      </div>
+  </div>
+</div>
+</div>
+</body>
+</html>

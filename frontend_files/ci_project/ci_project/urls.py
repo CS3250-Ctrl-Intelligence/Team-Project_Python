@@ -18,6 +18,7 @@ from django.urls import path,include
 from django.conf import settings
 from django.conf.urls.static import static
 from ci_project import views
+
 urlpatterns = [
     path('', views.home, name='home'),
     path('contactUs/',views.contactUs,name='contact'),
@@ -31,6 +32,9 @@ urlpatterns = [
     path('account/',include('ci_account.urls')),
     # Order
     path('order/',include('ci_order.urls')),
+    # Chatbox
+    path('chat/',include('ci_chat.urls')),
+   
 ]
 
 

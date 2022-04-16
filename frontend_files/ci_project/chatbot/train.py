@@ -5,9 +5,10 @@ import json
 import torch
 import torch.nn as nn
 from torch.utils.data import Dataset, DataLoader
+from model import NeuralNet
 
 from nltk_utils import bag_of_words, tokenize, stem
-from model import NeuralNet
+
 
 with open('intents.json', 'r') as f:
     intents = json.load(f)
@@ -29,7 +30,7 @@ for intent in intents['intents']:
         xy.append((w, tag))
 
 # stem and lower each word
-ignore_words = ['?', '.', '!']
+ignore_words = ['?', '.', '!',',']
 all_words = [stem(w) for w in all_words if w not in ignore_words]
 # remove duplicates and sort
 all_words = sorted(set(all_words))
@@ -117,8 +118,8 @@ print(f'final loss: {loss.item():.4f}')
 data = {
 "model_state": model.state_dict(),
 "input_size": input_size,
-"hidden_size": hidden_size,
 "output_size": output_size,
+"hidden_size": hidden_size,
 "all_words": all_words,
 "tags": tags
 }

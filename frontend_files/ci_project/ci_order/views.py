@@ -1,17 +1,22 @@
 import datetime
+import stripe
+
 from django.http import JsonResponse
 from django.shortcuts import render,redirect
+from django.views import View
+from django.conf import settings
+from django.views.generic import TemplateView
 
 from ci_cart.models import CartItem,Cart
 from ci_order.forms import OrderForm
 from ci_order.models import Order,OrderItem,Payment
 from ci_shop.models import Product
-
-import json
-
-# Email
 from django.core.mail import EmailMessage
 from django.template.loader import render_to_string
+import json
+
+
+
 
 def payments(request):
     body = json.loads(request.body)
