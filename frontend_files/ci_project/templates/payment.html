@@ -7,65 +7,90 @@
 <h2 class="heading"> Review Your Order and Make Payment</h2>
 
 <div class="row" style="padding-left: 60px; padding-right:60px;">
-   <!-- Information-->
+    <!-- Information-->
     <div class="col-lg-9">
-        <div class="box-element " >
+        <div class="card">
+            <h5 class="card-header">Shipping Address</h5>
+            <div class="card-body">
+                <p class="card-text">{{order.first_name}} {{order.last_name}}</p>
+                <p class="card-text">{{order.address}}</p>
+                <p class="card-text">{{order.city}}, {{order.state}}, {{order.country}}</p>
+                <p class="card-text">{{order.email}}</p>
+                <p class="card-text"></p>
+            </div>
+        </div>
+
+        <br>
+
+
+        <div class="card">
+            <h5 class="card-header">Payment Method</h5>
+            <div class="card-body">
+                <p class="card-text">Paypal</p>
+
+            </div>
+        </div>
+        <br>
+        <div class="card">
+            <h5 class="card-header">Product Review</h5>
             {% for item_in_cart in cart_items %}
             <div class="card mb-3 mt-3 ms-3 me-3">
-                <div class="row no-gutters">
-                    <div class="col-md-6 col-lg-3 ">
-                        <div>
-                            <img class="picture-float" src="{% static 'css/headphone.png' %}" alt="product-pict" style="width:300px; padding-bottom: 20px;">
+                <div class="card-body">
+                    <div class="row no-gutters">
+                        <div class="col-md-6 col-lg-3 ">
+                            <div>
+                                <img class="picture-float" src="{% static 'css/headphones.png' %}" alt="product-pict"
+                                    style="width:300px; padding-bottom: 20px;">
+                            </div>
+                            <div>
+                                <h4 style=" padding-left: 10px;">Return by mail only</h4>
+                            </div>
                         </div>
-                        <div>
-                            <h4 style=" padding-left: 10px;">Return by mail only</h4>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-3 ">
-                        <div style="padding-top: 20px; padding-bottom: 20px;">
-                            <h3 class="card-title">{{item_in_cart.product.product_id}}</h3>
-                        </div>
-                        <div>
-                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>     
-                        </div>    
-                        
-                    </div>
-                    <div class="col-lg-6">
-                        
-                        <div>
-                            <p style="text-align: right; padding-right: 15px; padding-top: 10px; font-size: 1.89rem;">
-                                <a href="{% url 'cart_item_remove' item_in_cart.product.id %}" type="button"><i class="fa-solid fa-xmark" style="text-decoration: none; color: black;"></i> </a>
+                        <div class="col-md-6 col-lg-3 ">
+                            <div style="padding-top: 20px; padding-bottom: 20px;">
+                                <h3 class="card-title">{{item_in_cart.product.product_id}}</h3>
+                            </div>
+                            <div>
+                                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+                                    tempor incididunt ut labore et dolore magna aliqua. </p>
+                            </div>
     
-                            </p>
                         </div>
-                        <div>
+                        <div class="col-lg-6">
     
-                            <h3 style ="text-align: right; margin-top: 310px; padding-right: 15px;">Quantity: 
-                                <a href="{% url 'cart_remove' item_in_cart.product.id %}"  type="button" id="button-plus" style="text-decoration: none; color: black;"> 
-                                    <i class="fa-solid fa-minus"></i> 
-                                </a>
-                                
-                                {{item_in_cart.quantity}} 
-                                <a href="{% url 'cart_add' item_in_cart.product.id %}" type="button" id="button-minus" style="text-decoration: none; color: black;">
-                                    <i class="fa-solid fa-plus"></i>                
-                                </a>
-                                <span style="padding-left:125px;">Price: $ {{item_in_cart.product.price}}</span>
-                            </h3>
+    
+                            <div>
+    
+                                <h3 style="text-align: right; margin-top: 310px; padding-right: 15px;">Quantity:
+    
+                                    {{item_in_cart.quantity}}
+    
+                                    <span style="padding-left:125px;">Price: $ {{item_in_cart.product.price}}</span>
+                                </h3>
+                            </div>
+    
+    
+    
+    
+    
+    
                         </div>
     
-                                
-                                
-                        
-                        
-                        
                     </div>
+
+
                 </div>
+                
+                
+                
             </div>
-            {% endfor %}
-            
+                {% endfor %}
+
+
         </div>
-    
     </div>
+
+
 
     <!-- Price Info-->
     <div class="col-lg-3" style="padding-right:100px;">
@@ -96,8 +121,10 @@
                 </div>
             </div>
             <p class="text-center mb-3">
-                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-paypal" viewBox="0 0 16 16">
-                    <path d="M14.06 3.713c.12-1.071-.093-1.832-.702-2.526C12.628.356 11.312 0 9.626 0H4.734a.7.7 0 0 0-.691.59L2.005 13.509a.42.42 0 0 0 .415.486h2.756l-.202 1.28a.628.628 0 0 0 .62.726H8.14c.429 0 .793-.31.862-.731l.025-.13.48-3.043.03-.164.001-.007a.351.351 0 0 1 .348-.297h.38c1.266 0 2.425-.256 3.345-.91.379-.27.712-.603.993-1.005a4.942 4.942 0 0 0 .88-2.195c.242-1.246.13-2.356-.57-3.154a2.687 2.687 0 0 0-.76-.59l-.094-.061ZM6.543 8.82a.695.695 0 0 1 .321-.079H8.3c2.82 0 5.027-1.144 5.672-4.456l.003-.016c.217.124.4.27.548.438.546.623.679 1.535.45 2.71-.272 1.397-.866 2.307-1.663 2.874-.802.57-1.842.815-3.043.815h-.38a.873.873 0 0 0-.863.734l-.03.164-.48 3.043-.024.13-.001.004a.352.352 0 0 1-.348.296H5.595a.106.106 0 0 1-.105-.123l.208-1.32.845-5.214Z"/>
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-paypal"
+                    viewBox="0 0 16 16">
+                    <path
+                        d="M14.06 3.713c.12-1.071-.093-1.832-.702-2.526C12.628.356 11.312 0 9.626 0H4.734a.7.7 0 0 0-.691.59L2.005 13.509a.42.42 0 0 0 .415.486h2.756l-.202 1.28a.628.628 0 0 0 .62.726H8.14c.429 0 .793-.31.862-.731l.025-.13.48-3.043.03-.164.001-.007a.351.351 0 0 1 .348-.297h.38c1.266 0 2.425-.256 3.345-.91.379-.27.712-.603.993-1.005a4.942 4.942 0 0 0 .88-2.195c.242-1.246.13-2.356-.57-3.154a2.687 2.687 0 0 0-.76-.59l-.094-.061ZM6.543 8.82a.695.695 0 0 1 .321-.079H8.3c2.82 0 5.027-1.144 5.672-4.456l.003-.016c.217.124.4.27.548.438.546.623.679 1.535.45 2.71-.272 1.397-.866 2.307-1.663 2.874-.802.57-1.842.815-3.043.815h-.38a.873.873 0 0 0-.863.734l-.03.164-.48 3.043-.024.13-.001.004a.352.352 0 0 1-.348.296H5.595a.106.106 0 0 1-.105-.123l.208-1.32.845-5.214Z" />
                 </svg>
             </p>
             <div id="paypal-button-container">
@@ -121,15 +148,31 @@
         your items and reflects each item's most recent price. </p>
 </div>
 
-
-
-
-
 <!-- Script from paypal-->
 <script>
-    var amount = document.getElementById("myVar").value;
+    function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                // Does this cookie string begin with the name we want?
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+    const csrftoken = getCookie('csrftoken');
 
-    console.log(amount);
+    var amount = "{{grand_total}}"
+    var url = "{% url 'payments' %}"
+    var orderID = "{{order.order_number}}";
+    var payment_method = "Paypal";
+    var redirect_url = "{% url 'order_complete' %}"
+
     // Render the PayPal button into #paypal-button-container
     paypal.Buttons({
 
@@ -138,7 +181,7 @@
             return actions.order.create({
                 purchase_units: [{
                     amount: {
-                        value: Math.round(amount * 100) / 100
+                        value: amount,
                     }
                 }]
             });
@@ -147,21 +190,39 @@
         // Finalize the transaction
         onApprove: function (data, actions) {
             return actions.order.capture().then(function (orderData) {
-                // Successful capture! For demo purposes:
-                console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
-                var transaction = orderData.purchase_units[0].payments.captures[0];
-                alert('Transaction ' + transaction.status + ': ' + transaction.id +
-                    '\n\nSee console for all available details');
+                console.log(orderData);
 
-                // Replace the above to show a success message within this page, e.g.
-                // const element = document.getElementById('paypal-button-container');
-                // element.innerHTML = '';
-                // element.innerHTML = '<h3>Thank you for your payment!</h3>';
-                // Or go to another URL:  actions.redirect('thank_you.html');
+                sendData();
+                // Implement sendData funciton using fetch to resources to backend
+                // data will be sent to the payment view as a dictionary to process
+                function sendData() {
+                    fetch(url, {
+                            method: "POST",
+                            headers: {
+                                "Content-type": "application/json",
+                                "X-CSRFToken": csrftoken,
+
+                            },
+                            body: JSON.stringify({
+                                orderID: orderID,
+                                transID: orderData.id,
+                                payment_method: payment_method,
+                                status: orderData.status,
+                            }),
+                        })
+                        .then((response) => response.json())
+                        .then((data) => {
+                            //    console.log('Sucess',data);
+                            // Redirect to to order_complete html
+                            window.location.href = redirect_url + '?order_number=' + data
+                                .order_number + '&payment_id=' + data.transID;
+                        });
+                }
             });
         }
 
 
     }).render('#paypal-button-container');
 </script>
+
 {% endblock %}

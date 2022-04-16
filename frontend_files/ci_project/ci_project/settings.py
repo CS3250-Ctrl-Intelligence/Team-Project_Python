@@ -23,14 +23,17 @@ STATIC_DIR = os.path.join(BASE_DIR,"static")
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-h8fsew66u%t8+prl=yuaq3oja0rrgp^t!#bu2bxw&5=-+hxg!'
+
+SECRET_KEY = ''
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+
 ALLOWED_HOSTS = ['127.0.0.1']
 
-
+ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
@@ -86,27 +89,29 @@ WSGI_APPLICATION = 'ci_project.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': ci_db,
-#         'USER': 'postgres',
-#         'PASSWORD': '123',
-#         'HOST': 'localhost',
-#         'PORT': '5432'
-#     }
-# }
+
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'ctrlinte_project',
-        'USER': 'ctrlinte_admin',
-        'PASSWORD': 'CS3250!!',
-        'HOST': 'ctrlintel.net',
-        'PORT':3306
+        'NAME': os.environ['DATABASE_NAME'],
+        'USER': os.environ['USER_NAME'],
+        'PASSWORD': os.environ['PASSWORD'],
+        'HOST': os.environ['DATABASE_SERVER'],
+        'PORT': os.environ['DATABASE_PORT'],
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'mydb',
+#         'USER': 'admin',
+#         'PASSWORD': '123',
+#         'HOST': 'localhost',
+#         'PORT': '',
+#     }
+# }
 
 
 # Password validation
@@ -142,6 +147,7 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
+
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS =[STATIC_DIR,]

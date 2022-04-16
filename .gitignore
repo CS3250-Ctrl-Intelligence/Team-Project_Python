@@ -1,4 +1,6 @@
-*.csv
+customer_orders_team1.csv
+inventory_team1.csv
+dbscript.py
 *.class
 
 

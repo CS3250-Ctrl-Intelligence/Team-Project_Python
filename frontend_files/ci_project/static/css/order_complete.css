@@ -1,0 +1,13 @@
+.heading {
+    padding-top: 15px;
+    text-align: center;
+    font-size: 4rem;
+}
+
+table{
+    width:100%;
+}
+td,th {
+    border:1px solid #000;
+    padding:8px;
+}

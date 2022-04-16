@@ -11,7 +11,7 @@
     <div class="box-element col-lg-4" style="padding: 0px 30px 30px 30px;">
         <div class="box-element card mt-4">
             <div class="cart-body" style="padding: 20px 20px 20px 20px;">
-                <h4 class="card-title mb-4">Billing Address</h4>
+                <h4 class="card-title mb-4">Shipping Address</h4>
                 <form action="{% url 'place_order' %}" method="POST">
                     {% csrf_token %}
                     <div class="row">
@@ -31,21 +31,18 @@
                             <label for="">Address</label>
                             <input type="text" name="address" class="form-control" required>
                         </div>
-                        <div class="col-lg-3">
+                        <div class="col-lg-4">
                             <label for="">City</label>
                             <input type="text" name="city" class="form-control" required>
                         </div>
-                        <div class="col-lg-3">
+                        <div class="col-lg-4">
                             <label for="">State</label>
                             <input type="text" name="state" class="form-control" required>
                         </div>
-                        <div class="col-lg-3">
-                            <label for="">Country</label>
-                            <input type="text" name="country" class="form-control" required>
-                        </div>
-                        <div class="col-lg-3">
+                        
+                        <div class="col-lg-4">
                             <label for="">Zip</label>
-                            <input type="text" name="zip" class="form-control" required>
+                            <input type="text" name="zipcode" class="form-control" required>
                         </div>
 
                     </div>
@@ -94,7 +91,7 @@
                 <div class="row no-gutters">
                     <div class="col-md-6 col-lg-3 ">
                         <div>
-                            <img class="picture-float" src="{% static 'css/headphone.png' %}" alt="product-pict" style="width:300px; padding-bottom: 20px;">
+                            <img class="picture-float" src="{% static 'css/headphones.png' %}" alt="product-pict" style="width:300px; padding-bottom: 20px;">
                         </div>
                         <div>
                             <h4 style=" padding-left: 10px;">Return by mail only</h4>
@@ -130,6 +127,8 @@
     </div>
 </form>
 </div>
+
+
 
 {% endblock %}
 
