@@ -23,12 +23,12 @@ STATIC_DIR = os.path.join(BASE_DIR,"static")
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ['DJANGO_SECRET_KEY']
+SECRET_KEY = 'django-insecure-h8fsew66u%t8+prl=yuaq3oja0rrgp^t!#bu2bxw&5=-+hxg!'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['34.125.101.189']
+ALLOWED_HOSTS = ['127.0.0.1']
 
 
 # Application definition
@@ -89,22 +89,22 @@ WSGI_APPLICATION = 'ci_project.wsgi.application'
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': os.environ['DATABASE_NAME'],
-#         'USER': os.environ['USER_NAME'],
-#         'PASSWORD': os.environ['PASSWORD'],
-#         'HOST': os.environ['DATABASE_SERVER'],
-#         'PORT': os.environ['DATABASE_PORT'],
+#         'NAME': ci_db,
+#         'USER': 'postgres',
+#         'PASSWORD': '123',
+#         'HOST': 'localhost',
+#         'PORT': '5432'
 #     }
 # }
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'mydb',
-        'USER': 'admin',
-        'PASSWORD': '123',
-        'HOST': 'localhost',
-        'PORT': '',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'ctrlinte_project',
+        'USER': 'ctrlinte_admin',
+        'PASSWORD': 'CS3250!!',
+        'HOST': 'ctrlintel.net',
+        'PORT':3306
     }
 }
 
@@ -165,9 +165,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Simple Mail Transfer Protocol(SMTP) config
 
 EMAIL_BACKEND='django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = os.environ['EMAIL_HOST']
-EMAIL_HOST_USER =  os.environ['EMAIL_HOST_USER']
-EMAIL_HOST_PASSWORD = os.environ['EMAIL_HOST_PASSWORD']
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER =  'controlintel19@gmail.com'
+EMAIL_HOST_PASSWORD = 'Cs3250!!'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
