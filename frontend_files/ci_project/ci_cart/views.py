@@ -11,7 +11,9 @@ def _cart_session(request):
     # if there is no session,create one
     if not cart:
         cart = request.session.create()
+    print(cart)    
     return cart
+
 
 def cart_add(request, product_id):
     product = Product.objects.get(id=product_id) # get product

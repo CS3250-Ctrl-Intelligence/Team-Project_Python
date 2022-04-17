@@ -9,7 +9,11 @@ def tokenize(sentence):
     """
     split sentence into array of words/tokens
     a token can be a word or punctuation character, or number
+    examples:
+    sentence = 'How are you?'
+    tokenized_sentece =['How', 'are', 'you', '?']
     """
+    
     return nltk.word_tokenize(sentence)
 
 
@@ -21,10 +25,11 @@ def stem(word):
     words = [stem(w) for w in words]
     -> ["organ", "organ", "organ"]
     """
+
     return stemmer.stem(word.lower())
 
 
-def bag_of_words(tokenized_sentence, words):
+def bag_of_words(tokenized_sentence, all_words):
     """
     return bag of words array:
     1 for each known word that exists in the sentence, 0 otherwise
@@ -36,9 +41,11 @@ def bag_of_words(tokenized_sentence, words):
     # stem each word
     sentence_words = [stem(word) for word in tokenized_sentence]
     # initialize bag with 0 for each word
-    bag = np.zeros(len(words), dtype=np.float32)
-    for idx, w in enumerate(words):
+    bag = np.zeros(len(all_words), dtype=np.float32)
+    for idx, w in enumerate(all_words):
         if w in sentence_words: 
-            bag[idx] = 1
+            bag[idx] = 1.0
 
     return bag
+
+
