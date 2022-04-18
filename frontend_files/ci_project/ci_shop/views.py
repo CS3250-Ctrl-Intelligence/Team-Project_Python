@@ -31,6 +31,7 @@ def product_detail(request, product_slug):
     #category__slug means the slug attribute of category
     try:
         product_detail= Product.objects.get(slug = product_slug)
+        related_products = Product.objects.filter(category__slug=category_slug)[:4]
 
         # check to see if the product is already in cart
         if request.user.is_authenticated:
@@ -39,5 +40,6 @@ def product_detail(request, product_slug):
             in_cart = CartItem.objects.filter(cart__cart_id=_cart_session(request)).exists()
     except Exception as e:
         raise e
-    return render(request,'productDetail.html',{'product_detail':product_detail,'in_cart':in_cart,})
+
+    return render(request,'productDetail.html',{'product_detail':product_detail,'in_cart':in_cart,'related':related_products,})
 
