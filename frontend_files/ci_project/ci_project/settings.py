@@ -23,9 +23,7 @@ STATIC_DIR = os.path.join(BASE_DIR,"static")
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-
-SECRET_KEY = ''
-
+SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -43,11 +41,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'ci_category',
     'ci_account',
     'ci_shop',
     'ci_cart',
     'ci_order',
+    'ci_chat',
     'fontawesomefree',
 ]
 
@@ -74,7 +72,6 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'ci_category.context_processors.menu_links',
                 'ci_cart.context_processors.counter'
             ],
         },
@@ -94,25 +91,36 @@ WSGI_APPLICATION = 'ci_project.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': os.environ['DATABASE_NAME'],
-        'USER': os.environ['USER_NAME'],
-        'PASSWORD': os.environ['PASSWORD'],
-        'HOST': os.environ['DATABASE_SERVER'],
-        'PORT': os.environ['DATABASE_PORT'],
+        'NAME': os.getenv('DATABASE_NAME'),
+        'USER': os.getenv('DATABASE_USERNAME'),
+        'PASSWORD': os.getenv('DATABASE_PASSWORD'),
+        'HOST': os.getenv('DATABASE_SERVER'),
+        'PORT': os.getenv('DATABASE_PORT'),
+
     }
 }
 
 # DATABASES = {
 #     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': 'mydb',
-#         'USER': 'admin',
-#         'PASSWORD': '123',
-#         'HOST': 'localhost',
-#         'PORT': '',
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'ctrlinte_project',
+#         'USER': 'ctrlinte_admin',
+#         'PASSWORD': 'CS3250!!',
+#         'HOST': 'ctrlintel.net',
+#         'PORT': '3306',
 #     }
 # }
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'ci_db1',
+#         'USER': 'thole',
+#         'PASSWORD': '123',
+#         'HOST': 'localhost',
+#         'PORT': '5432',
+#     }
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
@@ -138,7 +146,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/Denver'
 
 USE_I18N = True
 
@@ -151,6 +159,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS =[STATIC_DIR,]
+
 
 # media files config
 MEDIA_URL = "/images/"
@@ -171,9 +180,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Simple Mail Transfer Protocol(SMTP) config
 
 EMAIL_BACKEND='django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER =  'controlintel19@gmail.com'
-EMAIL_HOST_PASSWORD = 'Cs3250!!'
+EMAIL_HOST = os.getenv('EMAIL_HOST')
+EMAIL_HOST_USER =  os.getenv('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
