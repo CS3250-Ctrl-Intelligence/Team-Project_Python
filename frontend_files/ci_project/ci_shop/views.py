@@ -27,7 +27,7 @@ def shop(request):
             }
     return render(request, 'shop.html', context)
 
-def product_detail(request, product_slug):
+def product_detail(request,category_slug, product_slug):
     #category__slug means the slug attribute of category
     try:
         product_detail= Product.objects.get(slug = product_slug)
