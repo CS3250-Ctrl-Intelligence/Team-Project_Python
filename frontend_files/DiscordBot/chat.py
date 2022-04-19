@@ -29,7 +29,7 @@ bot_name = "Jarvis"
 
 def chat(request):
     while True:        
-        sentence = request.POST.get('input',False)
+        sentence = request
 
         if sentence =='quit':
             break
