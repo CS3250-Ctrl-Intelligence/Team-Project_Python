@@ -28,7 +28,8 @@ SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-# ALLOWED_HOSTS = ['34.125.101.189']
+
+ALLOWED_HOSTS = ['127.0.0.1']
 
 ALLOWED_HOSTS = []
 # Application definition
@@ -85,6 +86,8 @@ WSGI_APPLICATION = 'ci_project.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
+
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
@@ -93,6 +96,7 @@ DATABASES = {
         'PASSWORD': os.getenv('DATABASE_PASSWORD'),
         'HOST': os.getenv('DATABASE_SERVER'),
         'PORT': os.getenv('DATABASE_PORT'),
+
     }
 }
 
