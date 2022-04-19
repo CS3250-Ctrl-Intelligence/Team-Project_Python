@@ -3,7 +3,7 @@
         <ul class="list-group">
         <a class="list-group-item {% if '/dashboard/' in request.path %}active{% endif %}" href="{% url 'dashboard' %}">Dashboard</a>
         <a class="list-group-item {% if '/my_orders/' in request.path %}active{% endif %}" href="{% url 'my_orders' %}">My Order</a>
-        
+        <a class="list-group-item" href="{% url 'request-refund' %}">Request Refund</a>
         </ul>
         <br>
 

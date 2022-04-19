@@ -39,6 +39,9 @@ class Order(models.Model):
     is_ordered = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     order_total = models.FloatField(default = 0)
+    refund_requested = models.BooleanField(default=False)
+    refund_granted= models.BooleanField(default=False)
+
 
     def __str__(self):
         return self.first_name
@@ -54,3 +57,12 @@ class OrderItem(models.Model):
 
     def __str__(self):
         return self.product.product_id
+
+
+class Refund(models.Model):
+    order = models.ForeignKey(Order,on_delete=models.CASCADE)
+    reason = models.TextField()
+    accepted = models.BooleanField(default=False)
+
+    def __str__(self):
+        return str(self.pk)
