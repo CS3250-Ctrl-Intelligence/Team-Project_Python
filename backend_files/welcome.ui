@@ -1,110 +1,356 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>login_window</class>
- <widget class="QDialog" name="login_window">
+ <class>Dialog</class>
+ <widget class="QDialog" name="Dialog">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1200</width>
-    <height>800</height>
+    <width>891</width>
+    <height>561</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
-  <widget class="QWidget" name="widget" native="true">
+  <property name="styleSheet">
+   <string notr="true">#leftMenuContainer{
+	background-color:  #16191d;
+}
+#leftMenuContainer QPushButton{
+	text-align: left;
+	padding: 5px 10px;
+	border-top-left-radius: 10px;
+	border-bottom-left-radius: 10px;
+}</string>
+  </property>
+  <widget class="QWidget" name="leftMenuContainer" native="true">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1201</width>
-     <height>801</height>
+     <width>123</width>
+     <height>561</height>
     </rect>
    </property>
-   <property name="styleSheet">
-    <string notr="true">QWidget#widget{
-background-color:qlineargradient(spread:pad, x1:0, y1:0.636, x2:0, y2:0.999591, stop:0 rgba(0, 0, 127, 255), stop:0.99435 rgba(0, 0, 0, 255));}</string>
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
    </property>
-   <widget class="QLabel" name="label">
+   <layout class="QHBoxLayout" name="horizontalLayout_3">
+    <property name="spacing">
+     <number>0</number>
+    </property>
+    <property name="leftMargin">
+     <number>0</number>
+    </property>
+    <property name="topMargin">
+     <number>0</number>
+    </property>
+    <property name="rightMargin">
+     <number>0</number>
+    </property>
+    <property name="bottomMargin">
+     <number>0</number>
+    </property>
+    <item>
+     <widget class="QWidget" name="leftMenuSubContainer" native="true">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_2">
+       <property name="spacing">
+        <number>0</number>
+       </property>
+       <property name="leftMargin">
+        <number>0</number>
+       </property>
+       <property name="topMargin">
+        <number>0</number>
+       </property>
+       <property name="rightMargin">
+        <number>0</number>
+       </property>
+       <property name="bottomMargin">
+        <number>0</number>
+       </property>
+       <item>
+        <widget class="QFrame" name="frame">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="frameShape">
+          <enum>QFrame::StyledPanel</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Raised</enum>
+         </property>
+         <layout class="QHBoxLayout" name="horizontalLayout_2">
+          <property name="spacing">
+           <number>0</number>
+          </property>
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
+          <item>
+           <widget class="QPushButton" name="loginBtn">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="toolTip">
+             <string>Menu</string>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">background-color: #1f232a;
+color: rgb(255, 255, 255);</string>
+            </property>
+            <property name="text">
+             <string>Sign in</string>
+            </property>
+            <property name="icon">
+             <iconset resource="resources.qrc">
+              <normaloff>:/icons/icons/user.svg</normaloff>:/icons/icons/user.svg</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>24</width>
+              <height>24</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QFrame" name="frame_2">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="frameShape">
+          <enum>QFrame::StyledPanel</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Raised</enum>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_3">
+          <property name="spacing">
+           <number>0</number>
+          </property>
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>10</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>10</number>
+          </property>
+          <item>
+           <spacer name="verticalSpacer">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QFrame" name="frame_3">
+         <property name="frameShape">
+          <enum>QFrame::StyledPanel</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Raised</enum>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_4">
+          <property name="spacing">
+           <number>0</number>
+          </property>
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>10</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>10</number>
+          </property>
+         </layout>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QWidget" name="mainWindow" native="true">
+   <property name="geometry">
+    <rect>
+     <x>120</x>
+     <y>40</y>
+     <width>771</width>
+     <height>521</height>
+    </rect>
+   </property>
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color:  #16191d;
+</string>
+   </property>
+   <widget class="QLabel" name="label_2">
     <property name="geometry">
      <rect>
-      <x>420</x>
-      <y>130</y>
-      <width>271</width>
-      <height>71</height>
+      <x>50</x>
+      <y>60</y>
+      <width>671</width>
+      <height>61</height>
      </rect>
     </property>
     <property name="font">
      <font>
       <pointsize>36</pointsize>
-      <italic>false</italic>
-      <bold>true</bold>
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">color:white;
-font: 900 36pt &quot;Arial Black&quot;;</string>
+     <string notr="true">color: rgb(255, 255, 255);</string>
     </property>
     <property name="text">
-     <string>Welcome</string>
+     <string>Welcome to Ctrl Intelligence!</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
     </property>
    </widget>
-   <widget class="QLabel" name="label_2">
+   <widget class="QLabel" name="label_3">
     <property name="geometry">
      <rect>
-      <x>360</x>
-      <y>210</y>
-      <width>421</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">color:white;
-font: 900 16pt &quot;Arial Black&quot;;</string>
-    </property>
-    <property name="text">
-     <string>Sign in or create a new account</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="pushButton_login">
-    <property name="geometry">
-     <rect>
-      <x>370</x>
-      <y>300</y>
-      <width>331</width>
+      <x>50</x>
+      <y>150</y>
+      <width>671</width>
       <height>61</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <pointsize>24</pointsize>
+     </font>
+    </property>
     <property name="styleSheet">
-     <string notr="true">border-radius:20px;
-background-color: rgb(255, 255, 255);
-font: 900 14pt &quot;Arial Black&quot;;</string>
+     <string notr="true">color: rgb(255, 255, 255);</string>
     </property>
     <property name="text">
-     <string>Login</string>
+     <string>If you are an existing employee, please sign in.</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_newAcc">
+   <widget class="QLabel" name="label_4">
     <property name="geometry">
      <rect>
-      <x>370</x>
-      <y>390</y>
-      <width>331</width>
-      <height>61</height>
+      <x>0</x>
+      <y>200</y>
+      <width>761</width>
+      <height>111</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <pointsize>24</pointsize>
+     </font>
+    </property>
     <property name="styleSheet">
-     <string notr="true">border-radius:20px;
-background-color: rgb(255, 255, 255);
-font: 900 14pt &quot;Arial Black&quot;;</string>
+     <string notr="true">color: rgb(255, 255, 255);</string>
     </property>
     <property name="text">
-     <string>Create a new account</string>
+     <string>Otherwise, please make an account with a supervisor.</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QWidget" name="header" native="true">
+   <property name="geometry">
+    <rect>
+     <x>120</x>
+     <y>0</y>
+     <width>771</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color:qlineargradient(spread:pad, x1:0.591, y1:0.0454545, x2:1, y2:0, stop:0  #16191d, stop:1 rgb(255, 85, 0))
+</string>
+   </property>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>10</y>
+      <width>191</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>18</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(255, 255, 255);
+background-color:  #16191d;</string>
+    </property>
+    <property name="text">
+     <string>Ctrl Intelligence</string>
     </property>
    </widget>
   </widget>
  </widget>
- <resources/>
+ <resources>
+  <include location="resources.qrc"/>
+ </resources>
  <connections/>
 </ui>

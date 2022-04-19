@@ -24,14 +24,13 @@
    </property>
    <property name="font">
     <font>
-     <family>Arial Black</family>
      <pointsize>12</pointsize>
      <bold>true</bold>
     </font>
    </property>
    <property name="styleSheet">
-    <string notr="true">QWidget#widget{
-background-color:qlineargradient(spread:pad, x1:0, y1:0.636, x2:0, y2:0.999591, stop:0 rgba(0, 0, 127, 255), stop:0.99435 rgba(0, 0, 0, 255));}</string>
+    <string notr="true">background-color:  #16191d;
+</string>
    </property>
    <widget class="QLabel" name="label_product">
     <property name="geometry">
@@ -44,7 +43,6 @@ background-color:qlineargradient(spread:pad, x1:0, y1:0.636, x2:0, y2:0.999591, 
     </property>
     <property name="font">
      <font>
-      <family>Arial Black</family>
       <pointsize>12</pointsize>
       <bold>true</bold>
      </font>
@@ -153,6 +151,9 @@ background-color:qlineargradient(spread:pad, x1:0, y1:0.636, x2:0, y2:0.999591, 
       <height>21</height>
      </rect>
     </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(255, 255, 255);</string>
+    </property>
    </widget>
    <widget class="QLineEdit" name="lineEdit_quantity">
     <property name="geometry">
@@ -162,6 +163,9 @@ background-color:qlineargradient(spread:pad, x1:0, y1:0.636, x2:0, y2:0.999591, 
       <width>211</width>
       <height>21</height>
      </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(255, 255, 255);</string>
     </property>
    </widget>
    <widget class="QLineEdit" name="lineEdit_wholesale">
@@ -173,6 +177,9 @@ background-color:qlineargradient(spread:pad, x1:0, y1:0.636, x2:0, y2:0.999591, 
       <height>21</height>
      </rect>
     </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(255, 255, 255);</string>
+    </property>
    </widget>
    <widget class="QLineEdit" name="lineEdit_sale">
     <property name="geometry">
@@ -182,6 +189,9 @@ background-color:qlineargradient(spread:pad, x1:0, y1:0.636, x2:0, y2:0.999591, 
       <width>211</width>
       <height>21</height>
      </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(255, 255, 255);</string>
     </property>
    </widget>
    <widget class="QLineEdit" name="lineEdit_supplier">
@@ -193,22 +203,29 @@ background-color:qlineargradient(spread:pad, x1:0, y1:0.636, x2:0, y2:0.999591, 
       <height>21</height>
      </rect>
     </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(255, 255, 255);</string>
+    </property>
    </widget>
    <widget class="QPushButton" name="pushButton_commit">
     <property name="geometry">
      <rect>
-      <x>60</x>
+      <x>90</x>
       <y>270</y>
-      <width>351</width>
+      <width>311</width>
       <height>41</height>
      </rect>
     </property>
     <property name="font">
      <font>
-      <family>Arial Black</family>
-      <pointsize>14</pointsize>
-      <bold>true</bold>
+      <family>Segoe UI</family>
+      <pointsize>16</pointsize>
+      <bold>false</bold>
      </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(255, 85, 0);
+border-radius: 20px</string>
     </property>
     <property name="text">
      <string>Create Data</string>
@@ -225,7 +242,6 @@ background-color:qlineargradient(spread:pad, x1:0, y1:0.636, x2:0, y2:0.999591, 
     </property>
     <property name="font">
      <font>
-      <family>Arial Black</family>
       <pointsize>12</pointsize>
       <bold>true</bold>
      </font>
