@@ -5,11 +5,13 @@ from django.http import JsonResponse
 from django.shortcuts import render,redirect
 from django.views import View
 from django.conf import settings
-from django.views.generic import TemplateView
+from django.contrib import messages
+from django.core.exceptions import ObjectDoesNotExist
+
 
 from ci_cart.models import CartItem,Cart
-from ci_order.forms import OrderForm
-from ci_order.models import Order,OrderItem,Payment
+from ci_order.forms import OrderForm,RefundForm
+from ci_order.models import Order,OrderItem,Payment,Refund
 from ci_shop.models import Product
 from django.core.mail import EmailMessage
 from django.template.loader import render_to_string
@@ -169,3 +171,32 @@ def order_complete(request):
     except(Payment.DoesNotExist,Order.DoesNotExist):
         return redirect('home')
     
+class RequestRefundView(View):
+    def get(self,*args,**kwargs):
+        form = RefundForm()
+        context={
+            'form':form
+        }
+        return render(self.request,"refund.html",context)
+
+    def post(self,*args, **kwargs):
+        form = RefundForm(self.request.POST)
+        if form.is_valid():
+            order_num = form.cleaned_data.get('order_num')
+            message = form.cleaned_data.get('message')
+            # edit the order
+            try:
+                order = Order.objects.get(order_number = order_num)
+                order.refund_requested = True
+                order.save()
+
+            # store refund
+                refund = Refund()
+                refund.order = order
+                refund.reason = message
+                refund.save()
+                messages.info(self.request,"Your request was received")
+                return redirect("request-refund")
+            except ObjectDoesNotExist:
+                messages.info(self.request,"This order does not exist")
+                return redirect("request-refund") # return to the same page
