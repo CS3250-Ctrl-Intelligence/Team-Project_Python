@@ -41,6 +41,7 @@ class Order(models.Model):
     order_total = models.FloatField(default = 0)
     refund_requested = models.BooleanField(default=False)
     refund_granted= models.BooleanField(default=False)
+    refund_allow = models.BooleanField(default=True)
 
 
     def __str__(self):
