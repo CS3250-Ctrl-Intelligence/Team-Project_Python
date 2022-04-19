@@ -1,406 +1,281 @@
-import sys
-from PyQt6.uic import loadUi
-from PyQt6 import QtWidgets
-from PyQt6.QtWidgets import QDialog, QApplication, QWidget, QTableWidgetItem
-from dbscript import Database_Functions
-import dbscript
-import time
+import mysql.connector as mc
+import unittest
+import csv
 
-class Buttons(QDialog):
-    def __init__(self):
-        super().__init__()
-        loadUi(r'''backend_files\home.ui''',self)
+class Initialize_database():
 
-        #Implementation of the buttons on the page.
-        self.invBtn.clicked.connect(self.goToInv)
-        self.ordersBtn.clicked.connect(self.goToOrders)
-        self.marketBtn.clicked.connect(self.goToMarket)
-        self.financeBtn.clicked.connect(self.goToFinance)
-        self.settingsBtn.clicked.connect(self.goToSettings)
-        self.helpBtn.clicked.connect(self.goToHelp)
-        self.infoBtn.clicked.connect(self.goToInfo)
+    def createDB():
+        mydb = mc.connect(
+            host="localhost",
+            user="root",
+            password="",
+            port=3306
+        )
+        cur = mydb.cursor()
+        cur.execute("CREATE DATABASE IF NOT EXISTS ci_db")
+        
+        cur.close()
+        mydb.close()
 
-    #function to go to the inventory screen
-    def goToInv(self):
-        inventory = InvScreen()
-        widget.addWidget(inventory)
-        widget.setCurrentIndex(widget.currentIndex()+1)
+    def createTables():
 
-    #function to go to the customer orders screen
-    def goToOrders(self):
-        orders = OrdersScreen()
-        widget.addWidget(orders)
-        widget.setCurrentIndex(widget.currentIndex()+1)
+        mydb = mc.connect(
+            host="localhost",
+            user="root",
+            password="",
+            database="ci_db",
+            port=3306
+        )
+
+        cur = mydb.cursor()
+
+        cur.execute("CREATE TABLE IF NOT EXISTS inventory (Product_ID VARCHAR(45), Quantity INT, Wholesale_Price FLOAT, Sale_Price FLOAT, Supplier_ID VARCHAR(45))")
+        cur.execute("CREATE TABLE IF NOT EXISTS orders (Date DATE, Cust_Email VARCHAR(45), Cust_Location INT, Product_ID VARCHAR(45), Quantity INT)")
+        cur.execute("CREATE TABLE IF NOT EXISTS employees (username VARCHAR(45), password VARCHAR(45))")
+        cur.execute("CREATE TABLE IF NOT EXISTS customers (cust_email VARCHAR(45), username VARCHAR(45), password VARCHAR(45))")
+
+        cur.close()
+        mydb.close()
+        
+class Database_Functions():
+
+    def connect():
+
+        mydb = mc.connect(
+            host="localhost",
+            user="root",
+            password="",
+            database="ci_db",
+            port=3306
+        )
+
+        return mydb
+
+    def login(username, password):
+
+        mydb = Database_Functions.connect()
+
+        #find the username and password in the database table employees
+        cur = mydb.cursor()
+        query = "SELECT username,password from employees where username like '" + username + "'and password like '" + password +  "'"
+        cur.execute(query)
+        result = cur.fetchone()
+
+        return result
+
+    def createEmployee(username, password):
+
+        mydb = Database_Functions.connect()
+        #create record of employee in database table employees
+        cur = mydb.cursor()
+        query = 'INSERT INTO employees(username, password)' 'VALUES(%s, %s)'
+        value = (username, password)
+        cur.execute(query, value)
+        mydb.commit()
     
-    def goToMarket(self):
-        market = MarketScreen()
-        widget.addWidget(market)
-        widget.setCurrentIndex(widget.currentIndex()+1)
+    def fetchInventory():
 
-    def goToFinance(self):
-        finance = FinanceScreen()
-        widget.addWidget(finance)
-        widget.setCurrentIndex(widget.currentIndex()+1)
+        mydb = Database_Functions.connect()
 
-    def goToSettings(self):
-        settings = SettingsScreen()
-        widget.addWidget(settings)
-        widget.setCurrentIndex(widget.currentIndex()+1)
+        cur = mydb.cursor()
+        cur.execute("SELECT * FROM {} ".format("inventory"))
+        result = cur.fetchall()
 
-    def goToHelp(self):
-        help = HelpScreen()
-        widget.addWidget(help)
-        widget.setCurrentIndex(widget.currentIndex()+1)
+        return result
+    
+    def importInventory():
 
-    def goToInfo(self):
-        info = InfoScreen()
-        widget.addWidget(info)
-        widget.setCurrentIndex(widget.currentIndex()+1)
+                #connect to database
+        mydb = Database_Functions.connect()
+        cur = mydb.cursor()
+        #open the .csv file and read it into variable.
+        file = open(r'''backend_files\inventory_team1.csv''')
+        csv_data = csv.reader(file)
 
+        skipHeader = True
 
-#This class displays the welcome screen
-class WelcomeScreen(QDialog):
-    def __init__(self):
-        super(WelcomeScreen, self).__init__()
-        loadUi(r'''backend_files\welcome.ui''',self)
+        #import the data from csv variable into the database table "inventory"
+        for row in csv_data:
+            if skipHeader:
+                skipHeader = False
+                continue
+            cur.execute('INSERT IGNORE INTO inventory(Product_ID, Quantity, Wholesale_Price, Sale_Price, Supplier_ID)' 'VALUES(%s, %s, %s, %s, %s)', row)
+        mydb.commit()
+
+    def importOrders():
+        mydb = Database_Functions.connect()
+
+        cur = mydb.cursor()
+
+        #open the .csv file and read it into variable.
+        file = open(r'''backend_files\customer_orders_team1.csv''')
+        csv_data = csv.reader(file)
+
+        skipHeader = True
+
+        #import the data from csv variable into the database table "inventory"
+        for row in csv_data:
+            if skipHeader:
+                skipHeader = False
+                continue
+            cur.execute('INSERT IGNORE INTO orders(Date, Cust_Email, Cust_Location, Product_ID, Quantity)' 'VALUES(%s, %s, %s, %s, %s)', row)
+        mydb.commit()
+
+    def fetchOrders():
+        mydb = Database_Functions.connect()
+
+        cur = mydb.cursor()
+        cur.execute("SELECT * FROM {} ".format("orders"))
+        result = cur.fetchall()
+
+        return result
+
+    def addInventory(product, quantity, wholesale, sale, supplier):
+
+        #connect to database
+        mydb = Database_Functions.connect()
+
+        cur = mydb.cursor()
+        query = "INSERT INTO inventory (Product_ID, Quantity, Wholesale_Price, Sale_Price, Supplier_ID) VALUES (%s, %s, %s, %s, %s)"
+        value = (product, quantity, wholesale, sale, supplier)
+        cur.execute(query, value)
+        #pushes the new data to the inventory table in the database.
+        mydb.commit()
+
+    def deleteInventory(product):
+
+        mydb = Database_Functions.connect()
+
+        cur = mydb.cursor()
+        query = ("DELETE FROM inventory WHERE Product_ID = '" + product + "'")
         
-        #Implementation of the buttons on the page.
-        self.loginBtn.clicked.connect(self.goToLogin)
-        #self.pushButton_newAcc.clicked.connect(self.goToCreate)
-
-    #function to bring you to login page
-    def goToLogin(self):
-        login = LoginScreen()
-        widget.addWidget(login)
-        widget.setCurrentIndex(widget.currentIndex()+1)
-
-#This class displays the employee login screen
-class LoginScreen(QDialog):
-    def __init__(self):
-        super(LoginScreen, self).__init__()
-        loadUi(r'''backend_files\login.ui''',self)
-
-        #Implementation of the buttons on the page.
-        self.goBtn.clicked.connect(self.loginFunc)
-        self.createBtn.clicked.connect(self.employeeCreate)
-
-    #function to bring you to the dashboard if you successfully log in
-    def goToHome(self):
-        dashboard = HomeScreen()
-        widget.addWidget(dashboard)
-        widget.setCurrentIndex(widget.currentIndex()+1)
-
-    #function to login in. 
-    def loginFunc(self):
-
-        #get the user input from the text fields
-        username = self.lineEdit_username.text()
-        password = self.lineEdit_password.text()
-
-        #Connect to the database
-        result = dbscript.Database_Functions.login(username, password)
-
-        #if username and/or password do not match a record print error text
-        if result ==None:
-            self.label_result.setText("Incorrect username or password")
-
-        #if successfully verified call dashboard function
-        else:
-            self.goToHome()
-
-    #function to go to the create employee screen
-    def employeeCreate(self):
-        create = CreateEmpScreen()
-        widget.addWidget(create)
-        widget.setCurrentIndex(widget.currentIndex()+1)
-
-#This class displays the create employee screen
-class CreateEmpScreen(QDialog):
-    def __init__(self):
-        super(CreateEmpScreen, self).__init__()
-        loadUi(r'''backend_files\createEmployee.ui''',self)
-
-        #Implementation of the buttons on the page.
-        self.createBtn.clicked.connect(self.signup)
-        
-    #function to create a record in the table employees
-    def signup(self):
-        #get user input from text fields
-        username = self.lineEdit_username.text()
-        password = self.lineEdit_password.text()
-        confPassword = self.lineEdit_confpassword.text()
-
-        #test to if all fields have an input and the password and confirm password match each other.
-        if username=="" or password=="" or confPassword=="":
-            self.label_result.setText("Please fill in all fields.")
-
-        elif password != confPassword:
-            self.label_result.setText("Passwords do not match")
-
-        else:
-            dbscript.Database_Functions.createEmployee(username, password)
-
-        #display on screen that employee was created
-            self.label_result.setText("Employee created, returning to main screen")
-
-            #wait 4 seconds before returning to welcome screen
-            time.sleep(1)
-
-            #returns to welcome screen after employee is created.
-            login = LoginScreen()
-            widget.addWidget(login)
-            widget.setCurrentIndex(widget.currentIndex()+1)
-
-class HomeScreen(Buttons):
-    def __init__(self):
-        super(HomeScreen, self).__init__()
-        loadUi(r'''backend_files\home.ui''',self)
-
-        #Implementation of the buttons on the page.
-        self.invBtn.clicked.connect(self.goToInv)
-        self.ordersBtn.clicked.connect(self.goToOrders)
-        self.marketBtn.clicked.connect(self.goToMarket)
-        self.financeBtn.clicked.connect(self.goToFinance)
-        self.settingsBtn.clicked.connect(self.goToSettings)
-        self.helpBtn.clicked.connect(self.goToHelp)
-        self.infoBtn.clicked.connect(self.goToInfo)
-
+        #execute query to delete data from database
+        cur.execute(query)
+        mydb.commit()
 
-#This class displays the inventory screen
-class InvScreen(Buttons):
-    def __init__(self):
-        super(InvScreen, self).__init__()
-        loadUi(r'''backend_files\inventory.ui''',self)
-
-        #Implementation of the buttons on the page.
-        self.importBtn.clicked.connect(self.importData)
-        self.fetchBtn.clicked.connect(self.fetchData)
-        self.deleteBtn.clicked.connect(self.goToDelete)
-        self.updateBtn.clicked.connect(self.goToUpdate)
-        self.ordersBtn.clicked.connect(self.goToOrders)
-        self.marketBtn.clicked.connect(self.goToMarket)
-        self.financeBtn.clicked.connect(self.goToFinance)
-        self.settingsBtn.clicked.connect(self.goToSettings)
-        self.helpBtn.clicked.connect(self.goToHelp)
-        self.infoBtn.clicked.connect(self.goToInfo)
-
-        self.fetchData()
-
-    def fetchData(self):
-        result = dbscript.Database_Functions.fetchInventory()
-
-        #starts row count at 0 and inserts all the data for each row
-        self.tableWidget.setRowCount(0)
-
-        for row_number, row_data in enumerate(result):
-            self.tableWidget.insertRow(row_number)
-
-            for column_number, data in enumerate(row_data):
-                self.tableWidget.setItem(row_number, column_number, QTableWidgetItem(str(data)))
-
-    #function to import data from .csv file to mysql database
-    def importData(self):
-        
-        dbscript.Database_Functions.importInventory()
-
-    #function to open the delete product screen        
-    def goToDelete(self):
-        delete = DeleteScreen()
-        delete.setFixedHeight(200)
-        delete.setFixedWidth(500)
-        delete.exec()
-
-    #function to open the update product screen
-    def goToUpdate(self):
-        update = AddScreen()
-        update.setFixedHeight(350)
-        update.setFixedWidth(500)
-        update.exec()
-
-#This class displays the customer orders screen.
-class OrdersScreen(Buttons):
-    def __init__(self):
-        super(OrdersScreen, self).__init__()
-        loadUi(r'''backend_files\orders.ui''',self)
-
-        #Implementation of the buttons on the page.
-        self.fetchBtn.clicked.connect(self.fetchData)
-        self.invBtn.clicked.connect(self.goToInv)
-        self.marketBtn.clicked.connect(self.goToMarket)
-        self.financeBtn.clicked.connect(self.goToFinance)
-        self.settingsBtn.clicked.connect(self.goToSettings)
-        self.helpBtn.clicked.connect(self.goToHelp)
-        self.infoBtn.clicked.connect(self.goToInfo)
-
-        self.fetchData()
-
-    def fetchData(self):
-        result = dbscript.Database_Functions.fetchOrders()
-
-        #starts row count at 0 and inserts all the data for each row
-        self.tableWidget.setRowCount(0)
-
-        for row_number, row_data in enumerate(result):
-            self.tableWidget.insertRow(row_number)
-
-            for column_number, data in enumerate(row_data):
-                self.tableWidget.setItem(row_number, column_number, QTableWidgetItem(str(data)))
-
-
-            
-class MarketScreen(Buttons):
-    def __init__(self):
-        super(MarketScreen, self).__init__()
-        loadUi(r'''backend_files\market.ui''',self)
-
-        #Implementation of the buttons on the page.
-        self.invBtn.clicked.connect(self.goToInv)
-        self.ordersBtn.clicked.connect(self.goToOrders)
-        self.financeBtn.clicked.connect(self.goToFinance)
-        self.settingsBtn.clicked.connect(self.goToSettings)
-        self.helpBtn.clicked.connect(self.goToHelp)
-        self.infoBtn.clicked.connect(self.goToInfo)
-        self.dailyBtn.clicked.connect(self.dailyReport)
-        self.weeklyBtn.clicked.connect(self.weeklyReport)
-        self.monthlyBtn.clicked.connect(self.monthlyReport)
-
-    def dailyReport(self):
-
-        date = self.lineDate.text()
-        dailyP = Database_Functions.dailyProduct(date)
-        self.lineLabelP.setText("The most purchased daily product is:")
-        self.lineProduct.setText(str(dailyP[0]) + " with " + str(dailyP[1]) + " sold")
-
-        #customer = Database_Functions.dailyCustomer(date)
-        dailyC = Database_Functions.dailyCustomer(date)
-        self.lineLabelC.setText("Daily customer that purchased the most:")
-        self.lineCustomer.setText(str(dailyC[0]) + " with $" + str(dailyC[1]))
-
-    def weeklyReport(self):
-
-        date = self.lineDate.text()
-        weeklyP = Database_Functions.weeklyProduct(date)
-        self.lineLabelP.setText("The most purchased weekly product is:")
-        self.lineProduct.setText(str(weeklyP[0]) + " with " + '%.2f' % weeklyP[1] + " sold")
-
-        #customer = Database_Functions.dailyCustomer(date)
-        weeklyC = Database_Functions.weeklyCustomer(date)
-        self.lineLabelC.setText("Weekly customer that purchased the most:")
-        self.lineCustomer.setText(str(weeklyC[0]) + " with $" + str(weeklyC[1]))
-
-    def monthlyReport(self):
-
-        date = self.lineDate.text()
-        monthlyP = Database_Functions.monthlyProduct(date)
-        self.lineProduct.setText(str(monthlyP[0]) + " with " + str(monthlyP[1]) + " sold")
-
-        #customer = Database_Functions.dailyCustomer(date)
-        monthlyC = Database_Functions.monthlyCustomer(date)
-        self.lineLabelC.setText("Monthly customer that purchased the most:")
-        self.lineCustomer.setText(str(monthlyC[0]) + " with $" + str(monthlyC[1]))
-        
-class FinanceScreen(Buttons):
-    def __init__(self):
-        super(FinanceScreen, self).__init__()
-        loadUi(r'''backend_files\finance.ui''',self)
-
-        #Implementation of the buttons on the page.
-        self.invBtn.clicked.connect(self.goToInv)
-        self.marketBtn.clicked.connect(self.goToMarket)
-        self.OrdersBtn.clicked.connect(self.goToOrders)
-        self.settingsBtn.clicked.connect(self.goToSettings)
-        self.helpBtn.clicked.connect(self.goToHelp)
-        self.infoBtn.clicked.connect(self.goToInfo)
-
-class SettingsScreen(Buttons):
-    def __init__(self):
-        super(SettingsScreen, self).__init__()
-        loadUi(r'''backend_files\settings.ui''',self)
-
-        #Implementation of the buttons on the page.
-        self.invBtn.clicked.connect(self.goToInv)
-        self.marketBtn.clicked.connect(self.goToMarket)
-        self.financeBtn.clicked.connect(self.goToFinance)
-        self.ordersBtn.clicked.connect(self.goToOrders)
-        self.helpBtn.clicked.connect(self.goToHelp)
-        self.infoBtn.clicked.connect(self.goToInfo)
-
-class HelpScreen(Buttons):
-    def __init__(self):
-        super(HelpScreen, self).__init__()
-        loadUi(r'''backend_files\help.ui''',self)
-
-        #Implementation of the buttons on the page.
-        self.invBtn.clicked.connect(self.goToInv)
-        self.marketBtn.clicked.connect(self.goToMarket)
-        self.financeBtn.clicked.connect(self.goToFinance)
-        self.settingsBtn.clicked.connect(self.goToSettings)
-        self.ordersBtn.clicked.connect(self.goToOrders)
-        self.infoBtn.clicked.connect(self.goToInfo)
-
-class InfoScreen(Buttons):
-    def __init__(self):
-        super(InfoScreen, self).__init__()
-        loadUi(r'''backend_files\info.ui''',self)
-
-        #Implementation of the buttons on the page.
-        self.invBtn.clicked.connect(self.goToInv)
-        self.marketBtn.clicked.connect(self.goToMarket)
-        self.financeBtn.clicked.connect(self.goToFinance)
-        self.settingsBtn.clicked.connect(self.goToSettings)
-        self.helpBtn.clicked.connect(self.goToHelp)
-        self.ordersBtn.clicked.connect(self.goToOrders)
-
-
-
-#This class displays the delete product screen
-class DeleteScreen(QDialog):
-    def __init__(self):
-        super(DeleteScreen, self).__init__()
-        loadUi(r'''backend_files\deleteData.ui''',self)
-
-        #Implementation of the buttons on the page.
-        self.pushButton_commit.clicked.connect(self.deleteData)
-
-    #function to delete data from the database
-    def deleteData(self):
-
-        product = self.lineEdit_product.text()
-
-        dbscript.Database_Functions.deleteInventory(product)
-
-
-#This class displays the update the 
-class AddScreen(QDialog):
-    def __init__(self):
-        super(AddScreen, self).__init__()
-        loadUi(r'''backend_files\addData.ui''',self)
-
-        #Implementation of the buttons on the page.
-        self.pushButton_commit.clicked.connect(self.addData)
-
-    #function to add new data record to the database table inventory
-    def addData(self):
-
-        #get user input fields for new product and info
-        product = self.lineEdit_product.text()
-        quantity = self.lineEdit_quantity.text()
-        wholesale = self.lineEdit_wholesale.text()
-        sale = self.lineEdit_sale.text()
-        supplier = self.lineEdit_supplier.text()
-
-        dbscript.Database_Functions.addInventory(product, quantity, wholesale, sale, supplier)
-
-#call the database.py main() function and and open the welcome screen with fixed height and width 
-app = QApplication(sys.argv)
-welcome = WelcomeScreen()
-widget = QtWidgets.QStackedWidget()
-widget.addWidget(welcome)
-widget.setFixedHeight(561)
-widget.setFixedWidth(891)
-widget.show()
-
-try:
-    sys.exit(app.exec())
-except:
-    print("Exiting")
+    def dailyProduct(date):
+
+        searchDate = date
+        mydb = Database_Functions.connect()
+
+        cur = mydb.cursor()
+        query = "SELECT Product_ID,Quantity from orders where date =" + "'" + str(searchDate) + "'" + "AND Quantity=(SELECT MAX(Quantity) FROM orders where date=" + "'" + str(searchDate) + "'" + ");"
+        cur.execute(query)
+        dailyP = cur.fetchone()
+
+        return dailyP
+
+    def dailyCustomer(date):
+
+        searchDate = date
+        mydb = Database_Functions.connect()
+
+        cur = mydb.cursor()
+        query = "SELECT Cust_Email,SUM(orders.Quantity*inventory.Sale_Price) as Amount_Paid from orders INNER JOIN inventory ON orders.Product_ID = inventory.Product_ID WHERE date =" + "'" + str(searchDate) + "'" + "GROUP BY orders.Cust_Email ORDER BY Amount_Paid DESC;"
+        cur.execute(query)
+        dailyC = cur.fetchone()
+        x = [dailyC[0], float(dailyC[1])]
+        x[1] = '%.2f' % x[1]
+        return x
+
+
+    def weeklyProduct(date):
+
+        searchDate = date
+        mydb = Database_Functions.connect()
+
+        cur = mydb.cursor()
+        query = "SELECT Product_ID,Quantity from orders where WEEKOFYEAR(date)=WEEKOFYEAR(" + "'" + str(searchDate) + "'" + ") AND Quantity=(SELECT MAX(Quantity) FROM orders where WEEKOFYEAR(date)=WEEKOFYEAR(" + "'" + str(searchDate) + "'" + "));"
+        cur.execute(query)
+        weeklyP = cur.fetchone()
+
+        return weeklyP
+
+    def weeklyCustomer(date):
+        searchDate = date
+        mydb = Database_Functions.connect()
+
+        cur = mydb.cursor()
+        query = "SELECT Cust_Email,SUM(orders.Quantity*inventory.Sale_Price) as Amount_Paid from orders INNER JOIN inventory ON orders.Product_ID = inventory.Product_ID WHERE WEEKOFYEAR(date)=WEEKOFYEAR(" + "'" + str(searchDate) + "'" + ") GROUP BY orders.Cust_Email ORDER BY Amount_Paid DESC;"
+        cur.execute(query)
+        weeklyC = cur.fetchone()
+        x = [weeklyC[0], float(weeklyC[1])]
+        x[1] = '%.2f' % x[1]
+        return x
+
+    def monthlyProduct(date):
+
+        searchDate = date
+        mydb = Database_Functions.connect()
+
+        cur = mydb.cursor()
+        query = "SELECT Product_ID,Quantity from orders where MONTH(date)=MONTH(" + "'" + str(searchDate) + "'" + ") AND Quantity=(SELECT MAX(Quantity) FROM orders where MONTH(date)=MONTH(" + "'" + str(searchDate) + "'" + "));"
+        cur.execute(query)
+        monthlyP = cur.fetchone()
+
+        return monthlyP
+
+    def monthlyCustomer(date):
+        searchDate = date
+        mydb = Database_Functions.connect()
+
+        cur = mydb.cursor()
+        query = "SELECT Cust_Email,SUM(orders.Quantity*inventory.Sale_Price) as Amount_Paid from orders INNER JOIN inventory ON orders.Product_ID = inventory.Product_ID WHERE MONTH(date)=MONTH(" + "'" + str(searchDate) + "'" + ") GROUP BY orders.Cust_Email ORDER BY Amount_Paid DESC;"
+        cur.execute(query)
+        monthlyC = cur.fetchone()
+        x = [monthlyC[0], float(monthlyC[1])]
+        x[1] = '%.2f' % x[1]
+        return x
+
+class TestDatabase(unittest.TestCase):
+
+    def test_write(self):
+        mydb = mc.connect(
+            host="localhost",
+            user="root",
+            password=""
+        )
+        test_cursor = mydb.cursor()
+
+        test_cursor.execute("CREATE DATABASE IF NOT EXISTS unittest")
+
+        mydb = mc.connect(
+            host="localhost",
+            user="root",
+            password="",
+            database="unittest"
+        )
+        test_cursor = mydb.cursor()
+
+        test_cursor.execute("CREATE TABLE IF NOT EXISTS test_table (id INT, text VARCHAR(45))")
+
+        test_cursor.execute("INSERT INTO `test_table` (id, `text`) VALUES (3, 'test_text_3')")
+
+        test_cursor.execute("SELECT text FROM test_table ORDER BY id DESC LIMIT 1")
+
+        test = test_cursor.fetchall()
+
+        self.assertEqual(test, [('test_text_3',)])
+
+    def test_delete(self):
+        mydb = mc.connect(
+            host="localhost",
+            user="root",
+            password="",
+            database="unittest"
+        )
+        test_cursor = mydb.cursor()
+
+        test_cursor.execute("""DELETE FROM `test_table` WHERE id= 3 """)
+
+        test_cursor.execute("""SELECT text FROM test_table ORDER BY id DESC LIMIT 1""")
+
+        test = test_cursor.fetchall()
+
+        self.assertEqual(test, [])
+
+
+Initialize_database.createDB()
+Initialize_database.createTables()
+Database_Functions.importOrders()
+
