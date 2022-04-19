@@ -9,6 +9,54 @@ from ci_shop.models import Product
 from ci_cart.models import Cart,CartItem
 
 import datetime
+import time as ta
+
+def time_reformat(time):
+    t = ta.strptime(time, "%H:%M")
+    minutes = t.tm_hour * 60 + t.tm_min
+    return minutes
+
+def extract_time(time):
+    """
+    Extract hour and minutes from a datetime string
+    Ex: "2022-04-16 06:37:30.472276" will return "6:37"
+    """
+    
+    time = str(time)
+
+    # if timezone is included in string, eliminate it
+    if("+" in time):
+        time = time.split("+")
+        time = time[0]
+
+    # eliminate date in string
+    time = time.split(" ")
+    time = time[1]
+    time = time.split(":")
+    time = time[0]+":"+time[1]
+    time = time_reformat(time)
+
+    return time
+
+
+def session_expired():
+    time = datetime.datetime.now()
+    now = extract_time(time)
+    cart = Cart.objects.all()
+    for id in cart:
+        session_time=extract_time(id.date_added)
+        print(session_time)
+        if(now-session_time >=1):
+            print("True")
+            cart_item = CartItem.objects.filter(cart=id)
+            for item in cart_item:
+                product = Product.objects.get(product_id=item.product.product_id)
+                print(product)
+                product.quantity += item.quantity
+                product.save()
+            id.delete()
+    
+
 def _cart_session(request):
     cart = request.session.session_key
     # if there is no session,create one
@@ -19,9 +67,6 @@ def _cart_session(request):
 
 
 def cart_add(request, product_id):
-    # create a 5 min expire session time
-    
-
     product = Product.objects.get(id=product_id) # get product
     # if cart exist, get cart data using cart_id in the session
     try:
@@ -62,11 +107,11 @@ def cart_add(request, product_id):
         product.quantity -=1
         product.save()
         
-    clear_session_data(request)
     return redirect('cart')
 
 
 def cart(request, total=0, quantity = 0, cart_items = None,tax=0, grand_total = 0):
+    session_expired()
     try:
         if request.user.is_authenticated:
            cart_items = CartItem.objects.filter(user=request.user, is_active= True)
@@ -107,6 +152,7 @@ def cart_remove(request,product_id):
     # if there's item in cart, decrement by 1
     if cart_item.quantity > 1:
         cart_item.quantity -= 1
+        
         cart_item.save()
     else:
         cart_item.delete()
@@ -160,17 +206,17 @@ def checkout(request, total=0, quantity = 0, cart_items = None,tax=0, grand_tota
     return render(request,'checkout.html',context)
 
 
-def clear_session_data(request):
-    if request.user.is_authenticated:
-        cart_items = CartItem.objects.filter(user=request.user, is_active= True)
-    else: 
-        cart = Cart.objects.get(cart_id = _cart_session(request))
-        cart_items = CartItem.objects.filter(cart = cart, is_active= True)
-    time =datetime.datetime.now()
-    time=time.split(' ')
+# def clear_session_data(request):
+#     if request.user.is_authenticated:
+#         cart_items = CartItem.objects.filter(user=request.user, is_active= True)
+#     else: 
+#         cart = Cart.objects.get(cart_id = _cart_session(request))
+#         cart_items = CartItem.objects.filter(cart = cart, is_active= True)
+#     time =datetime.datetime.now()
+#     time=time.split(' ')
    
-    for cart_item in cart_items:
-        cart_item.cart.date_added
+#     for cart_item in cart_items:
+#         cart_item.cart.date_added
     
-    print(datetime.datetime.now())
-    print(request.session.get_expiry_date())
+#     print(datetime.datetime.now())
+#     print(request.session.get_expiry_date())

@@ -55,9 +55,9 @@ def payments(request):
         orderitem.save()
 
     # Reduce the quantity of sold products in inventory
-        product = Product.objects.get(id=items.product_id)
-        product.quantity -= items.quantity
-        product.save()
+        # product = Product.objects.get(id=items.product_id)
+        # product.quantity -= items.quantity
+        # product.save()
     
     # Clear cart
     CartItem.objects.filter(user=request.user).delete()
@@ -171,6 +171,7 @@ def order_complete(request):
     except(Payment.DoesNotExist,Order.DoesNotExist):
         return redirect('home')
     
+
 class RequestRefundView(View):
     def get(self,*args,**kwargs):
         form = RefundForm()

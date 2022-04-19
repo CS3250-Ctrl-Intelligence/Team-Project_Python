@@ -20,6 +20,7 @@
                         <th scope="col">Email</th>
                         <th scope="col">Order Total</th>
                         <th scope="col">Date</th>
+                        <th scope="col">Refund Request</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -30,6 +31,16 @@
                         <td>{{order.email}}</td>
                         <td>$ {{order.order_total}}</td>
                         <td>{{order.created_at}}</td>
+                        <td> 
+                          {% if order.refund_allow %}
+                          <a href="{% url 'refund_request' order.order_number %}" type="button" id="button-minus" class="btn btn-primary" style="text-decoration: none; color: black;">
+                            Refund
+                          {% else %}
+                          <button type="button" class="btn btn-secondary" disabled>Non-Refundable</button>
+                          {% endif %}
+                        </a>
+
+                        </td>
                       </tr>
                       {% endfor %}
                     </tbody>
