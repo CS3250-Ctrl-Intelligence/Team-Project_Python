@@ -97,7 +97,7 @@ class Database_Functions():
         #import the data from csv variable into the database table "inventory"
         for row in csv_data:
             if skipHeader:
-                skipHeader = False
+                skipHeader = False 
                 continue
             cur.execute('INSERT IGNORE INTO inventory(Product_ID, Quantity, Wholesale_Price, Sale_Price, Supplier_ID)' 'VALUES(%s, %s, %s, %s, %s)', row)
         mydb.commit()

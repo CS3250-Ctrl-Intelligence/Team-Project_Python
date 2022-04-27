@@ -56,8 +56,10 @@ class Account(AbstractBaseUser):
     REQUIRED_FIELDS = ['username','first_name','last_name']
 
     # use account manager to perform create user and superuser
-
     objects = AccountManager()
+
+    class Meta:
+        db_table='accounts'
 
     def __str__(self):
         return self.username

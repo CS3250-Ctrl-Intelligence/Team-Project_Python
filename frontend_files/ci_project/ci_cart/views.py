@@ -122,7 +122,7 @@ def cart(request, total=0, quantity = 0, cart_items = None,tax=0, grand_total = 
         for cart_item in cart_items:
             print(datetime.datetime.now())
             print(cart_item.cart.date_added)
-            total += (cart_item.product.price * cart_item.quantity)
+            total += (cart_item.product.sale_price * cart_item.quantity)
             quantity += cart_item.quantity
         tax = (2* total)/100 #.2 tax
         tax=round(tax,2)
@@ -184,7 +184,7 @@ def checkout(request, total=0, quantity = 0, cart_items = None,tax=0, grand_tota
         cart_items = CartItem.objects.filter(user=request.user, is_active= True)
         # loop through the items in cart to find total and quantity
         for cart_item in cart_items:
-            total += (cart_item.product.price * cart_item.quantity)
+            total += (cart_item.product.sale_price * cart_item.quantity)
             quantity += cart_item.quantity
         tax = (2* total)/100 #.2 tax        
         tax=round(tax,2)
@@ -205,18 +205,3 @@ def checkout(request, total=0, quantity = 0, cart_items = None,tax=0, grand_tota
   
     return render(request,'checkout.html',context)
 
-
-# def clear_session_data(request):
-#     if request.user.is_authenticated:
-#         cart_items = CartItem.objects.filter(user=request.user, is_active= True)
-#     else: 
-#         cart = Cart.objects.get(cart_id = _cart_session(request))
-#         cart_items = CartItem.objects.filter(cart = cart, is_active= True)
-#     time =datetime.datetime.now()
-#     time=time.split(' ')
-   
-#     for cart_item in cart_items:
-#         cart_item.cart.date_added
-    
-#     print(datetime.datetime.now())
-#     print(request.session.get_expiry_date())
