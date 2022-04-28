@@ -33,7 +33,6 @@ urlpatterns = [
     # Order
     path('order/',include('ci_order.urls')),
     # Chatbox
-    path('chat/',include('ci_chat.urls')),
    
 ]
 

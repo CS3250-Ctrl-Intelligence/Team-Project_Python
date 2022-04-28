@@ -45,7 +45,6 @@ INSTALLED_APPS = [
     'ci_shop',
     'ci_cart',
     'ci_order',
-    'ci_chat',
     'fontawesomefree',
     'crispy_forms',
 ]
@@ -89,39 +88,40 @@ WSGI_APPLICATION = 'ci_project.wsgi.application'
 
 
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': os.getenv('DATABASE_NAME'),
-        'USER': os.getenv('DATABASE_USERNAME'),
-        'PASSWORD': os.getenv('DATABASE_PASSWORD'),
-        'HOST': os.getenv('DATABASE_SERVER'),
-        'PORT': os.getenv('DATABASE_PORT'),
-
-    }
-}
-
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': 'ctrlinte_project',
-#         'USER': 'ctrlinte_admin',
-#         'PASSWORD': 'CS3250!!',
-#         'HOST': 'ctrlintel.net',
-#         'PORT': '3306',
+#         'NAME': os.getenv('DATABASE_NAME'),
+#         'USER': os.getenv('DATABASE_USERNAME'),
+#         'PASSWORD': os.getenv('DATABASE_PASSWORD'),
+#         'HOST': os.getenv('DATABASE_SERVER'),
+#         'PORT': os.getenv('DATABASE_PORT'),
+
 #     }
 # }
 
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': 'ci_db1',
+#         'NAME': 'ci_db4',
 #         'USER': 'thole',
 #         'PASSWORD': '123',
 #         'HOST': 'localhost',
 #         'PORT': '5432',
 #     }
 # }
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'ci_db6',
+        'USER': 'root',
+        'PASSWORD': '',
+        'HOST': 'localhost',
+        'PORT': '3306',
+    }
+}
+
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators

@@ -1,21 +1,22 @@
 import datetime
-import stripe
+import json
+from datetime import date
 
+today = date.today()
 from django.http import JsonResponse
 from django.shortcuts import render,redirect
 from django.views import View
 from django.conf import settings
 from django.contrib import messages
 from django.core.exceptions import ObjectDoesNotExist
+from django.core.mail import EmailMessage
+from django.template.loader import render_to_string
 
 
 from ci_cart.models import CartItem,Cart
 from ci_order.forms import OrderForm,RefundForm
-from ci_order.models import Order,OrderItem,Payment,Refund
+from ci_order.models import Order,OrderItem,Payment,Refund, CustomerOrders
 from ci_shop.models import Product
-from django.core.mail import EmailMessage
-from django.template.loader import render_to_string
-import json
 
 
 
@@ -50,11 +51,21 @@ def payments(request):
         orderitem.user_id = request.user.id
         orderitem.product_id = items.product_id
         orderitem.quantity = items.quantity
-        orderitem.price = items.product.price
+        orderitem.price = items.product.sale_price
         orderitem.ordered = True
         orderitem.save()
 
-    # Reduce the quantity of sold products in inventory
+        # Create new order for customer_order table
+        customer_order = CustomerOrders()
+        customer_order.date = today.strftime("%Y-%m-%d")
+        customer_order.cust_email=order.email
+        customer_order.cust_location= order.zipcode
+        customer_order.quantity= items.quantity
+        product = Product.objects.get(pk=items.product_id)
+        customer_order.product_id = product.product_id
+        customer_order.save()
+
+        # Reduce the quantity of sold products in inventory
         # product = Product.objects.get(id=items.product_id)
         # product.quantity -= items.quantity
         # product.save()
@@ -93,7 +104,7 @@ def place_order(request,total =0, quantity = 0):
         return redirect('shop')
 
     for cart_item in cart_items:
-        total += (cart_item.product.price * cart_item.quantity)
+        total += (cart_item.product.sale_price * cart_item.quantity)
         quantity += cart_item.quantity
 
     tax = (2* total)/100 #.2 tax
@@ -196,8 +207,8 @@ class RequestRefundView(View):
                 refund.order = order
                 refund.reason = message
                 refund.save()
-                messages.info(self.request,"Your request was received")
+                messages.success(self.request,messages.INFO,f"Your request was received")
                 return redirect("request-refund")
             except ObjectDoesNotExist:
-                messages.info(self.request,"This order does not exist")
+                messages.info(self.request,f"This order does not exist")
                 return redirect("request-refund") # return to the same page

@@ -126,7 +126,9 @@ def my_orders(request):
     orders=Order.objects.filter(user=request.user, is_ordered = True).order_by('-created_at')
     now = extract_time(datetime.datetime.now())
     for i in orders:
-        if(now-extract_time(i.created_at)>= 5):
+
+        if(now-extract_time(i.created_at) >= 1):
+
             i.refund_allow=False
             i.save()
     context ={
@@ -139,7 +141,7 @@ def refund_request(request,order_id):
     order = Order.objects.get(order_number = order_id)
     order.refund_requested = True
     order.save()
-    return redirect('dashboard')
+    return redirect('my_orders')
 
 @login_required(login_url='login')
 def order_detail(request,order_id):

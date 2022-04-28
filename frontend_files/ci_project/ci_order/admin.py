@@ -3,7 +3,7 @@ from django.core.mail import EmailMessage
 from django.template.loader import render_to_string
 
 
-from ci_order.models import Order,OrderItem,Payment,Refund
+from ci_order.models import Order,OrderItem,Payment,Refund,CustomerOrders
 from ci_shop.models import Product
 
 
@@ -15,8 +15,11 @@ def make_refund_acccepted(modeladmin,request,queryset):
         # 
         else:
             i.refund_requested = False
-            i.refund_granted=True    
-            
+
+            i.refund_granted= True
+            i.save()    
+            # i.update(refund_requested=False,refund_granted=True)
+
 
             # loop through items in order to add product quantity back to inventory
             order= Order.objects.get(order_number=i.order_number)
@@ -65,3 +68,4 @@ admin.site.register(Order,OrderAdmin)
 admin.site.register(OrderItem)
 admin.site.register(Payment)
 admin.site.register(Refund)
+admin.site.register(CustomerOrders)
