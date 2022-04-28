@@ -1,18 +1,19 @@
 import mysql.connector as mc
 import unittest
 import csv
+import pandas as pd
 
 class Initialize_database():
 
     def createDB():
         mydb = mc.connect(
-            host="localhost",
-            user="root",
-            password="",
+            host="ctrlintel.net",
+            user="ctrlinte_admin",
+            password="CS3250!!",
             port=3306
         )
         cur = mydb.cursor()
-        cur.execute("CREATE DATABASE IF NOT EXISTS ci_db")
+        cur.execute("CREATE DATABASE IF NOT EXISTS ctrlinte_ci_db")
         
         cur.close()
         mydb.close()
@@ -20,19 +21,18 @@ class Initialize_database():
     def createTables():
 
         mydb = mc.connect(
-            host="localhost",
-            user="root",
-            password="",
-            database="ci_db",
-            port=3306
+            host="ctrlintel.net",
+            user="ctrlinte_admin",
+            password="CS3250!!",
+            database="ctrlinte_ci_db",
+            port='3306'
         )
 
         cur = mydb.cursor()
 
-        cur.execute("CREATE TABLE IF NOT EXISTS inventory (Product_ID VARCHAR(45), Quantity INT, Wholesale_Price FLOAT, Sale_Price FLOAT, Supplier_ID VARCHAR(45))")
-        cur.execute("CREATE TABLE IF NOT EXISTS orders (Date DATE, Cust_Email VARCHAR(45), Cust_Location INT, Product_ID VARCHAR(45), Quantity INT)")
+        cur.execute("CREATE TABLE IF NOT EXISTS product (Product_ID VARCHAR(45) PRIMARY KEY NOT NULL, Quantity INT, Wholesale_Cost FLOAT, Sale_Price FLOAT, Supplier_ID VARCHAR(45), slug VARCHAR(45), in_stock INT, featured BOOLEAN)")
+        cur.execute("CREATE TABLE IF NOT EXISTS customer_orders (Date DATE , Cust_Email VARCHAR(45) , Cust_Location INT , Product_ID VARCHAR(45) , Quantity INT)")
         cur.execute("CREATE TABLE IF NOT EXISTS employees (username VARCHAR(45), password VARCHAR(45))")
-        cur.execute("CREATE TABLE IF NOT EXISTS customers (cust_email VARCHAR(45), username VARCHAR(45), password VARCHAR(45))")
 
         cur.close()
         mydb.close()
@@ -42,11 +42,11 @@ class Database_Functions():
     def connect():
 
         mydb = mc.connect(
-            host="localhost",
-            user="root",
-            password="",
-            database="ci_db",
-            port=3306
+            host="ctrlintel.net",
+            user="ctrlinte_admin",
+            password="CS3250!!",
+            database="ctrlinte_ci_db",
+            port='3306'
         )
 
         return mydb
@@ -72,60 +72,90 @@ class Database_Functions():
         value = (username, password)
         cur.execute(query, value)
         mydb.commit()
+        cur.close()
     
     def fetchInventory():
 
         mydb = Database_Functions.connect()
 
         cur = mydb.cursor()
-        cur.execute("SELECT * FROM {} ".format("inventory"))
+        cur.execute("SELECT Product_Id, Quantity, Wholesale_Cost, Sale_Price, Supplier_Id FROM {} ".format("product"))
         result = cur.fetchall()
-
+        cur.close()
         return result
-    
+
+
+
     def importInventory():
-
+        def in_stock(x):
+            if x >0:
+                return 1
+            else:
+                return 0
                 #connect to database
-        mydb = Database_Functions.connect()
-        cur = mydb.cursor()
-        #open the .csv file and read it into variable.
-        file = open(r'''backend_files\inventory_team1.csv''')
-        csv_data = csv.reader(file)
+        try:
+            mydb = Database_Functions.connect()
 
-        skipHeader = True
+            cur = mydb.cursor()
+            
+            df = pd.read_csv(r'''backend_files\inventory_team1.csv''')
+            
+            df['slug'] = df['product_id'].str.lower().values
+            df['in_stock'] = df['quantity'].apply(in_stock)
+            df['featured'] = df['quantity'] - df['quantity']
+            insert_inventory_data=list(zip(df['product_id'], df['quantity'], df['wholesale_cost'], df['sale_price'], df['supplier_id'], df['slug'], df['in_stock']))
+            # update product quantity in inventory
+            insert_inventory_query = """INSERT IGNORE INTO product (Product_Id, Quantity, Wholesale_Cost, Sale_Price, Supplier_Id, slug, in_stock,featured) VALUES (%s,%s,%s,%s,%s,%s,%s,0)"""
+            cur.executemany(insert_inventory_query,insert_inventory_data)
+            mydb.commit()
 
-        #import the data from csv variable into the database table "inventory"
-        for row in csv_data:
-            if skipHeader:
-                skipHeader = False 
-                continue
-            cur.execute('INSERT IGNORE INTO inventory(Product_ID, Quantity, Wholesale_Price, Sale_Price, Supplier_ID)' 'VALUES(%s, %s, %s, %s, %s)', row)
-        mydb.commit()
+            print("Record updated successfully into Product table")
+
+        except mc as error:
+            print("Failed to insert into MySQL table {}".format(error))
+
+        finally:
+            if mydb.is_connected():
+                cur.close()
+                mydb.close()
+                print("MySQL connection is closed")
 
     def importOrders():
-        mydb = Database_Functions.connect()
+        try:
+            mydb = Database_Functions.connect()
 
-        cur = mydb.cursor()
+            cur = mydb.cursor()
 
-        #open the .csv file and read it into variable.
-        file = open(r'''backend_files\customer_orders_team1.csv''')
-        csv_data = csv.reader(file)
+            df = pd.read_csv(r'''backend_files\customer_orders_team1.csv''')
+            customer_order_data= list(zip(df['date'],df['cust_email'],df['cust_location'],df['product_id'],df['product_quantity']))
+            update_inventory_data=list(zip(df['product_quantity'],df['product_id'],df['product_quantity']))
 
-        skipHeader = True
+            # insert customer order data to table
+            insert_customer_orders_query = """INSERT IGNORE INTO customer_orders (Date, Cust_Email, Cust_Location,Product_Id,Quantity) VALUES (%s, %s, %s, %s, %s)"""
+            cur.executemany(insert_customer_orders_query, customer_order_data)
+            mydb.commit()
 
-        #import the data from csv variable into the database table "inventory"
-        for row in csv_data:
-            if skipHeader:
-                skipHeader = False
-                continue
-            cur.execute('INSERT IGNORE INTO orders(Date, Cust_Email, Cust_Location, Product_ID, Quantity)' 'VALUES(%s, %s, %s, %s, %s)', row)
-        mydb.commit()
+            # update product quantity in inventory
+            update_inventory_query = """UPDATE product INNER JOIN customer_orders ON product.Product_Id = customer_orders.Product_Id SET product.Quantity = product.Quantity - %s WHERE product.Product_Id=%s AND product.Quantity > %s"""
+            cur.executemany(update_inventory_query,update_inventory_data)
+            mydb.commit()
+            print("Record updated successfully into Customer Order table")
+
+        except mc as error:
+            print("Failed to insert into MySQL table {}".format(error))
+
+        finally:
+            if mydb.is_connected():
+                cur.close()
+                mydb.close()
+                print("MySQL connection is closed")
+
 
     def fetchOrders():
         mydb = Database_Functions.connect()
 
         cur = mydb.cursor()
-        cur.execute("SELECT * FROM {} ".format("orders"))
+        cur.execute("SELECT Date, Cust_Email, Cust_Location,Product_Id,Quantity FROM {} ".format("customer_orders"))
         result = cur.fetchall()
 
         return result
@@ -136,7 +166,7 @@ class Database_Functions():
         mydb = Database_Functions.connect()
 
         cur = mydb.cursor()
-        query = "INSERT INTO inventory (Product_ID, Quantity, Wholesale_Price, Sale_Price, Supplier_ID) VALUES (%s, %s, %s, %s, %s)"
+        query = "INSERT INTO product (Product_ID, Quantity, Wholesale_Price, Sale_Price, Supplier_ID) VALUES (%s, %s, %s, %s, %s)"
         value = (product, quantity, wholesale, sale, supplier)
         cur.execute(query, value)
         #pushes the new data to the inventory table in the database.
@@ -147,7 +177,7 @@ class Database_Functions():
         mydb = Database_Functions.connect()
 
         cur = mydb.cursor()
-        query = ("DELETE FROM inventory WHERE Product_ID = '" + product + "'")
+        query = ("DELETE FROM product WHERE Product_ID = '" + product + "'")
         
         #execute query to delete data from database
         cur.execute(query)
@@ -159,7 +189,7 @@ class Database_Functions():
         mydb = Database_Functions.connect()
 
         cur = mydb.cursor()
-        query = "SELECT Product_ID,Quantity from orders where date =" + "'" + str(searchDate) + "'" + "AND Quantity=(SELECT MAX(Quantity) FROM orders where date=" + "'" + str(searchDate) + "'" + ");"
+        query = "SELECT Product_ID,Quantity from customer_orders where date =" + "'" + str(searchDate) + "'" + "AND Quantity=(SELECT MAX(Quantity) FROM customer_orders where date=" + "'" + str(searchDate) + "'" + ");"
         cur.execute(query)
         dailyP = cur.fetchone()
 
@@ -171,7 +201,7 @@ class Database_Functions():
         mydb = Database_Functions.connect()
 
         cur = mydb.cursor()
-        query = "SELECT Cust_Email,SUM(orders.Quantity*inventory.Sale_Price) as Amount_Paid from orders INNER JOIN inventory ON orders.Product_ID = inventory.Product_ID WHERE date =" + "'" + str(searchDate) + "'" + "GROUP BY orders.Cust_Email ORDER BY Amount_Paid DESC;"
+        query = "SELECT Cust_Email,SUM(customer_orders.Quantity*product.Sale_Price) as Amount_Paid from customer_orders INNER JOIN product ON customer_orders.Product_ID = products.Product_ID WHERE date =" + "'" + str(searchDate) + "'" + "GROUP BY customer_orders.Cust_Email ORDER BY Amount_Paid DESC;"
         cur.execute(query)
         dailyC = cur.fetchone()
         x = [dailyC[0], float(dailyC[1])]
@@ -185,7 +215,7 @@ class Database_Functions():
         mydb = Database_Functions.connect()
 
         cur = mydb.cursor()
-        query = "SELECT Product_ID,Quantity from orders where WEEKOFYEAR(date)=WEEKOFYEAR(" + "'" + str(searchDate) + "'" + ") AND Quantity=(SELECT MAX(Quantity) FROM orders where WEEKOFYEAR(date)=WEEKOFYEAR(" + "'" + str(searchDate) + "'" + "));"
+        query = "SELECT Product_ID,Quantity from customer_orders where WEEKOFYEAR(date)=WEEKOFYEAR(" + "'" + str(searchDate) + "'" + ") AND Quantity=(SELECT MAX(Quantity) FROM customer_orders where WEEKOFYEAR(date)=WEEKOFYEAR(" + "'" + str(searchDate) + "'" + "));"
         cur.execute(query)
         weeklyP = cur.fetchone()
 
@@ -196,7 +226,7 @@ class Database_Functions():
         mydb = Database_Functions.connect()
 
         cur = mydb.cursor()
-        query = "SELECT Cust_Email,SUM(orders.Quantity*inventory.Sale_Price) as Amount_Paid from orders INNER JOIN inventory ON orders.Product_ID = inventory.Product_ID WHERE WEEKOFYEAR(date)=WEEKOFYEAR(" + "'" + str(searchDate) + "'" + ") GROUP BY orders.Cust_Email ORDER BY Amount_Paid DESC;"
+        query = "SELECT Cust_Email,SUM(customer_orders.Quantity*product.Sale_Price) as Amount_Paid from customer_orders INNER JOIN product ON customer_orders.Product_ID = product.Product_ID WHERE WEEKOFYEAR(date)=WEEKOFYEAR(" + "'" + str(searchDate) + "'" + ") GROUP BY customer_orders.Cust_Email ORDER BY Amount_Paid DESC;"
         cur.execute(query)
         weeklyC = cur.fetchone()
         x = [weeklyC[0], float(weeklyC[1])]
@@ -209,7 +239,7 @@ class Database_Functions():
         mydb = Database_Functions.connect()
 
         cur = mydb.cursor()
-        query = "SELECT Product_ID,Quantity from orders where MONTH(date)=MONTH(" + "'" + str(searchDate) + "'" + ") AND Quantity=(SELECT MAX(Quantity) FROM orders where MONTH(date)=MONTH(" + "'" + str(searchDate) + "'" + "));"
+        query = "SELECT Product_ID,Quantity from customer_orders where MONTH(date)=MONTH(" + "'" + str(searchDate) + "'" + ") AND Quantity=(SELECT MAX(Quantity) FROM customer_orders where MONTH(date)=MONTH(" + "'" + str(searchDate) + "'" + "));"
         cur.execute(query)
         monthlyP = cur.fetchone()
 
@@ -220,12 +250,135 @@ class Database_Functions():
         mydb = Database_Functions.connect()
 
         cur = mydb.cursor()
-        query = "SELECT Cust_Email,SUM(orders.Quantity*inventory.Sale_Price) as Amount_Paid from orders INNER JOIN inventory ON orders.Product_ID = inventory.Product_ID WHERE MONTH(date)=MONTH(" + "'" + str(searchDate) + "'" + ") GROUP BY orders.Cust_Email ORDER BY Amount_Paid DESC;"
+        query = "SELECT Cust_Email,SUM(customer_orders.Quantity*product.Sale_Price) as Amount_Paid from customer_orders INNER JOIN product ON customer_orders.Product_ID = product.Product_ID WHERE MONTH(date)=MONTH(" + "'" + str(searchDate) + "'" + ") GROUP BY customer_orders.Cust_Email ORDER BY Amount_Paid DESC;"
         cur.execute(query)
         monthlyC = cur.fetchone()
         x = [monthlyC[0], float(monthlyC[1])]
         x[1] = '%.2f' % x[1]
         return x
+
+    def getThreeRev():
+
+        mydb = Database_Functions.connect()
+        cur = mydb.cursor()
+        query = "SELECT WEEKOFYEAR(Date),SUM(customer_orders.Quantity*product.Sale_Price) as Amount_Paid from customer_orders INNER JOIN product ON customer_orders.Product_ID = product.Product_ID WHERE Date >= DATE_ADD(CURDATE(), INTERVAL -3 MONTH) AND Date <= CURDATE() Group by WEEKOFYEAR(Date)"
+        cur.execute(query)
+
+
+        weeklyRev = cur.fetchall()
+
+        date = []
+        amount = []
+        for x in range(len(weeklyRev)):
+            week = [int(weeklyRev[x][0]),float(weeklyRev[x][1])]
+            week[1] = '%.2f' % week[1]
+            amount += [float(week[1])]
+            date += [week[0]]
+        return date, amount
+
+    def getAllRev():
+
+        mydb = Database_Functions.connect()
+        cur = mydb.cursor()
+        query = "SELECT YEARWEEK(Date),SUM(customer_orders.Quantity*product.Sale_Price) as Amount_Paid from customer_orders INNER JOIN product ON customer_orders.Product_ID = product.Product_ID Group by WEEKOFYEAR(Date)"
+        cur.execute(query)
+
+
+        weeklyRev = cur.fetchall()
+
+        amount = []
+        for x in range(len(weeklyRev)):
+            week = [int(weeklyRev[x][0]),float(weeklyRev[x][1])]
+            week[1] = '%.2f' % week[1]
+            amount += [float(week[1])]
+        return amount
+
+    def getDiffRev():
+
+        mydb = Database_Functions.connect()
+        cur = mydb.cursor()
+        query = "SELECT YEARWEEK(Date),SUM(customer_orders.Quantity*product.Sale_Price) as Amount_Paid from customer_orders INNER JOIN product ON customer_orders.Product_ID = product.Product_ID WHERE Date >= DATE_ADD(CURDATE(), INTERVAL -3 MONTH) AND Date <= CURDATE() Group by WEEKOFYEAR(Date)"
+        cur.execute(query)
+
+
+        weeklyRev = cur.fetchall()
+
+        date = []
+        data = []
+        for x in range(len(weeklyRev)):
+            week = [int(weeklyRev[x][0]),float(weeklyRev[x][1])]
+            week[1] = '%.2f' % week[1]
+            data += [float(week[1])]
+            date += [week[0]]
+        date.pop(0)
+        x = 0
+        result = []
+        while x < (len(data) - 1):
+            diff = data[x + 1] - data[x]
+            result += [[date[x],float('%.2f' % diff)]]
+            x += 1
+        return result
+
+    def getThreeOrders():
+
+        mydb = Database_Functions.connect()
+        cur = mydb.cursor()
+        query = "SELECT WEEKOFYEAR(Date),Count(*) as Number_Orders from customer_orders  WHERE Date >= DATE_ADD(CURDATE(), INTERVAL -3 MONTH) AND Date <= CURDATE() Group by WEEKOFYEAR(Date)"
+        cur.execute(query)
+
+
+        weeklyOrders = cur.fetchall()
+
+        date = []
+        amount = []
+        for x in range(len(weeklyOrders)):
+            week = [int(weeklyOrders[x][0]),float(weeklyOrders[x][1])]
+            week[1] = '%.2f' % week[1]
+            amount += [float(week[1])]
+            date += [week[0]]
+        return date, amount
+
+    def getAllOrders():
+
+        mydb = Database_Functions.connect()
+        cur = mydb.cursor()
+        query = "SELECT YEARWEEK(Date),COUNT(*) as Amount_Paid from customer_orders Group by WEEKOFYEAR(Date)"
+        cur.execute(query)
+
+
+        weeklyOrders = cur.fetchall()
+
+        amount = []
+        for x in range(len(weeklyOrders)):
+            week = [int(weeklyOrders[x][0]),float(weeklyOrders[x][1])]
+            week[1] = '%.2f' % week[1]
+            amount += [float(week[1])]
+        return amount
+
+    def getDiffOrders():
+        mydb = Database_Functions.connect()
+        cur = mydb.cursor()
+        query = "SELECT YEARWEEK(Date),Count(*) as Number_Orders from customer_orders WHERE Date >= DATE_ADD(CURDATE(), INTERVAL -3 MONTH) AND Date <= CURDATE() Group by WEEKOFYEAR(Date)"
+        cur.execute(query)
+
+
+        weeklyOrders = cur.fetchall()
+
+        date = []
+        data = []
+        for x in range(len(weeklyOrders)):
+            week = [int(weeklyOrders[x][0]),float(weeklyOrders[x][1])]
+            week[1] = '%.2f' % week[1]
+            data += [float(week[1])]
+            date += [week[0]]
+        date.pop(0)
+        x = 0
+        result = []
+        while x < (len(data) - 1):
+            diff = data[x + 1] - data[x]
+            result += [[date[x],float('%.2f' % diff)]]
+            x += 1
+        return result
 
 class TestDatabase(unittest.TestCase):
 
@@ -273,9 +426,10 @@ class TestDatabase(unittest.TestCase):
         test = test_cursor.fetchall()
 
         self.assertEqual(test, [])
+    
 
 
 Initialize_database.createDB()
 Initialize_database.createTables()
-Database_Functions.importOrders()
+
 
