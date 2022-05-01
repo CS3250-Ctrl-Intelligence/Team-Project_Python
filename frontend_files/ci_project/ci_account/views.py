@@ -5,8 +5,6 @@ from django.contrib import messages,auth
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 
-
-
 # Email verification
 from django.contrib.sites.shortcuts import get_current_site
 from django.template.loader import render_to_string
@@ -17,10 +15,11 @@ from django.core.mail import EmailMessage
 
 from ci_account.forms import RegistrationForm
 from ci_account.models import Account
-from ci_cart.views import _cart_session
+from ci_cart.views import _cart_session,time_reformat,extract_time
 from ci_cart.models import Cart,CartItem
+from ci_order.models import Order,OrderItem,Payment
 
-
+import datetime
 def register(request):
    # handle submission
     if request.method =='POST':
@@ -109,3 +108,53 @@ def activate(request,uidb64, token):
     else:
         messages.error(request,'Invalid activation link')
         return redirect('register')
+
+
+@login_required(login_url='login')
+def dashboard(request):
+    # hyphen give the queries in descending order
+    # Finc the total amount of order the user made
+    orders = Order.objects.order_by('-created_at').filter(user_id=request.user.id, is_ordered=True)
+    order_count = orders.count()
+    context={
+        'order_count':order_count,
+    }
+    return render(request,'dashboard.html',context)
+
+@login_required(login_url='login')
+def my_orders(request):
+    orders=Order.objects.filter(user=request.user, is_ordered = True).order_by('-created_at')
+    now = extract_time(datetime.datetime.now())
+    for i in orders:
+
+        if(now-extract_time(i.created_at) >= 1):
+
+            i.refund_allow=False
+            i.save()
+    context ={
+        'orders':orders,
+    }
+    return render(request,'my_orders.html',context)
+
+@login_required(login_url='login')
+def refund_request(request,order_id):
+    order = Order.objects.get(order_number = order_id)
+    order.refund_requested = True
+    order.save()
+    return redirect('my_orders')
+
+@login_required(login_url='login')
+def order_detail(request,order_id):
+    subtotal=0
+    order_detail = OrderItem.objects.filter(order__order_number=order_id)
+    order= Order.objects.get(order_number=order_id)
+    
+    for i in order_detail:
+        subtotal+= i.price * i.quantity
+    subtotal = round(subtotal,2)
+    context={ 
+        'order_detail':order_detail,
+        'order':order,
+        'subtotal':subtotal,
+    }
+    return render(request,'order_detail.html',context)

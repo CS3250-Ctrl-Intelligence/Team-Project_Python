@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% load static%}
+{% block content %}
+
+<link rel="stylesheet" <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">>
+
+
+<h2 class="heading">My Order</h2>
+<div class="container">
+    <div class="row">
+        {% include 'dashboard_sidebar.html' %}
+
+        <main class="col-lg-9 col-md-9">
+            <div class="card">
+                <table class="table table-hover">
+                    <thead>
+                      <tr>
+                        <th scope="col">Order #</th>
+                        <th scope="col">Billing Name</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Order Total</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Refund Request</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        {% for order in orders %}
+                      <tr>
+                        <th scope="row"> <a href="{% url 'order_detail' order.order_number %}">{{order.order_number}} </a> </th>
+                        <td>{{order.first_name}} {{order.last_name}}</td>
+                        <td>{{order.email}}</td>
+                        <td>$ {{order.order_total}}</td>
+                        <td>{{order.created_at}}</td>
+                        <td> 
+                          {% if order.refund_allow %}
+                          <a href="{% url 'refund_request' order.order_number %}" type="button" id="button-minus" class="btn btn-primary" style="text-decoration: none; color: black;">
+                            Refund
+                          {% else %}
+                          <button type="button" class="btn btn-secondary" disabled>Non-Refundable</button>
+                          {% endif %}
+                        </a>
+
+                        </td>
+                      </tr>
+                      {% endfor %}
+                    </tbody>
+                  </table>
+                
+            </div>    
+        </main>
+    </div>
+
+
+</div>
+
+<script>
+  var strDate ="April 15, 2022, 6:42 a.m."
+  var split = strDate.split(".");
+  var date = new Date(split[2])
+
+</script>
+
+
+{% endblock %}
+

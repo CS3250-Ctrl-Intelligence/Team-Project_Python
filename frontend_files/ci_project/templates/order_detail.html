@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content%}
+
+<link rel="stylesheet" href="{% static 'css/order_complete.css' %}">
+
+
+
+
+
+<div class="box-element"style="width:60%; margin:auto;">
+    <div style="text-align:right; line-height: 1;">
+        <h5 style="font-weight:bold;"> Invoiced To</h5>
+        <p>{{order.first_name}} {{order.last_name}}</p>
+        <p>{{order.address}}</p>
+        <p>{{order.city}}, {{order.state}} {{order.zipcode}}</p>
+    </div>
+    <div>
+        <h5>Order #: {{order.order_number}} </h5>
+        <h5>Transaction #: {{order.payment.payment_id}}</h5>
+        <h5>Order Date: {{order.created_at}}</h5>
+        <h5>Status: {{order.payment.status}}</h5>
+
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>Description</th>
+                <th>Qty</th>
+                <th>SubTotal</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for items in order_detail %}
+
+            <tr>
+                <td>{{items.product.product_id}}</td>
+                <td>{{items.quantity}}</td>
+                <td>$ {{subtotal}}</td>
+            </tr>
+            {% endfor %}
+            
+        </tbody>
+        
+
+    </table>
+    
+    <div style="text-align:right">
+        <h5>Tax: ${{order.tax}}</h5>
+        <h5>Total: ${{order.order_total}}</h5>
+
+    </div>
+</div>
+
+{% endblock %}

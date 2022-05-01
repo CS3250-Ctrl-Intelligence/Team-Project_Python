@@ -19,20 +19,22 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
   </script>
-  <script
-    src="https://www.paypal.com/sdk/js?client-id=AcrsDZD_-zYS2KqqUK4BpfbHpufj7KkJjMtBYY5rK2R-NosuVjIiy_DkhjyXoL652Co8xMsAxUO8ViKY&currency=USD&disable-funding=card,paylater,venmo">
-  </script>
+  <script src="https://www.paypal.com/sdk/js?client-id=AcrsDZD_-zYS2KqqUK4BpfbHpufj7KkJjMtBYY5rK2R-NosuVjIiy_DkhjyXoL652Co8xMsAxUO8ViKY&currency=USD&disable-funding=card,paylater,venmo"></script>
+  <!-- AcrsDZD_-zYS2KqqUK4BpfbHpufj7KkJjMtBYY5rK2R-NosuVjIiy_DkhjyXoL652Co8xMsAxUO8ViKY -->
+
+
+  <!-- Fonts -->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&display=swap" rel="stylesheet"> 
 
   <!-- Website Title -->
   <title>Ctrl Intelligence</title>
-
-  <!-- Website favicon -->
-  <link rel="logo icon" type="image/jpg" href="{% static 'images/favicon.ico' %}" />
-
 </head>
 
-<body class="background-pict" style="overflow-x:hidden;">
-    <nav class="navbar navbar-expand-lg navbar-light nav-pad" >
+<body class="" style="overflow-x:hidden;">
+    <nav class="bg-black text-white navbar navbar-expand-lg  nav-pad navbar-dark " >
       <div class="container-fluid">
         <a class="navbar-brand" href="{% url 'home' %}" >Ctrl Intelligence</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
@@ -61,10 +63,9 @@
         </li>
       </ul>
       <span class="navbar-text span-margin">
-        
         {% if user.id is None %}
         <div class=" widget-header">
-          <h5 class="title text-muted">Welcome guest!</h5>
+          <h5 style="font-size: 15px; " class="nav-content title text-muted">Welcome guest!</h5>
           <div>
             <a class="nav-content" href="{% url 'login' %}">Login</a> <span class="nav-content"> | </span>
             <a class="nav-content" href="{% url 'register' %}">Register</a>
@@ -73,9 +74,9 @@
         </div>
         {% else %}
         <div class="nav-content widget-header">
-          <h5 class="title text-muted">Welcome {{user.first_name}}</h5>
+          <h5 style="font-size: 15px;" class="nav-content title text-muted">Welcome {{user.first_name}}</h5>
           <div>
-            <a class="nav-content" href="#">Dashboard</a> <span class="nav-content"> | </span>
+            <a class="nav-content" href="{% url 'dashboard' %}">Dashboard</a> <span > | </span>
             <a class="nav-content" href="{% url 'logout' %}">Logout</a>
             
             <a type="button" role="button" href="{% url 'cart' %}" class="btn btn-outline-light"> {{cart_count}}<i class="fa-solid fa-cart-shopping"></i></a>
@@ -90,17 +91,59 @@
     </div>
   </div>
 </nav>
-<br>
 
 
   <!-- Body Contents -->
-  <main>
+  <main class="d-flex flex-column min-vh-100">
     {% block content %}
     {% endblock %}
   </main>
 
+<!-- Chat Bot -->
+
+<link rel="stylesheet" href="{% static 'css/chatbot.css' %}" />
+<head>
+    <meta charset="UTF-8">
+    <title>Chatbot</title>
+</head>
+<body>
+<div class="container">
+    <div class="chatbox">
+        <div class="chatbox__support">
+            <div class="chatbox__header">
+                <div class="chatbox__image--header">
+                    <img src="https://img.icons8.com/color/48/000000/circled-user-female-skin-type-5--v1.png" alt="image">
+                </div>
+                <div class="chatbox__content--header">
+                    <h4 class="chatbox__heading--header">Chat support</h4>
+                    <p class="chatbox__description--header">Hi. My name is Sofi. How can I help you?</p>
+                </div>
+            </div>
+            <div class="chatbox__messages">
+                <div></div>
+            </div>
+            <div class="chatbox__footer">
+                <input type="text" placeholder="Write a message...">
+                <button class="chatbox__send--footer send__button">Send</button>
+            </div>
+        </div>
+        <div class="chatbox__button">
+            <button><img src="{% static 'images/chat.png'%}" width="30px"></button>
+        </div>
+    </div>
+</div>
+
+    <script >
+        $SCRIPT_ROOT = {request.script_root|tojson|safe };
+    </script>
+
+    <script type="text/javascript" src="{% static 'js/app.js' %}"></script>
+
+</body>
+</html>
+
   <!-- Footer -->
-  <footer class="bg-secondary text-white text-center ">
+  <footer class="mt-auto bg-black text-white text-center ">
     <!-- Grid container -->
     <div class="container p-4">
       <!--Grid row-->
@@ -123,7 +166,7 @@
         <!--Grid column-->
 
         <!--Grid column-->
-        <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+        <div class="col-lg-3 col-md-6 mb-4 mb-md-0" >
           <h5 class="text-uppercase mb-0">Links</h5>
 
           <ul class="list-unstyled">
@@ -134,7 +177,7 @@
               <a class="link-color link-underline" href="{% url 'about' %}" class="text-white">About us</a>
             </li>
             <li>
-              <a class="link-color link-underline" href="{% url 'contactUs'%}" class="text-white">Contact us</a>
+              <a class="link-color link-underline" href="{% url 'contact' %}" class="text-white">Contact Us</a>
             </li>
           </ul>
         </div>

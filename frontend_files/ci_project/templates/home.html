@@ -2,53 +2,40 @@
 {% load static %}
 {% block content %}
 
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anybody:wght@500;600&family=Bree+Serif&family=Metrophobic&display=swap" rel="stylesheet">
 
-
-    <div class="jumbotron">
-        <!--Adds special large formating to welcome message for added effect-->
-        <h2 class="display-4">Hello, <b>{{user.first_name}}</b></h2>
-        <p class="lead">Thank you for choosing Ctrl Intelligence for your product needs.</p>
-        <hr class="my-4">
+    <div class="background-pict">
+    <h1 style="position: relative;left:100px; top:325px; font-family: 'Metrophobic', sans-serif; font-size: 7rem; font-weight: bold; color: black;">Whoa.</h1>
+        <p style="position: relative;left:100px; top:350px;">Introducing Max Air— a perfect balance of exhilarating <br> high-fidelity audio and the effortless magic of MaxAir. <br> The ultimate personal listening experience is here with <br> Active Noise Cancellation with Transparency Mode.</p>
     </div>
-
-      <h2 style="color:white"> Featured Products <h2>
+    
+    <br class="br-pad">
+    <br class="br-pad">
+    <br class="br-pad"> 
+      <h2 style="text-align:center; font-size: 3rem; font-weight: bold;"> Featured Products <h2>
     <!--Adds featured products to homepage by adding a card layout and loading products from ci_shop.product and filtering by featured (see views.py) -->
-    <div class="row">
+    <br class="br-pad">
+    <div class="row" >
         {% for product in data%}
-        <div class="col-lg-2 col-md-4">
-            <figure class="card card-product-grid" style="width: 6.25cm;">
-                <div class="img-wrap">
-
-                    <img class="product-image" src="{% static 'images/chip.png' %}">
-
-                </div> <!-- img-wrap.// -->
-                <figcaption class="info-wrap">
-                    <div class="fix-height">
-                        <a href="{{ product.get_url }}" class="title">{{product.product_id}}</a>
-                        <div class="price-wrap mt-2">
-                            <span class="price">$ {{product.price}}</span>
-
-                        </div> <!-- price-wrap.// -->
-                    </div>
-                    <a href="{% url 'cart_add' product.id %}" class="btn btn-block btn-success">Add to cart</a>
-                </figcaption>
-            </figure>
+        <div class=" col-lg-4 col-md-6" style="padding-right:275px; padding-bottom:100px;" >
+            <div class=" bg-transparent card card-product-grid" >
+                    <a href="{{product.get_url}}" style="text-decoration: none; color:black;">
+                    <div >
+                        <img  class="product-image" src="{% static 'css/headphones.png' %}">                     
+                   </div> <!-- img-wrap.// -->
+                    
+                        <div class="fix-height">
+                         <h4>{{product.product_id}} <span class="price" style="font-size: 1rem; font-weight: 500;">  $ {{product.sale_price}}   </span></h4>
+                            
+                        </div>
+                    </a>
+                </div> <!-- card-->
         </div> <!-- col.// -->
         {%endfor%}
     </div> <!-- row end.// -->
 
-    <h2>Contact Us</h2>
-<form class="contact">
-    <!--adds contact us fields-->
-    <div class="left-contact">
-        <input type="text" id="input=name" placeholder="Full Name" style="width: 7.3cm;"><br>
-        <input type="email" id="input-email" placeholder="Email Address" style="width: 7.3cm;"><br>
-        <input type="tel" id="input-phone" placeholder="Phone Number" style="width: 7.3cm;"><br>
-    </div>
-    <div class="right-contact">
-        <textarea name="message" id="input-message" cols="30" rows="10" placeholder="Enter your message..."></textarea>
-    </div>
-    <input type="submit" id="submit-button">
-</form>
-
+    
 {% endblock %}

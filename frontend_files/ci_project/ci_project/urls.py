@@ -18,9 +18,10 @@ from django.urls import path,include
 from django.conf import settings
 from django.conf.urls.static import static
 from ci_project import views
+
 urlpatterns = [
     path('', views.home, name='home'),
-    path('contactUs/',views.contactUs,name='contactUs'),
+    path('contactUs/',views.contactUs,name='contact'),
     path('about/',views.about,name='about'),
     path('admin/', admin.site.urls),
     # Cart
@@ -31,6 +32,8 @@ urlpatterns = [
     path('account/',include('ci_account.urls')),
     # Order
     path('order/',include('ci_order.urls')),
+    # Chatbox
+   
 ]
 
 
