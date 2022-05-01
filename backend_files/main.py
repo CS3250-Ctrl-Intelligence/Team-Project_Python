@@ -5,11 +5,12 @@ from PyQt6.QtWidgets import QDialog, QApplication, QWidget, QTableWidgetItem
 from dbscript import Database_Functions
 import dbscript
 import time
+import allRev, threeRev, diffRev, allOrders, threeOrders, diffOrders
 
 class Buttons(QDialog):
     def __init__(self):
         super().__init__()
-        loadUi(r'''backend_files\home.ui''',self)
+        loadUi(r'''backend_files\ui_files\home.ui''',self)
 
         #Implementation of the buttons on the page.
         self.invBtn.clicked.connect(self.goToInv)
@@ -62,7 +63,7 @@ class Buttons(QDialog):
 class WelcomeScreen(QDialog):
     def __init__(self):
         super(WelcomeScreen, self).__init__()
-        loadUi(r'''backend_files\welcome.ui''',self)
+        loadUi(r'''backend_files\ui_files\welcome.ui''',self)
         
         #Implementation of the buttons on the page.
         self.loginBtn.clicked.connect(self.goToLogin)
@@ -78,7 +79,7 @@ class WelcomeScreen(QDialog):
 class LoginScreen(QDialog):
     def __init__(self):
         super(LoginScreen, self).__init__()
-        loadUi(r'''backend_files\login.ui''',self)
+        loadUi(r'''backend_files\ui_files\login.ui''',self)
 
         #Implementation of the buttons on the page.
         self.goBtn.clicked.connect(self.loginFunc)
@@ -118,7 +119,7 @@ class LoginScreen(QDialog):
 class CreateEmpScreen(QDialog):
     def __init__(self):
         super(CreateEmpScreen, self).__init__()
-        loadUi(r'''backend_files\createEmployee.ui''',self)
+        loadUi(r'''backend_files\ui_files\createEmployee.ui''',self)
 
         #Implementation of the buttons on the page.
         self.createBtn.clicked.connect(self.signup)
@@ -154,7 +155,7 @@ class CreateEmpScreen(QDialog):
 class HomeScreen(Buttons):
     def __init__(self):
         super(HomeScreen, self).__init__()
-        loadUi(r'''backend_files\home.ui''',self)
+        loadUi(r'''backend_files\ui_files\home.ui''',self)
 
         #Implementation of the buttons on the page.
         self.invBtn.clicked.connect(self.goToInv)
@@ -170,7 +171,7 @@ class HomeScreen(Buttons):
 class InvScreen(Buttons):
     def __init__(self):
         super(InvScreen, self).__init__()
-        loadUi(r'''backend_files\inventory.ui''',self)
+        loadUi(r'''backend_files\ui_files\inventory.ui''',self)
 
         #Implementation of the buttons on the page.
         self.importBtn.clicked.connect(self.importData)
@@ -221,7 +222,7 @@ class InvScreen(Buttons):
 class OrdersScreen(Buttons):
     def __init__(self):
         super(OrdersScreen, self).__init__()
-        loadUi(r'''backend_files\orders.ui''',self)
+        loadUi(r'''backend_files\ui_files\orders.ui''',self)
 
         #Implementation of the buttons on the page.
         self.fetchBtn.clicked.connect(self.fetchData)
@@ -231,9 +232,12 @@ class OrdersScreen(Buttons):
         self.settingsBtn.clicked.connect(self.goToSettings)
         self.helpBtn.clicked.connect(self.goToHelp)
         self.infoBtn.clicked.connect(self.goToInfo)
+        self.importBtn.clicked.connect(self.importOrders)
 
         self.fetchData()
-
+    def importOrders(self):
+        Database_Functions.importOrders()
+        
     def fetchData(self):
         result = dbscript.Database_Functions.fetchOrders()
 
@@ -251,7 +255,7 @@ class OrdersScreen(Buttons):
 class MarketScreen(Buttons):
     def __init__(self):
         super(MarketScreen, self).__init__()
-        loadUi(r'''backend_files\market.ui''',self)
+        loadUi(r'''backend_files\ui_files\market.ui''',self)
 
         #Implementation of the buttons on the page.
         self.invBtn.clicked.connect(self.goToInv)
@@ -263,6 +267,7 @@ class MarketScreen(Buttons):
         self.dailyBtn.clicked.connect(self.dailyReport)
         self.weeklyBtn.clicked.connect(self.weeklyReport)
         self.monthlyBtn.clicked.connect(self.monthlyReport)
+
 
     def dailyReport(self):
 
@@ -298,24 +303,45 @@ class MarketScreen(Buttons):
         monthlyC = Database_Functions.monthlyCustomer(date)
         self.lineLabelC.setText("Monthly customer that purchased the most:")
         self.lineCustomer.setText(str(monthlyC[0]) + " with $" + str(monthlyC[1]))
+
+    
         
 class FinanceScreen(Buttons):
     def __init__(self):
         super(FinanceScreen, self).__init__()
-        loadUi(r'''backend_files\finance.ui''',self)
+        loadUi(r'''backend_files\ui_files\finance.ui''',self)
 
         #Implementation of the buttons on the page.
         self.invBtn.clicked.connect(self.goToInv)
         self.marketBtn.clicked.connect(self.goToMarket)
-        self.OrdersBtn.clicked.connect(self.goToOrders)
+        self.ordersBtn.clicked.connect(self.goToOrders)
         self.settingsBtn.clicked.connect(self.goToSettings)
         self.helpBtn.clicked.connect(self.goToHelp)
         self.infoBtn.clicked.connect(self.goToInfo)
+        self.revAllBtn.clicked.connect(self.allRev)
+        self.revMonthBtn.clicked.connect(self.monthRev)
+        self.revDiffBtn.clicked.connect(self.diffRev)
+        self.custAllBtn.clicked.connect(self.allOrder)
+        self.custMonthBtn.clicked.connect(self.monthOrder)
+        self.custDiffBtn.clicked.connect(self.diffOrder)
+
+    def allRev(self):
+        allRev.main()
+    def monthRev(self):
+        threeRev.main()
+    def diffRev(self):
+        diffRev.main()
+    def allOrder(self):
+        allOrders.main()
+    def monthOrder(self):
+        threeOrders.main()
+    def diffOrder(self):
+        diffOrders.main()
 
 class SettingsScreen(Buttons):
     def __init__(self):
         super(SettingsScreen, self).__init__()
-        loadUi(r'''backend_files\settings.ui''',self)
+        loadUi(r'''backend_files\ui_files\settings.ui''',self)
 
         #Implementation of the buttons on the page.
         self.invBtn.clicked.connect(self.goToInv)
@@ -328,7 +354,7 @@ class SettingsScreen(Buttons):
 class HelpScreen(Buttons):
     def __init__(self):
         super(HelpScreen, self).__init__()
-        loadUi(r'''backend_files\help.ui''',self)
+        loadUi(r'''backend_files\ui_files\help.ui''',self)
 
         #Implementation of the buttons on the page.
         self.invBtn.clicked.connect(self.goToInv)
@@ -341,7 +367,7 @@ class HelpScreen(Buttons):
 class InfoScreen(Buttons):
     def __init__(self):
         super(InfoScreen, self).__init__()
-        loadUi(r'''backend_files\info.ui''',self)
+        loadUi(r'''backend_files\ui_files\info.ui''',self)
 
         #Implementation of the buttons on the page.
         self.invBtn.clicked.connect(self.goToInv)
@@ -357,7 +383,7 @@ class InfoScreen(Buttons):
 class DeleteScreen(QDialog):
     def __init__(self):
         super(DeleteScreen, self).__init__()
-        loadUi(r'''backend_files\deleteData.ui''',self)
+        loadUi(r'''backend_files\ui_files\deleteData.ui''',self)
 
         #Implementation of the buttons on the page.
         self.pushButton_commit.clicked.connect(self.deleteData)
@@ -374,7 +400,7 @@ class DeleteScreen(QDialog):
 class AddScreen(QDialog):
     def __init__(self):
         super(AddScreen, self).__init__()
-        loadUi(r'''backend_files\addData.ui''',self)
+        loadUi(r'''backend_files\ui_files\addData.ui''',self)
 
         #Implementation of the buttons on the page.
         self.pushButton_commit.clicked.connect(self.addData)
