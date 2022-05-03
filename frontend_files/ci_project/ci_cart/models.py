@@ -13,7 +13,7 @@ class Cart(models.Model):
         db_table='carts'
 
     def __str__(self):
-        return self.cart_id +"," + str(self.date_added)
+        return self.cart_id
 
     
 class CartItem(models.Model):
