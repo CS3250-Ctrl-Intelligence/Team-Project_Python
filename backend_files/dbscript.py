@@ -9,9 +9,9 @@ class Initialize_database():
     def createDB():
         '''Creates MySQL Database.'''
         mydb = mc.connect(
-            host="ctrlintel.net",
-            user="ctrlinte_admin",
-            password="CS3250!!",
+            host="xxxx",
+            user="xxxx",
+            password="xxxx",
             port=3306
         )
         cur = mydb.cursor()
@@ -23,10 +23,10 @@ class Initialize_database():
     def createTables():
         '''Creates tables that are needed. product, customer_orders, employees.'''
         mydb = mc.connect(
-            host="ctrlintel.net",
-            user="ctrlinte_admin",
-            password="CS3250!!",
-            database="ctrlinte_ci_db",
+            host="xxxx",
+            user="xxxx",
+            password="xxxx",
+            database="xxxx",
             port='3306'
         )
 
@@ -44,10 +44,10 @@ class Database_Functions():
     def connect():
         '''Establishes MySQL database connection.'''
         mydb = mc.connect(
-            host="ctrlintel.net",
-            user="ctrlinte_admin",
-            password="CS3250!!",
-            database="ctrlinte_ci_db",
+            host="xxxx",
+            user="xxxx",
+            password="xxxx",
+            database="xxxx",
             port='3306'
         )
 
@@ -345,7 +345,7 @@ class Database_Functions():
         return amount
 
     def getDiffRev():
-        '''Returns change in revenue day-over-day.'''
+        '''Returns change in revenue week-over-week.'''
         mydb = Database_Functions.connect()
         cur = mydb.cursor()
         query = "SELECT YEARWEEK(Date),SUM(customer_orders.Quantity*product.Sale_Price) as Amount_Paid from customer_orders INNER JOIN product ON customer_orders.Product_ID = product.Product_ID WHERE Date >= DATE_ADD(CURDATE(), INTERVAL -3 MONTH) AND Date <= CURDATE() Group by WEEKOFYEAR(Date)"
@@ -407,7 +407,7 @@ class Database_Functions():
         return amount
 
     def getDiffOrders():
-        '''getDiffOrders'''
+        '''Returns change in orders week over week'''
         mydb = Database_Functions.connect()
         cur = mydb.cursor()
         query = "SELECT YEARWEEK(Date),Count(*) as Number_Orders from customer_orders WHERE Date >= DATE_ADD(CURDATE(), INTERVAL -3 MONTH) AND Date <= CURDATE() Group by WEEKOFYEAR(Date)"
