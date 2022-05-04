@@ -5,12 +5,13 @@ import pandas as pd
 import os
 
 class Initialize_database():
-
+    '''Creates database, establishes connection, creates tables.'''
     def createDB():
+        '''Creates MySQL Database.'''
         mydb = mc.connect(
-            host="ctrlintel.net",
-            user="ctrlinte_admin",
-            password="CS3250!!",
+            host="xxxx",
+            user="xxxx",
+            password="xxxx",
             port=3306
         )
         cur = mydb.cursor()
@@ -20,12 +21,12 @@ class Initialize_database():
         mydb.close()
 
     def createTables():
-
+        '''Creates tables that are needed. product, customer_orders, employees.'''
         mydb = mc.connect(
-            host="ctrlintel.net",
-            user="ctrlinte_admin",
-            password="CS3250!!",
-            database="ctrlinte_ci_db",
+            host="xxxx",
+            user="xxxx",
+            password="xxxx",
+            database="xxxx",
             port='3306'
         )
 
@@ -41,12 +42,12 @@ class Initialize_database():
 class Database_Functions():
 
     def connect():
-
+        '''Establishes MySQL database connection.'''
         mydb = mc.connect(
-            host="ctrlintel.net",
-            user="ctrlinte_admin",
-            password="CS3250!!",
-            database="ctrlinte_ci_db",
+            host="xxxx",
+            user="xxxx",
+            password="xxxx",
+            database="xxxx",
             port='3306'
         )
 
@@ -54,7 +55,7 @@ class Database_Functions():
         return mydb
 
     def login(username, password):
-
+        '''Verifies user's login information.'''
         mydb = Database_Functions.connect()
 
         #find the username and password in the database table employees
@@ -66,7 +67,7 @@ class Database_Functions():
         return result
 
     def createEmployee(username, password):
-
+        '''Adds employee to employee table.'''
         mydb = Database_Functions.connect()
         #create record of employee in database table employees
         cur = mydb.cursor()
@@ -77,7 +78,7 @@ class Database_Functions():
         cur.close()
     
     def fetchInventory():
-
+        '''Returns inventory data.'''
         mydb = Database_Functions.connect()
 
         cur = mydb.cursor()
@@ -102,6 +103,7 @@ class Database_Functions():
 
 
     def importInventory():
+        '''Imports inventory data from .csv file. Auto adds necessary fields for Django models.'''
         def in_stock(x):
             if x >0:
                 return 1
@@ -136,6 +138,7 @@ class Database_Functions():
                 print("MySQL connection is closed")
 
     def importOrders():
+        '''Imports order data from .csv. Updates product quantity in inventory.'''
         try:
             mydb = Database_Functions.connect()
 
@@ -167,6 +170,7 @@ class Database_Functions():
 
 
     def fetchOrders():
+        '''Returns customer orders.'''
         mydb = Database_Functions.connect()
 
         cur = mydb.cursor()
@@ -190,6 +194,7 @@ class Database_Functions():
         return result
 
     def addInventory(product, quantity, wholesale, sale, supplier):
+        '''Adds an item to product table.'''
 
         #connect to database
         mydb = Database_Functions.connect()
@@ -217,7 +222,7 @@ class Database_Functions():
 
 
     def deleteInventory(product):
-
+        '''Deletes an item from product table'''
         mydb = Database_Functions.connect()
 
         cur = mydb.cursor()
@@ -228,7 +233,7 @@ class Database_Functions():
         mydb.commit()
 
     def dailyProduct(date):
-
+        '''Returns the highest selling product for a given day.'''
         searchDate = date
         mydb = Database_Functions.connect()
 
@@ -240,7 +245,7 @@ class Database_Functions():
         return dailyP
 
     def dailyCustomer(date):
-
+        '''Returns the customer that ordered the most for a given day.'''
         searchDate = date
         mydb = Database_Functions.connect()
 
@@ -254,7 +259,7 @@ class Database_Functions():
 
 
     def weeklyProduct(date):
-
+        '''Returns the highest selling product for a given week'''
         searchDate = date
         mydb = Database_Functions.connect()
 
@@ -266,6 +271,7 @@ class Database_Functions():
         return weeklyP
 
     def weeklyCustomer(date):
+        '''Returns the customer that ordered the most for a given week.'''
         searchDate = date
         mydb = Database_Functions.connect()
 
@@ -278,7 +284,7 @@ class Database_Functions():
         return x
 
     def monthlyProduct(date):
-
+        '''Returns the highest selling product for a given month.'''
         searchDate = date
         mydb = Database_Functions.connect()
 
@@ -290,6 +296,7 @@ class Database_Functions():
         return monthlyP
 
     def monthlyCustomer(date):
+        '''Returns the customer that ordered the most for a given month.'''
         searchDate = date
         mydb = Database_Functions.connect()
 
@@ -302,7 +309,7 @@ class Database_Functions():
         return x
 
     def getThreeRev():
-
+        '''Returns 3 months of revenue data.'''
         mydb = Database_Functions.connect()
         cur = mydb.cursor()
         query = "SELECT WEEKOFYEAR(Date),SUM(customer_orders.Quantity*product.Sale_Price) as Amount_Paid from customer_orders INNER JOIN product ON customer_orders.Product_ID = product.Product_ID WHERE Date >= DATE_ADD(CURDATE(), INTERVAL -3 MONTH) AND Date <= CURDATE() Group by WEEKOFYEAR(Date)"
@@ -321,7 +328,7 @@ class Database_Functions():
         return date, amount
 
     def getAllRev():
-
+        '''Returns all revenue'''
         mydb = Database_Functions.connect()
         cur = mydb.cursor()
         query = "SELECT YEARWEEK(Date),SUM(customer_orders.Quantity*product.Sale_Price) as Amount_Paid from customer_orders INNER JOIN product ON customer_orders.Product_ID = product.Product_ID Group by WEEKOFYEAR(Date)"
@@ -338,7 +345,7 @@ class Database_Functions():
         return amount
 
     def getDiffRev():
-
+        '''Returns change in revenue week-over-week.'''
         mydb = Database_Functions.connect()
         cur = mydb.cursor()
         query = "SELECT YEARWEEK(Date),SUM(customer_orders.Quantity*product.Sale_Price) as Amount_Paid from customer_orders INNER JOIN product ON customer_orders.Product_ID = product.Product_ID WHERE Date >= DATE_ADD(CURDATE(), INTERVAL -3 MONTH) AND Date <= CURDATE() Group by WEEKOFYEAR(Date)"
@@ -364,7 +371,7 @@ class Database_Functions():
         return result
 
     def getThreeOrders():
-
+        '''Returns 3 months of order data.'''
         mydb = Database_Functions.connect()
         cur = mydb.cursor()
         query = "SELECT WEEKOFYEAR(Date),Count(*) as Number_Orders from customer_orders  WHERE Date >= DATE_ADD(CURDATE(), INTERVAL -3 MONTH) AND Date <= CURDATE() Group by WEEKOFYEAR(Date)"
@@ -383,7 +390,7 @@ class Database_Functions():
         return date, amount
 
     def getAllOrders():
-
+        '''Return all orders.'''
         mydb = Database_Functions.connect()
         cur = mydb.cursor()
         query = "SELECT YEARWEEK(Date),COUNT(*) as Amount_Paid from customer_orders Group by WEEKOFYEAR(Date)"
@@ -400,6 +407,7 @@ class Database_Functions():
         return amount
 
     def getDiffOrders():
+        '''Returns change in orders week-over-week'''
         mydb = Database_Functions.connect()
         cur = mydb.cursor()
         query = "SELECT YEARWEEK(Date),Count(*) as Number_Orders from customer_orders WHERE Date >= DATE_ADD(CURDATE(), INTERVAL -3 MONTH) AND Date <= CURDATE() Group by WEEKOFYEAR(Date)"
@@ -427,6 +435,7 @@ class Database_Functions():
 class TestDatabase(unittest.TestCase):
 
     def test_write(self):
+        '''Tests database creation, database connection, table creation, and adding an item to the table.'''
         mydb = mc.connect(
             host="localhost",
             user="root",
@@ -455,6 +464,7 @@ class TestDatabase(unittest.TestCase):
         self.assertEqual(test, [('test_text_3',)])
 
     def test_delete(self):
+        '''Tests deleting an item from a table'''
         mydb = mc.connect(
             host="localhost",
             user="root",
@@ -470,8 +480,9 @@ class TestDatabase(unittest.TestCase):
         test = test_cursor.fetchall()
 
         self.assertEqual(test, [])
-    
 
+
+'TODO: Consider adding more tests for database, such as: updating an item. Breakout creating database/tables from write'
 
 Initialize_database.createDB()
 Initialize_database.createTables()
