@@ -11,7 +11,8 @@ from django.template.loader import render_to_string
 from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 from django.utils.encoding import force_bytes
 from django.contrib.auth.tokens import default_token_generator
-from django.core.mail import EmailMessage
+from django.core.mail import EmailMessage,EmailMultiAlternatives
+from django.template import loader
 
 from ci_account.forms import RegistrationForm
 from ci_account.models import Account
@@ -34,7 +35,7 @@ def register(request):
             username = email.split('@')[0]
             user = Account.objects.create_user(first_name = first_name, last_name = last_name,username = username,email=email,password= password)
             user.save()
-
+            
             # implement user activation
             current_site = get_current_site(request)
             mail_subject = 'Please activate your account'
