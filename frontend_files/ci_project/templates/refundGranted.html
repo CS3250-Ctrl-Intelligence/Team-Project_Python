@@ -1,7 +1,76 @@
-{% autoescape off %}
+<!DOCTYPE html>
+<html lang="en" xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:v="urn:schemas-microsoft-com:vml">
 
-Hello {{first_name}} {{last_name}},
+<head>
+    <title></title>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+    <meta content="width=device-width,initial-scale=1" name="viewport" />
+    <!--[if mso]><xml><o:OfficeDocumentSettings><o:PixelsPerInch>96</o:PixelsPerInch><o:AllowPNG/></o:OfficeDocumentSettings></xml><![endif]-->
+    <!--[if !mso]><!-->
+    <link href="https://fonts.googleapis.com/css?family=Abril+Fatface" rel="stylesheet" type="text/css" />
+    <!--<![endif]-->
+</head>
 
-Your order has been refunded
-Order Number:{{order_number}}
-{% endautoescape %}
+<body style="background-color:#fff;margin:0;padding:0;-webkit-text-size-adjust:none;text-size-adjust:none">
+    <table width="100%" style="width:100%;">
+        <tbody>
+            <tr>
+                <td>
+                    <table style="background-color:#fff8f5; width: 60%; margin:50px auto 0 auto;">
+                        <tbody>
+                            <tr>
+                                <td style="padding-bottom: 5px;">
+                                    <h1 style="text-align:center;">Ctrl
+                                        <span style="color:orange">
+                                            Intelligence
+                                        </span>
+                                    </h1>
+
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table style="background-color:#fff8f5; width: 60%; margin:0 auto 0 auto; padding: 0 50px 10px 50px;">
+                        <tbody>
+                           
+                            <tr>
+                                <td>
+                                    Hi {{user.first_name}} {{user.last_name}},
+                                    <p>
+                                        Thanks for reaching out. Satisfying our customers is very important to us and
+                                        I’m sorry our [product/ service]
+                                        didn’t meet your expectations. I fully respect your decision and can only
+                                        apologize for any problems your business experienced.
+                                    </p>
+                                    <p>
+                                        We’ve processed your refund, and you should expect to see the amount credited to
+                                        your account in about 3 to 5 business days.
+                                    </p>
+                                    <p>
+                                        If you have any other questions or concerns, just reply to this email, I’ll be
+                                        here to help you in any way I can.
+
+                                    </p>
+                                    <p>
+                                        Best,
+                                    </p>
+                                    <p>
+                                        Ctrl Intelligence
+                                    </p>
+
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+
+
+</body>
+
+</html>
