@@ -177,6 +177,7 @@ class InvScreen(Buttons):
         self.importBtn.clicked.connect(self.importData)
         self.fetchBtn.clicked.connect(self.fetchData)
         self.deleteBtn.clicked.connect(self.goToDelete)
+        self.addBtn.clicked.connect(self.goToAdd)
         self.updateBtn.clicked.connect(self.goToUpdate)
         self.ordersBtn.clicked.connect(self.goToOrders)
         self.marketBtn.clicked.connect(self.goToMarket)
@@ -184,6 +185,7 @@ class InvScreen(Buttons):
         self.settingsBtn.clicked.connect(self.goToSettings)
         self.helpBtn.clicked.connect(self.goToHelp)
         self.infoBtn.clicked.connect(self.goToInfo)
+        self.searchBtn.clicked.connect(self.searchData)
 
         self.fetchData()
 
@@ -191,6 +193,18 @@ class InvScreen(Buttons):
         result = dbscript.Database_Functions.fetchInventory()
 
         #starts row count at 0 and inserts all the data for each row
+        self.tableWidget.setRowCount(0)
+
+        for row_number, row_data in enumerate(result):
+            self.tableWidget.insertRow(row_number)
+
+            for column_number, data in enumerate(row_data):
+                self.tableWidget.setItem(row_number, column_number, QTableWidgetItem(str(data)))
+
+    def searchData(self):
+        product = [self.lineEdit.text()]
+        result = dbscript.Database_Functions.searchInventory(product)
+
         self.tableWidget.setRowCount(0)
 
         for row_number, row_data in enumerate(result):
@@ -212,8 +226,14 @@ class InvScreen(Buttons):
         delete.exec()
 
     #function to open the update product screen
+    def goToAdd(self):
+        add = AddScreen()
+        add.setFixedHeight(350)
+        add.setFixedWidth(500)
+        add.exec()
+
     def goToUpdate(self):
-        update = AddScreen()
+        update = UpdateScreen()
         update.setFixedHeight(350)
         update.setFixedWidth(500)
         update.exec()
@@ -233,6 +253,7 @@ class OrdersScreen(Buttons):
         self.helpBtn.clicked.connect(self.goToHelp)
         self.infoBtn.clicked.connect(self.goToInfo)
         self.importBtn.clicked.connect(self.importOrders)
+        self.searchBtn.clicked.connect(self.searchOrders)
 
         self.fetchData()
     def importOrders(self):
@@ -240,6 +261,19 @@ class OrdersScreen(Buttons):
         
     def fetchData(self):
         result = dbscript.Database_Functions.fetchOrders()
+
+        #starts row count at 0 and inserts all the data for each row
+        self.tableWidget.setRowCount(0)
+
+        for row_number, row_data in enumerate(result):
+            self.tableWidget.insertRow(row_number)
+
+            for column_number, data in enumerate(row_data):
+                self.tableWidget.setItem(row_number, column_number, QTableWidgetItem(str(data)))
+
+    def searchOrders(self):
+        customer = [self.lineEdit.text()]
+        result = dbscript.Database_Functions.searchOrders(customer)
 
         #starts row count at 0 and inserts all the data for each row
         self.tableWidget.setRowCount(0)
@@ -394,7 +428,7 @@ class DeleteScreen(QDialog):
         product = self.lineEdit_product.text()
 
         dbscript.Database_Functions.deleteInventory(product)
-
+        self.label_result.setText("Product has been deleted from the database")
 
 #This class displays the update the 
 class AddScreen(QDialog):
@@ -416,6 +450,28 @@ class AddScreen(QDialog):
         supplier = self.lineEdit_supplier.text()
 
         dbscript.Database_Functions.addInventory(product, quantity, wholesale, sale, supplier)
+        self.label_result.setText("Product has been added to the database")
+
+class UpdateScreen(QDialog):
+    def __init__(self):
+        super(UpdateScreen, self).__init__()
+        loadUi(r'''backend_files\ui_files\updateData.ui''',self)
+
+        #Implementation of the buttons on the page.
+        self.pushButton_commit.clicked.connect(self.updateData)
+
+    #function to add new data record to the database table inventory
+    def updateData(self):
+
+        #get user input fields for new product and info
+        product = self.lineEdit_product.text()
+        quantity = self.lineEdit_quantity.text()
+        wholesale = self.lineEdit_wholesale.text()
+        sale = self.lineEdit_sale.text()
+        supplier = self.lineEdit_supplier.text()
+
+        dbscript.Database_Functions.updateInventory(product, quantity, wholesale, sale, supplier)
+        self.label_result.setText("Product has been updated successfully")
 
 #call the database.py main() function and and open the welcome screen with fixed height and width 
 app = QApplication(sys.argv)

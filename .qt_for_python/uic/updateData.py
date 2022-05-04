@@ -1,4 +1,4 @@
-# Form implementation generated from reading ui file 'c:\Users\Marin\Documents\Team-Project_Python\backend_files\ui_files\addData.ui'
+# Form implementation generated from reading ui file 'c:\Users\Marin\Documents\Team-Project_Python\backend_files\ui_files\updateData.ui'
 #
 # Created by: PyQt6 UI code generator 6.1.0
 #
@@ -85,7 +85,6 @@ class Ui_login_window(object):
         self.pushButton_commit = QtWidgets.QPushButton(self.widget)
         self.pushButton_commit.setGeometry(QtCore.QRect(90, 270, 311, 41))
         font = QtGui.QFont()
-        font.setFamily("Segoe UI")
         font.setPointSize(16)
         font.setBold(False)
         self.pushButton_commit.setFont(font)
@@ -113,4 +112,4 @@ class Ui_login_window(object):
         self.label_wholesale.setText(_translate("login_window", "Wholesale Price:"))
         self.label_sale.setText(_translate("login_window", "Sale Price:"))
         self.label_supplier.setText(_translate("login_window", "Supplier ID:"))
-        self.pushButton_commit.setText(_translate("login_window", "Create Data"))
+        self.pushButton_commit.setText(_translate("login_window", "Update Data"))
