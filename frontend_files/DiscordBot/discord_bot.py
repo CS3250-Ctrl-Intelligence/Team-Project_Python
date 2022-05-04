@@ -177,7 +177,7 @@ async def below_error(ctx,error):
 async def above(ctx,arg):
     transac = ""
 
-    for tups in filter_below(str(arg)):
+    for tups in filter_above(str(arg)):
         for tup in tups:
             transac += str(tup) + "\t\t\t"
         transac += "\n"

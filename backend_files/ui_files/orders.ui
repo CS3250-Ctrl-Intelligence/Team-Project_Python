@@ -128,7 +128,7 @@ color: rgb(255, 255, 255);</string>
              <string>Signed In</string>
             </property>
             <property name="icon">
-             <iconset resource="resources.qrc">
+             <iconset resource="../resources.qrc">
               <normaloff>:/icons/icons/user.svg</normaloff>:/icons/icons/user.svg</iconset>
             </property>
             <property name="iconSize">
@@ -417,7 +417,7 @@ color: rgb(255, 255, 255);</string>
              <string>Orders</string>
             </property>
             <property name="icon">
-             <iconset resource="resources.qrc">
+             <iconset resource="../resources.qrc">
               <normaloff>:/icons/icons/inbox.svg</normaloff>:/icons/icons/inbox.svg</iconset>
             </property>
             <property name="iconSize">
@@ -447,7 +447,7 @@ color: rgb(255, 255, 255)</string>
              <string>Inventory</string>
             </property>
             <property name="icon">
-             <iconset resource="resources.qrc">
+             <iconset resource="../resources.qrc">
               <normaloff>:/icons/icons/list.svg</normaloff>:/icons/icons/list.svg</iconset>
             </property>
             <property name="iconSize">
@@ -471,7 +471,7 @@ color: rgb(255, 255, 255)</string>
              <string>Marketing</string>
             </property>
             <property name="icon">
-             <iconset resource="resources.qrc">
+             <iconset resource="../resources.qrc">
               <normaloff>:/icons/icons/printer.svg</normaloff>:/icons/icons/printer.svg</iconset>
             </property>
             <property name="iconSize">
@@ -495,7 +495,7 @@ color: rgb(255, 255, 255)</string>
              <string>Finance</string>
             </property>
             <property name="icon">
-             <iconset resource="resources.qrc">
+             <iconset resource="../resources.qrc">
               <normaloff>:/icons/icons/printer.svg</normaloff>:/icons/icons/printer.svg</iconset>
             </property>
             <property name="iconSize">
@@ -559,7 +559,7 @@ color: rgb(255, 255, 255)</string>
              <string>Settings</string>
             </property>
             <property name="icon">
-             <iconset resource="resources.qrc">
+             <iconset resource="../resources.qrc">
               <normaloff>:/icons/icons/settings.svg</normaloff>:/icons/icons/settings.svg</iconset>
             </property>
             <property name="iconSize">
@@ -583,7 +583,7 @@ color: rgb(255, 255, 255)</string>
              <string>Info</string>
             </property>
             <property name="icon">
-             <iconset resource="resources.qrc">
+             <iconset resource="../resources.qrc">
               <normaloff>:/icons/icons/info.svg</normaloff>:/icons/icons/info.svg</iconset>
             </property>
             <property name="iconSize">
@@ -607,7 +607,7 @@ color: rgb(255, 255, 255)</string>
              <string>Help</string>
             </property>
             <property name="icon">
-             <iconset resource="resources.qrc">
+             <iconset resource="../resources.qrc">
               <normaloff>:/icons/icons/help-circle.svg</normaloff>:/icons/icons/help-circle.svg</iconset>
             </property>
             <property name="iconSize">
@@ -650,7 +650,7 @@ color: rgb(255, 255, 255)</string>
      <rect>
       <x>10</x>
       <y>10</y>
-      <width>171</width>
+      <width>341</width>
       <height>51</height>
      </rect>
     </property>
@@ -663,7 +663,7 @@ color: rgb(255, 255, 255)</string>
      <string notr="true">color: rgb(255, 255, 255);</string>
     </property>
     <property name="text">
-     <string>Inventory</string>
+     <string>Orders</string>
     </property>
     <property name="alignment">
      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -680,8 +680,7 @@ color: rgb(255, 255, 255)</string>
     </property>
     <property name="styleSheet">
      <string notr="true">
-background-color: rgb(255, 255, 255);
-</string>
+background-color: rgb(255, 255, 255);</string>
     </property>
     <property name="showGrid">
      <bool>true</bool>
@@ -696,7 +695,7 @@ background-color: rgb(255, 255, 255);
      <bool>false</bool>
     </attribute>
     <attribute name="horizontalHeaderDefaultSectionSize">
-     <number>150</number>
+     <number>140</number>
     </attribute>
     <attribute name="horizontalHeaderHighlightSections">
      <bool>true</bool>
@@ -718,56 +717,34 @@ background-color: rgb(255, 255, 255);
     </attribute>
     <column>
      <property name="text">
+      <string>Date</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Customer Email</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Customer Location</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
       <string>Product ID</string>
      </property>
-     <property name="font">
-      <font>
-       <pointsize>10</pointsize>
-       <kerning>true</kerning>
-      </font>
-     </property>
-     <property name="background">
-      <color>
-       <red>255</red>
-       <green>255</green>
-       <blue>255</blue>
-      </color>
-     </property>
-     <property name="foreground">
-      <brush brushstyle="NoBrush">
-       <color alpha="255">
-        <red>255</red>
-        <green>255</green>
-        <blue>255</blue>
-       </color>
-      </brush>
-     </property>
     </column>
     <column>
      <property name="text">
-      <string>Quantity</string>
-     </property>
-    </column>
-    <column>
-     <property name="text">
-      <string>Wholesale Price</string>
-     </property>
-    </column>
-    <column>
-     <property name="text">
-      <string>Sale Price</string>
-     </property>
-    </column>
-    <column>
-     <property name="text">
-      <string>Supplier ID</string>
+      <string>Product Quantity</string>
      </property>
     </column>
    </widget>
    <widget class="QPushButton" name="importBtn">
     <property name="geometry">
      <rect>
-      <x>660</x>
+      <x>670</x>
       <y>30</y>
       <width>91</width>
       <height>31</height>
@@ -784,7 +761,7 @@ border-radius: 10px;</string>
    <widget class="QPushButton" name="fetchBtn">
     <property name="geometry">
      <rect>
-      <x>560</x>
+      <x>570</x>
       <y>30</y>
       <width>91</width>
       <height>31</height>
@@ -798,30 +775,29 @@ border-radius: 10px;</string>
      <string>Fetch</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="deleteBtn">
+   <widget class="QLineEdit" name="lineEdit">
     <property name="geometry">
      <rect>
-      <x>460</x>
-      <y>30</y>
-      <width>91</width>
-      <height>31</height>
+      <x>230</x>
+      <y>40</y>
+      <width>211</width>
+      <height>21</height>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color: rgb(255, 85, 0);
-border-radius: 10px;</string>
+     <string notr="true">background-color: rgb(255, 255, 255);</string>
     </property>
     <property name="text">
-     <string>Delete</string>
+     <string>Enter Customer email</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="updateBtn">
+   <widget class="QPushButton" name="searchBtn">
     <property name="geometry">
      <rect>
-      <x>360</x>
-      <y>30</y>
-      <width>91</width>
-      <height>31</height>
+      <x>450</x>
+      <y>40</y>
+      <width>51</width>
+      <height>21</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -829,24 +805,7 @@ border-radius: 10px;</string>
 border-radius: 10px;</string>
     </property>
     <property name="text">
-     <string>Update</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="addBtn">
-    <property name="geometry">
-     <rect>
-      <x>260</x>
-      <y>30</y>
-      <width>91</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background-color: rgb(255, 85, 0);
-border-radius: 10px;</string>
-    </property>
-    <property name="text">
-     <string>Add</string>
+     <string>Go</string>
     </property>
    </widget>
   </widget>
@@ -888,7 +847,7 @@ background-color:  #16191d;</string>
   </widget>
  </widget>
  <resources>
-  <include location="resources.qrc"/>
+  <include location="../resources.qrc"/>
  </resources>
  <connections/>
 </ui>

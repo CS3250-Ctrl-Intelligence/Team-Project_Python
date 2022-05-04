@@ -128,7 +128,7 @@ color: rgb(255, 255, 255);</string>
              <string>Signed In</string>
             </property>
             <property name="icon">
-             <iconset resource="resources.qrc">
+             <iconset resource="../../backend_files/resources.qrc">
               <normaloff>:/icons/icons/user.svg</normaloff>:/icons/icons/user.svg</iconset>
             </property>
             <property name="iconSize">
@@ -417,7 +417,7 @@ color: rgb(255, 255, 255);</string>
              <string>Orders</string>
             </property>
             <property name="icon">
-             <iconset resource="resources.qrc">
+             <iconset resource="../../backend_files/resources.qrc">
               <normaloff>:/icons/icons/inbox.svg</normaloff>:/icons/icons/inbox.svg</iconset>
             </property>
             <property name="iconSize">
@@ -447,7 +447,7 @@ color: rgb(255, 255, 255)</string>
              <string>Inventory</string>
             </property>
             <property name="icon">
-             <iconset resource="resources.qrc">
+             <iconset resource="../../backend_files/resources.qrc">
               <normaloff>:/icons/icons/list.svg</normaloff>:/icons/icons/list.svg</iconset>
             </property>
             <property name="iconSize">
@@ -471,7 +471,7 @@ color: rgb(255, 255, 255)</string>
              <string>Marketing</string>
             </property>
             <property name="icon">
-             <iconset resource="resources.qrc">
+             <iconset resource="../../backend_files/resources.qrc">
               <normaloff>:/icons/icons/printer.svg</normaloff>:/icons/icons/printer.svg</iconset>
             </property>
             <property name="iconSize">
@@ -495,7 +495,7 @@ color: rgb(255, 255, 255)</string>
              <string>Finance</string>
             </property>
             <property name="icon">
-             <iconset resource="resources.qrc">
+             <iconset resource="../../backend_files/resources.qrc">
               <normaloff>:/icons/icons/printer.svg</normaloff>:/icons/icons/printer.svg</iconset>
             </property>
             <property name="iconSize">
@@ -559,7 +559,7 @@ color: rgb(255, 255, 255)</string>
              <string>Settings</string>
             </property>
             <property name="icon">
-             <iconset resource="resources.qrc">
+             <iconset resource="../../backend_files/resources.qrc">
               <normaloff>:/icons/icons/settings.svg</normaloff>:/icons/icons/settings.svg</iconset>
             </property>
             <property name="iconSize">
@@ -583,7 +583,7 @@ color: rgb(255, 255, 255)</string>
              <string>Info</string>
             </property>
             <property name="icon">
-             <iconset resource="resources.qrc">
+             <iconset resource="../../backend_files/resources.qrc">
               <normaloff>:/icons/icons/info.svg</normaloff>:/icons/icons/info.svg</iconset>
             </property>
             <property name="iconSize">
@@ -607,7 +607,7 @@ color: rgb(255, 255, 255)</string>
              <string>Help</string>
             </property>
             <property name="icon">
-             <iconset resource="resources.qrc">
+             <iconset resource="../../backend_files/resources.qrc">
               <normaloff>:/icons/icons/help-circle.svg</normaloff>:/icons/icons/help-circle.svg</iconset>
             </property>
             <property name="iconSize">
@@ -650,7 +650,7 @@ color: rgb(255, 255, 255)</string>
      <rect>
       <x>10</x>
       <y>10</y>
-      <width>341</width>
+      <width>171</width>
       <height>51</height>
      </rect>
     </property>
@@ -663,116 +663,196 @@ color: rgb(255, 255, 255)</string>
      <string notr="true">color: rgb(255, 255, 255);</string>
     </property>
     <property name="text">
+     <string>Finance</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="revMonthBtn">
+    <property name="geometry">
+     <rect>
+      <x>200</x>
+      <y>190</y>
+      <width>151</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>14</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(255, 85, 0);
+border-radius: 10px;</string>
+    </property>
+    <property name="text">
+     <string>3-Month</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="revDiffBtn">
+    <property name="geometry">
+     <rect>
+      <x>200</x>
+      <y>310</y>
+      <width>151</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>14</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(255, 85, 0);
+border-radius: 10px;</string>
+    </property>
+    <property name="text">
+     <string>+/-</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="custDiffBtn">
+    <property name="geometry">
+     <rect>
+      <x>390</x>
+      <y>310</y>
+      <width>151</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>14</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(255, 85, 0);
+border-radius: 10px;</string>
+    </property>
+    <property name="text">
+     <string>+/-</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="custMonthBtn">
+    <property name="geometry">
+     <rect>
+      <x>390</x>
+      <y>190</y>
+      <width>151</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>14</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(255, 85, 0);
+border-radius: 10px;</string>
+    </property>
+    <property name="text">
+     <string>3-Month</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_username_2">
+    <property name="geometry">
+     <rect>
+      <x>210</x>
+      <y>130</y>
+      <width>131</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>26</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(255, 255, 255);</string>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::NoFrame</enum>
+    </property>
+    <property name="text">
+     <string>Revenue</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_username_3">
+    <property name="geometry">
+     <rect>
+      <x>410</x>
+      <y>130</y>
+      <width>131</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>26</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(255, 255, 255);</string>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::NoFrame</enum>
+    </property>
+    <property name="text">
      <string>Orders</string>
     </property>
     <property name="alignment">
      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
     </property>
    </widget>
-   <widget class="QTableWidget" name="tableWidget">
+   <widget class="QPushButton" name="revAllBtn">
     <property name="geometry">
      <rect>
-      <x>0</x>
-      <y>70</y>
-      <width>771</width>
-      <height>441</height>
+      <x>200</x>
+      <y>250</y>
+      <width>151</width>
+      <height>51</height>
      </rect>
     </property>
-    <property name="styleSheet">
-     <string notr="true">
-background-color: rgb(255, 255, 255);</string>
-    </property>
-    <property name="showGrid">
-     <bool>true</bool>
-    </property>
-    <property name="gridStyle">
-     <enum>Qt::SolidLine</enum>
-    </property>
-    <attribute name="horizontalHeaderVisible">
-     <bool>true</bool>
-    </attribute>
-    <attribute name="horizontalHeaderCascadingSectionResizes">
-     <bool>false</bool>
-    </attribute>
-    <attribute name="horizontalHeaderDefaultSectionSize">
-     <number>140</number>
-    </attribute>
-    <attribute name="horizontalHeaderHighlightSections">
-     <bool>true</bool>
-    </attribute>
-    <attribute name="verticalHeaderVisible">
-     <bool>true</bool>
-    </attribute>
-    <attribute name="verticalHeaderMinimumSectionSize">
-     <number>24</number>
-    </attribute>
-    <attribute name="verticalHeaderDefaultSectionSize">
-     <number>24</number>
-    </attribute>
-    <attribute name="verticalHeaderHighlightSections">
-     <bool>true</bool>
-    </attribute>
-    <attribute name="verticalHeaderShowSortIndicator" stdset="0">
-     <bool>false</bool>
-    </attribute>
-    <column>
-     <property name="text">
-      <string>Date</string>
-     </property>
-    </column>
-    <column>
-     <property name="text">
-      <string>Customer Email</string>
-     </property>
-    </column>
-    <column>
-     <property name="text">
-      <string>Customer Location</string>
-     </property>
-    </column>
-    <column>
-     <property name="text">
-      <string>Product ID</string>
-     </property>
-    </column>
-    <column>
-     <property name="text">
-      <string>Product Quantity</string>
-     </property>
-    </column>
-   </widget>
-   <widget class="QPushButton" name="importBtn">
-    <property name="geometry">
-     <rect>
-      <x>670</x>
-      <y>30</y>
-      <width>91</width>
-      <height>31</height>
-     </rect>
+    <property name="font">
+     <font>
+      <pointsize>14</pointsize>
+     </font>
     </property>
     <property name="styleSheet">
      <string notr="true">background-color: rgb(255, 85, 0);
 border-radius: 10px;</string>
     </property>
     <property name="text">
-     <string>Import</string>
+     <string>All-Time</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="fetchBtn">
+   <widget class="QPushButton" name="custAllBtn">
     <property name="geometry">
      <rect>
-      <x>570</x>
-      <y>30</y>
-      <width>91</width>
-      <height>31</height>
+      <x>390</x>
+      <y>250</y>
+      <width>151</width>
+      <height>51</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>14</pointsize>
+     </font>
     </property>
     <property name="styleSheet">
      <string notr="true">background-color: rgb(255, 85, 0);
 border-radius: 10px;</string>
     </property>
     <property name="text">
-     <string>Fetch</string>
+     <string>All-Time</string>
     </property>
    </widget>
   </widget>
@@ -814,7 +894,7 @@ background-color:  #16191d;</string>
   </widget>
  </widget>
  <resources>
-  <include location="resources.qrc"/>
+  <include location="../../backend_files/resources.qrc"/>
  </resources>
  <connections/>
 </ui>

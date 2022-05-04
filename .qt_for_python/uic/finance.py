@@ -1,4 +1,4 @@
-# Form implementation generated from reading ui file 'c:\Users\Marin\Documents\Team-Project_Python\backend_files\ui_files\info.ui'
+# Form implementation generated from reading ui file 'c:\Users\Marin\Documents\Team-Project_Python\backend_files\ui_files\finance.ui'
 #
 # Created by: PyQt6 UI code generator 6.1.0
 #
@@ -255,21 +255,79 @@ class Ui_Dialog(object):
 "")
         self.mainWindow.setObjectName("mainWindow")
         self.label_username = QtWidgets.QLabel(self.mainWindow)
-        self.label_username.setGeometry(QtCore.QRect(10, 10, 211, 51))
+        self.label_username.setGeometry(QtCore.QRect(10, 10, 171, 51))
         font = QtGui.QFont()
         font.setPointSize(26)
         self.label_username.setFont(font)
         self.label_username.setStyleSheet("color: rgb(255, 255, 255);")
         self.label_username.setAlignment(QtCore.Qt.AlignmentFlag.AlignLeading|QtCore.Qt.AlignmentFlag.AlignLeft|QtCore.Qt.AlignmentFlag.AlignVCenter)
         self.label_username.setObjectName("label_username")
-        self.textEdit = QtWidgets.QTextEdit(self.mainWindow)
-        self.textEdit.setGeometry(QtCore.QRect(0, 70, 721, 391))
+        self.revMonthBtn = QtWidgets.QPushButton(self.mainWindow)
+        self.revMonthBtn.setGeometry(QtCore.QRect(200, 190, 151, 51))
         font = QtGui.QFont()
-        font.setPointSize(12)
-        self.textEdit.setFont(font)
-        self.textEdit.setStyleSheet("color: rgb(255, 255, 255);")
-        self.textEdit.setFrameShape(QtWidgets.QFrame.Shape.NoFrame)
-        self.textEdit.setObjectName("textEdit")
+        font.setPointSize(14)
+        self.revMonthBtn.setFont(font)
+        self.revMonthBtn.setStyleSheet("background-color: rgb(255, 85, 0);\n"
+"border-radius: 10px;")
+        self.revMonthBtn.setObjectName("revMonthBtn")
+        self.revDiffBtn = QtWidgets.QPushButton(self.mainWindow)
+        self.revDiffBtn.setGeometry(QtCore.QRect(200, 310, 151, 51))
+        font = QtGui.QFont()
+        font.setPointSize(14)
+        self.revDiffBtn.setFont(font)
+        self.revDiffBtn.setStyleSheet("background-color: rgb(255, 85, 0);\n"
+"border-radius: 10px;")
+        self.revDiffBtn.setObjectName("revDiffBtn")
+        self.custDiffBtn = QtWidgets.QPushButton(self.mainWindow)
+        self.custDiffBtn.setGeometry(QtCore.QRect(390, 310, 151, 51))
+        font = QtGui.QFont()
+        font.setPointSize(14)
+        self.custDiffBtn.setFont(font)
+        self.custDiffBtn.setStyleSheet("background-color: rgb(255, 85, 0);\n"
+"border-radius: 10px;")
+        self.custDiffBtn.setObjectName("custDiffBtn")
+        self.custMonthBtn = QtWidgets.QPushButton(self.mainWindow)
+        self.custMonthBtn.setGeometry(QtCore.QRect(390, 190, 151, 51))
+        font = QtGui.QFont()
+        font.setPointSize(14)
+        self.custMonthBtn.setFont(font)
+        self.custMonthBtn.setStyleSheet("background-color: rgb(255, 85, 0);\n"
+"border-radius: 10px;")
+        self.custMonthBtn.setObjectName("custMonthBtn")
+        self.label_username_2 = QtWidgets.QLabel(self.mainWindow)
+        self.label_username_2.setGeometry(QtCore.QRect(210, 130, 131, 51))
+        font = QtGui.QFont()
+        font.setPointSize(26)
+        self.label_username_2.setFont(font)
+        self.label_username_2.setStyleSheet("color: rgb(255, 255, 255);")
+        self.label_username_2.setFrameShape(QtWidgets.QFrame.Shape.NoFrame)
+        self.label_username_2.setAlignment(QtCore.Qt.AlignmentFlag.AlignLeading|QtCore.Qt.AlignmentFlag.AlignLeft|QtCore.Qt.AlignmentFlag.AlignVCenter)
+        self.label_username_2.setObjectName("label_username_2")
+        self.label_username_3 = QtWidgets.QLabel(self.mainWindow)
+        self.label_username_3.setGeometry(QtCore.QRect(410, 130, 131, 51))
+        font = QtGui.QFont()
+        font.setPointSize(26)
+        self.label_username_3.setFont(font)
+        self.label_username_3.setStyleSheet("color: rgb(255, 255, 255);")
+        self.label_username_3.setFrameShape(QtWidgets.QFrame.Shape.NoFrame)
+        self.label_username_3.setAlignment(QtCore.Qt.AlignmentFlag.AlignLeading|QtCore.Qt.AlignmentFlag.AlignLeft|QtCore.Qt.AlignmentFlag.AlignVCenter)
+        self.label_username_3.setObjectName("label_username_3")
+        self.revAllBtn = QtWidgets.QPushButton(self.mainWindow)
+        self.revAllBtn.setGeometry(QtCore.QRect(200, 250, 151, 51))
+        font = QtGui.QFont()
+        font.setPointSize(14)
+        self.revAllBtn.setFont(font)
+        self.revAllBtn.setStyleSheet("background-color: rgb(255, 85, 0);\n"
+"border-radius: 10px;")
+        self.revAllBtn.setObjectName("revAllBtn")
+        self.custAllBtn = QtWidgets.QPushButton(self.mainWindow)
+        self.custAllBtn.setGeometry(QtCore.QRect(390, 250, 151, 51))
+        font = QtGui.QFont()
+        font.setPointSize(14)
+        self.custAllBtn.setFont(font)
+        self.custAllBtn.setStyleSheet("background-color: rgb(255, 85, 0);\n"
+"border-radius: 10px;")
+        self.custAllBtn.setObjectName("custAllBtn")
         self.header = QtWidgets.QWidget(Dialog)
         self.header.setGeometry(QtCore.QRect(120, 0, 771, 41))
         self.header.setStyleSheet("background-color:qlineargradient(spread:pad, x1:0.591, y1:0.0454545, x2:1, y2:0, stop:0  #16191d, stop:1 rgb(255, 85, 0))\n"
@@ -306,18 +364,13 @@ class Ui_Dialog(object):
         self.infoBtn.setText(_translate("Dialog", "Info"))
         self.helpBtn.setToolTip(_translate("Dialog", "Get more help"))
         self.helpBtn.setText(_translate("Dialog", "Help"))
-        self.label_username.setText(_translate("Dialog", "Information"))
-        self.textEdit.setHtml(_translate("Dialog", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
-"<html><head><meta name=\"qrichtext\" content=\"1\" /><meta charset=\"utf-8\" /><style type=\"text/css\">\n"
-"p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:\'Segoe UI\'; font-size:12pt; font-weight:400; font-style:normal;\">\n"
-"<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:16pt;\">We are a team based out of Colorado. There are five foundings members that go by the names:</span></p>\n"
-"<p align=\"center\" style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:16pt;\"><br /></p>\n"
-"<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:16pt;\">Tho Le</span></p>\n"
-"<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:16pt;\">Matthew White</span></p>\n"
-"<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:16pt;\">Brian Vasquez</span></p>\n"
-"<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:16pt;\">Cameron Spear</span></p>\n"
-"<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:16pt;\">Seth Hamilton</span></p>\n"
-"<p align=\"center\" style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:16pt;\"><br /></p>\n"
-"<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:16pt;\">We have created this ecommerce site and backend application to improve our skills. This is just one small stepping stone on our journey towards software engineering/development.</span></p></body></html>"))
+        self.label_username.setText(_translate("Dialog", "Finance"))
+        self.revMonthBtn.setText(_translate("Dialog", "3-Month"))
+        self.revDiffBtn.setText(_translate("Dialog", "+/-"))
+        self.custDiffBtn.setText(_translate("Dialog", "+/-"))
+        self.custMonthBtn.setText(_translate("Dialog", "3-Month"))
+        self.label_username_2.setText(_translate("Dialog", "Revenue"))
+        self.label_username_3.setText(_translate("Dialog", "Orders"))
+        self.revAllBtn.setText(_translate("Dialog", "All-Time"))
+        self.custAllBtn.setText(_translate("Dialog", "All-Time"))
         self.label.setText(_translate("Dialog", "Ctrl Intelligence"))

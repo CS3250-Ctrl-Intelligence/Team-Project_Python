@@ -1,4 +1,4 @@
-# Form implementation generated from reading ui file 'c:\Users\Marin\Documents\Team-Project_Python\backend_files\createEmployee.ui'
+# Form implementation generated from reading ui file 'c:\Users\Marin\Documents\Team-Project_Python\backend_files\ui_files\createEmployee.ui'
 #
 # Created by: PyQt6 UI code generator 6.1.0
 #
@@ -121,6 +121,7 @@ class Ui_Dialog(object):
         self.lineEdit_password.setGeometry(QtCore.QRect(240, 190, 251, 31))
         self.lineEdit_password.setStyleSheet("background-color: rgb(255, 255, 255);\n"
 "")
+        self.lineEdit_password.setEchoMode(QtWidgets.QLineEdit.EchoMode.Password)
         self.lineEdit_password.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
         self.lineEdit_password.setObjectName("lineEdit_password")
         self.createBtn = QtWidgets.QPushButton(self.mainWindow)
@@ -144,6 +145,7 @@ class Ui_Dialog(object):
         self.lineEdit_confpassword.setGeometry(QtCore.QRect(240, 260, 251, 31))
         self.lineEdit_confpassword.setStyleSheet("background-color: rgb(255, 255, 255);\n"
 "")
+        self.lineEdit_confpassword.setEchoMode(QtWidgets.QLineEdit.EchoMode.Password)
         self.lineEdit_confpassword.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
         self.lineEdit_confpassword.setObjectName("lineEdit_confpassword")
         self.label_result = QtWidgets.QLabel(self.mainWindow)

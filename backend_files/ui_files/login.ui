@@ -312,6 +312,9 @@ background-color: rgb(255, 85, 0);</string>
      <string notr="true">background-color: rgb(255, 255, 255);
 </string>
     </property>
+    <property name="echoMode">
+     <enum>QLineEdit::Password</enum>
+    </property>
     <property name="alignment">
      <set>Qt::AlignCenter</set>
     </property>
