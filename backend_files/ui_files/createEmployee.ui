@@ -287,6 +287,9 @@
      <string notr="true">background-color: rgb(255, 255, 255);
 </string>
     </property>
+    <property name="echoMode">
+     <enum>QLineEdit::Password</enum>
+    </property>
     <property name="alignment">
      <set>Qt::AlignCenter</set>
     </property>
@@ -353,6 +356,9 @@ background-color: rgb(255, 85, 0);</string>
      <string notr="true">background-color: rgb(255, 255, 255);
 </string>
     </property>
+    <property name="echoMode">
+     <enum>QLineEdit::Password</enum>
+    </property>
     <property name="alignment">
      <set>Qt::AlignCenter</set>
     </property>
@@ -417,7 +423,7 @@ background-color:  #16191d;</string>
   </widget>
  </widget>
  <resources>
-  <include location="resources.qrc"/>
+  <include location="../resources.qrc"/>
  </resources>
  <connections/>
 </ui>

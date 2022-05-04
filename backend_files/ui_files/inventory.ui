@@ -128,7 +128,7 @@ color: rgb(255, 255, 255);</string>
              <string>Signed In</string>
             </property>
             <property name="icon">
-             <iconset resource="resources.qrc">
+             <iconset resource="../resources.qrc">
               <normaloff>:/icons/icons/user.svg</normaloff>:/icons/icons/user.svg</iconset>
             </property>
             <property name="iconSize">
@@ -417,7 +417,7 @@ color: rgb(255, 255, 255);</string>
              <string>Orders</string>
             </property>
             <property name="icon">
-             <iconset resource="resources.qrc">
+             <iconset resource="../resources.qrc">
               <normaloff>:/icons/icons/inbox.svg</normaloff>:/icons/icons/inbox.svg</iconset>
             </property>
             <property name="iconSize">
@@ -447,7 +447,7 @@ color: rgb(255, 255, 255)</string>
              <string>Inventory</string>
             </property>
             <property name="icon">
-             <iconset resource="resources.qrc">
+             <iconset resource="../resources.qrc">
               <normaloff>:/icons/icons/list.svg</normaloff>:/icons/icons/list.svg</iconset>
             </property>
             <property name="iconSize">
@@ -471,7 +471,7 @@ color: rgb(255, 255, 255)</string>
              <string>Marketing</string>
             </property>
             <property name="icon">
-             <iconset resource="resources.qrc">
+             <iconset resource="../resources.qrc">
               <normaloff>:/icons/icons/printer.svg</normaloff>:/icons/icons/printer.svg</iconset>
             </property>
             <property name="iconSize">
@@ -495,7 +495,7 @@ color: rgb(255, 255, 255)</string>
              <string>Finance</string>
             </property>
             <property name="icon">
-             <iconset resource="resources.qrc">
+             <iconset resource="../resources.qrc">
               <normaloff>:/icons/icons/printer.svg</normaloff>:/icons/icons/printer.svg</iconset>
             </property>
             <property name="iconSize">
@@ -559,7 +559,7 @@ color: rgb(255, 255, 255)</string>
              <string>Settings</string>
             </property>
             <property name="icon">
-             <iconset resource="resources.qrc">
+             <iconset resource="../resources.qrc">
               <normaloff>:/icons/icons/settings.svg</normaloff>:/icons/icons/settings.svg</iconset>
             </property>
             <property name="iconSize">
@@ -583,7 +583,7 @@ color: rgb(255, 255, 255)</string>
              <string>Info</string>
             </property>
             <property name="icon">
-             <iconset resource="resources.qrc">
+             <iconset resource="../resources.qrc">
               <normaloff>:/icons/icons/info.svg</normaloff>:/icons/icons/info.svg</iconset>
             </property>
             <property name="iconSize">
@@ -607,7 +607,7 @@ color: rgb(255, 255, 255)</string>
              <string>Help</string>
             </property>
             <property name="icon">
-             <iconset resource="resources.qrc">
+             <iconset resource="../resources.qrc">
               <normaloff>:/icons/icons/help-circle.svg</normaloff>:/icons/icons/help-circle.svg</iconset>
             </property>
             <property name="iconSize">
@@ -849,6 +849,39 @@ border-radius: 10px;</string>
      <string>Add</string>
     </property>
    </widget>
+   <widget class="QLineEdit" name="lineEdit">
+    <property name="geometry">
+     <rect>
+      <x>400</x>
+      <y>0</y>
+      <width>131</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(255, 255, 255);</string>
+    </property>
+    <property name="text">
+     <string>Enter product ID</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="searchBtn">
+    <property name="geometry">
+     <rect>
+      <x>540</x>
+      <y>1</y>
+      <width>41</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(255, 85, 0);
+border-radius: 10px;</string>
+    </property>
+    <property name="text">
+     <string>Go</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QWidget" name="header" native="true">
    <property name="geometry">
@@ -886,9 +919,12 @@ background-color:  #16191d;</string>
     </property>
    </widget>
   </widget>
+  <zorder>leftMenuContainer</zorder>
+  <zorder>header</zorder>
+  <zorder>mainWindow</zorder>
  </widget>
  <resources>
-  <include location="resources.qrc"/>
+  <include location="../resources.qrc"/>
  </resources>
  <connections/>
 </ui>
