@@ -2,6 +2,7 @@ import mysql.connector as mc
 import unittest
 import csv
 import pandas as pd
+import os
 
 class Initialize_database():
     '''Creates database, establishes connection, creates tables.'''
@@ -50,6 +51,7 @@ class Database_Functions():
             port='3306'
         )
 
+
         return mydb
 
     def login(username, password):
@@ -85,6 +87,19 @@ class Database_Functions():
         cur.close()
         return result
 
+    def searchInventory(product):
+
+        identifier = product
+
+        mydb = Database_Functions.connect()
+
+        cur = mydb.cursor()
+        query =("SELECT Product_Id, Quantity, Wholesale_Cost, Sale_Price, Supplier_Id FROM product WHERE Product_Id like %s".format("product"))
+        values = (identifier)
+        cur.execute(query, values)
+        result = cur.fetchall()
+        cur.close()
+        return result
 
 
     def importInventory():
@@ -164,6 +179,20 @@ class Database_Functions():
 
         return result
 
+    def searchOrders(customer):
+
+        identifier = customer
+
+        mydb = Database_Functions.connect()
+
+        cur = mydb.cursor()
+        query =("SELECT Date, Cust_Email, Cust_Location,Product_Id,Quantity FROM customer_orders WHERE Cust_Email like %s".format("customer_orders"))
+        values = (identifier)
+        cur.execute(query, values)
+        result = cur.fetchall()
+        cur.close()
+        return result
+
     def addInventory(product, quantity, wholesale, sale, supplier):
         '''Adds an item to product table.'''
 
@@ -171,11 +200,26 @@ class Database_Functions():
         mydb = Database_Functions.connect()
 
         cur = mydb.cursor()
-        query = "INSERT INTO product (Product_ID, Quantity, Wholesale_Price, Sale_Price, Supplier_ID) VALUES (%s, %s, %s, %s, %s)"
+        query = "INSERT INTO product (Product_ID, Quantity, Wholesale_Cost, Sale_Price, Supplier_ID) VALUES (%s, %s, %s, %s, %s)"
         value = (product, quantity, wholesale, sale, supplier)
         cur.execute(query, value)
         #pushes the new data to the inventory table in the database.
         mydb.commit()
+
+    def updateInventory(product, quantity, wholesale, sale, supplier):
+
+        #connect to database
+        mydb = Database_Functions.connect()
+
+        identifier = product
+
+        cur = mydb.cursor()
+        query = "UPDATE product SET Product_ID = %s, Quantity = %s, Wholesale_Cost = %s, Sale_Price = %s, Supplier_ID = %s WHERE Product_ID = %s"
+        value = (product, quantity, wholesale, sale, supplier, identifier)
+        cur.execute(query, value)
+        #pushes the new data to the inventory table in the database.
+        mydb.commit()
+
 
     def deleteInventory(product):
         '''Deletes an item from product table'''

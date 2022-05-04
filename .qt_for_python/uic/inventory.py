@@ -1,4 +1,4 @@
-# Form implementation generated from reading ui file 'c:\Users\Seth\Documents\Team-Project_Python\backend_files\inventory.ui'
+# Form implementation generated from reading ui file 'c:\Users\Marin\Documents\Team-Project_Python\backend_files\ui_files\inventory.ui'
 #
 # Created by: PyQt6 UI code generator 6.1.0
 #
@@ -324,6 +324,15 @@ class Ui_Dialog(object):
         self.addBtn.setStyleSheet("background-color: rgb(255, 85, 0);\n"
 "border-radius: 10px;")
         self.addBtn.setObjectName("addBtn")
+        self.lineEdit = QtWidgets.QLineEdit(self.mainWindow)
+        self.lineEdit.setGeometry(QtCore.QRect(400, 0, 131, 22))
+        self.lineEdit.setStyleSheet("background-color: rgb(255, 255, 255);")
+        self.lineEdit.setObjectName("lineEdit")
+        self.searchBtn = QtWidgets.QPushButton(self.mainWindow)
+        self.searchBtn.setGeometry(QtCore.QRect(540, 1, 41, 20))
+        self.searchBtn.setStyleSheet("background-color: rgb(255, 85, 0);\n"
+"border-radius: 10px;")
+        self.searchBtn.setObjectName("searchBtn")
         self.header = QtWidgets.QWidget(Dialog)
         self.header.setGeometry(QtCore.QRect(120, 0, 771, 41))
         self.header.setStyleSheet("background-color:qlineargradient(spread:pad, x1:0.591, y1:0.0454545, x2:1, y2:0, stop:0  #16191d, stop:1 rgb(255, 85, 0))\n"
@@ -337,6 +346,9 @@ class Ui_Dialog(object):
         self.label.setStyleSheet("color: rgb(255, 255, 255);\n"
 "background-color:  #16191d;")
         self.label.setObjectName("label")
+        self.leftMenuContainer.raise_()
+        self.header.raise_()
+        self.mainWindow.raise_()
 
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
@@ -376,4 +388,6 @@ class Ui_Dialog(object):
         self.deleteBtn.setText(_translate("Dialog", "Delete"))
         self.updateBtn.setText(_translate("Dialog", "Update"))
         self.addBtn.setText(_translate("Dialog", "Add"))
+        self.lineEdit.setText(_translate("Dialog", "Enter product ID"))
+        self.searchBtn.setText(_translate("Dialog", "Go"))
         self.label.setText(_translate("Dialog", "Ctrl Intelligence"))

@@ -1,4 +1,4 @@
-# Form implementation generated from reading ui file 'c:\Users\Seth\Documents\Team-Project_Python\backend_files\orders.ui'
+# Form implementation generated from reading ui file 'c:\Users\Marin\Documents\Team-Project_Python\backend_files\ui_files\orders.ui'
 #
 # Created by: PyQt6 UI code generator 6.1.0
 #
@@ -300,6 +300,15 @@ class Ui_Dialog(object):
         self.fetchBtn.setStyleSheet("background-color: rgb(255, 85, 0);\n"
 "border-radius: 10px;")
         self.fetchBtn.setObjectName("fetchBtn")
+        self.lineEdit = QtWidgets.QLineEdit(self.mainWindow)
+        self.lineEdit.setGeometry(QtCore.QRect(230, 40, 211, 21))
+        self.lineEdit.setStyleSheet("background-color: rgb(255, 255, 255);")
+        self.lineEdit.setObjectName("lineEdit")
+        self.searchBtn = QtWidgets.QPushButton(self.mainWindow)
+        self.searchBtn.setGeometry(QtCore.QRect(450, 40, 51, 21))
+        self.searchBtn.setStyleSheet("background-color: rgb(255, 85, 0);\n"
+"border-radius: 10px;")
+        self.searchBtn.setObjectName("searchBtn")
         self.header = QtWidgets.QWidget(Dialog)
         self.header.setGeometry(QtCore.QRect(120, 0, 771, 41))
         self.header.setStyleSheet("background-color:qlineargradient(spread:pad, x1:0.591, y1:0.0454545, x2:1, y2:0, stop:0  #16191d, stop:1 rgb(255, 85, 0))\n"
@@ -349,4 +358,6 @@ class Ui_Dialog(object):
         item.setText(_translate("Dialog", "Product Quantity"))
         self.importBtn.setText(_translate("Dialog", "Import"))
         self.fetchBtn.setText(_translate("Dialog", "Fetch"))
+        self.lineEdit.setText(_translate("Dialog", "Enter Customer email"))
+        self.searchBtn.setText(_translate("Dialog", "Go"))
         self.label.setText(_translate("Dialog", "Ctrl Intelligence"))
