@@ -1,0 +1,10 @@
+import csv
+import hashlib
+
+
+with open('customer_orders_final_team1.csv') as csvfile:
+    with open('hashedemails2.csv', 'w') as newfile:
+        reader = csv.DictReader(csvfile)
+        for e in reader:
+            hashing = hashlib.sha256((e['cust_email']).encode('utf-8')).hexdigest()
+            newfile.write(hashing + '\n')
