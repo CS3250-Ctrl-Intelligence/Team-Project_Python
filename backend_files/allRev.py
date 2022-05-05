@@ -7,7 +7,7 @@ from dbscript import Database_Functions
 
 
 class MainWindow(QtWidgets.QMainWindow):
-
+    '''This class implements main window, displays window/info for allRev'''
     def __init__(self, *args, **kwargs):
         super(MainWindow, self).__init__(*args, **kwargs)
 
@@ -27,6 +27,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.graphWidget.showGrid(x=True, y=True)
 
 def main():
+    '''Executes main'''
     app = QtWidgets.QApplication(sys.argv)
     main = MainWindow()
     main.show()

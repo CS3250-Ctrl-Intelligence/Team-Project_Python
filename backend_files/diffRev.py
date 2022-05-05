@@ -7,12 +7,14 @@ from matplotlib.ft2font import HORIZONTAL
 from dbscript import Database_Functions
 
 class TableModel(QtCore.QAbstractTableModel):
+    '''This class implements a table model'''
     def __init__(self, data):
         super(TableModel, self).__init__()
         self._data = data
 
 
     def data(self, index, role):
+        '''data() method parses data to corresponding colors and determines if increase/decrease'''
         if role == Qt.ItemDataRole.DisplayRole:
             return self._data[index.row()][index.column()]
 
@@ -40,16 +42,18 @@ class TableModel(QtCore.QAbstractTableModel):
                 return QtGui.QColor('green')
 
     def rowCount(self, index):
+        '''Returns length of outer list'''
         # The length of the outer list.
         return len(self._data)
 
     def columnCount(self, index):
+        '''Returns the length of the first sub-list'''
         # The following takes the first sub-list, and returns
         # the length (only works if all rows are an equal length)
         return len(self._data[0])
 
 class MainWindow(QtWidgets.QMainWindow):
-
+    '''This class displays the mainwindow'''
     def __init__(self):
         super().__init__()
 
@@ -64,6 +68,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.table.horizontalHeader().setVisible(False)
 
 def main():
+    '''Executes main'''
     app = QtWidgets.QApplication(sys.argv)
     main = MainWindow()
     main.setFixedHeight(300)

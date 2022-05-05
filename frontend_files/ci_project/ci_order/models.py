@@ -84,8 +84,7 @@ class Refund(models.Model):
 class CustomerOrders(models.Model):
     date = models.DateField(blank=True, null=True)  # Field name made lowercase.
     cust_email = models.CharField(max_length=45, blank=True, null=True)
-    cust_location = models.IntegerField(blank=True, null=True)
-    
+    cust_location = models.IntegerField(blank=True, null=True)    
     product = models.ForeignKey(Product, models.DO_NOTHING,to_field='product_id', blank=True, null=True)
     quantity = models.IntegerField(blank=True, null=True)
 

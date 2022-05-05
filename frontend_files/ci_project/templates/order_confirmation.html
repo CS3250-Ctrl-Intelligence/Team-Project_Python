@@ -1,0 +1,166 @@
+
+
+<!DOCTYPE html>
+<html lang="en" xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:v="urn:schemas-microsoft-com:vml">
+
+<head>
+    <title></title>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+    <meta content="width=device-width,initial-scale=1" name="viewport" />
+    <!--[if mso]><xml><o:OfficeDocumentSettings><o:PixelsPerInch>96</o:PixelsPerInch><o:AllowPNG/></o:OfficeDocumentSettings></xml><![endif]-->
+    <!--[if !mso]><!-->
+    <link href="https://fonts.googleapis.com/css?family=Abril+Fatface" rel="stylesheet" type="text/css" />
+    <!--<![endif]-->
+</head>
+
+<body style="background-color:#fff;margin:0;padding:0;-webkit-text-size-adjust:none;text-size-adjust:none">
+    <table width="100%" style="width:100%;">
+        <tbody>
+            <tr>
+                <td>
+                    <table style="background-color:#fff8f5; width: 60%; margin:50px auto 0 auto;">
+                        <tbody>
+                            <tr>
+                                <td style="padding-bottom: 5px;">
+                                    <h1 style="text-align:center;">Ctrl  
+                                    <span style="color:orange">
+                                        Intelligence
+                                    </span>
+                                    </h1>
+                                    
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table style="background-color:#fff8f5; width: 60%; margin:0 auto 0 auto; padding-left:20px;">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <h2 style="text-align:center;">Order Infomation</h2>
+                                    <hr style="border-width: 4px; border-style: solid none none none; width:13%; color:#de7f50;">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <table width="100%;" style="height:auto; padding: 10px 0 50px 0; border-collapse:collapse; border: 2px solid orangered; ">
+                                        <thead style="text-align:left; border-collapse:collapse; border: 2px solid orangered;">
+                                            <tr >
+                                                <th>Description</th>
+                                                <th>Qty</th>
+                                                <th style="text-align:right;">Price</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for items in order_detail %}
+                                            <tr style="border-collapse:collapse; border: 2px solid orangered;">
+                                                <td>{{items.product.product_id}}</td>
+                                                <td>{{items.quantity}}</td>
+                                                <td style="text-align:right;">${{items.price}}</td>
+                                            </tr>
+                                            {% endfor %}
+                                            
+                                        </tbody>
+
+
+                                    </table>
+                                </td>
+                                
+                            </tr>
+                            <tr style="text-align: right; ">
+                                
+                                    
+                                    <td style="padding-right: 30px;">
+                                        <h5>SubTotal: ${{subtotal}}</h5>
+                                        <h5>Tax: ${{order.tax}}</h5>
+                                        <h5>Total: ${{order.order_total}}</h5>
+                                    </td>
+                                
+                            
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <table style="background-color:#fff8f5; width: 60%; margin:0 auto 0 auto; padding: 0 0 10px 50px;">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <h2 style="text-align:center;">Thank You For Your Order!</h2>
+                                        <hr style="border-width: 4px; border-style: solid none none none; width:13%; color:#de7f50;">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>
+                                        Confirmation Number: {{order.order_number}}
+                                    </p>
+                                    <p>
+                                        Hello {{user.first_name}} {{user.last_name}},
+                                    </p>
+                                    <p>
+                                        We’re happy to let you know that we’ve received your order.
+                                    </p>
+                                    <p>
+                                        Once your package ships, we will send you an email with a tracking number and
+                                        link so you can see the movement of your package.
+                                    </p>
+                                    <p>
+                                        If you have any questions, contact us here or call us on [contact number]!
+                                        We are here to help!
+                                    </p>
+                                    <p>
+                                        Returns: If you would like to return your product(s), please see here [link] or
+                                        contact us.
+
+
+                                    </p>
+                                    <p>
+                                        P.S. psst… you may love these too
+
+                                    </p>
+
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <table style="background-color:#fff8f5; width: 60%; margin:0 auto 0 auto; height:400px;">
+                        <tbody>
+                            <tr>
+                                <td style="text-align:center; ">
+                                    <h2>People's Favorites</h2>
+                                    <hr style="border-width: 4px; border-style: solid none none none; width:13%; color:#de7f50;">
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td style="padding-left:100px;">
+                                    {% for items in recommendation%}
+                                    <table width="150px;"
+                                        style="display: inline-block; max-width: 250px; margin: 15px 5px; text-align: center;"
+                                        valign="top">
+                                        <tr>
+                                            <td>
+                                                <img src="https://www.transparentpng.com/thumb/headphones/PblPaf-download-headphones.png" alt="download headphones @transparentpng.com" style="width: 100px">
+                                                <h3>{{items.product_id}}</h3>
+                                                <p>$ {{items.sale_price}}</p>
+                                                
+                                                
+
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    {% endfor %}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+
+
+</body>
+
+</html>

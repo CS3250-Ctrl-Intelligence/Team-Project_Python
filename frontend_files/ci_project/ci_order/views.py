@@ -9,13 +9,14 @@ from django.views import View
 from django.conf import settings
 from django.contrib import messages
 from django.core.exceptions import ObjectDoesNotExist
-from django.core.mail import EmailMessage
+from django.core.mail import EmailMessage,EmailMultiAlternatives,send_mail
 from django.template.loader import render_to_string
+from django.template import loader
 
 
 from ci_cart.models import CartItem,Cart
 from ci_order.forms import OrderForm,RefundForm
-from ci_order.models import Order,OrderItem,Payment,Refund, CustomerOrders
+from ci_order.models import Order,OrderItem,Payment,Refund,CustomerOrders
 from ci_shop.models import Product
 
 
@@ -26,7 +27,7 @@ def payments(request):
 
     order = Order.objects.get(user=request.user,is_ordered = False, order_number =body['orderID'])
 
-    # print(body)
+    
     # Store transaction details inside Payment model
     payment =Payment(
         user = request.user,
@@ -69,21 +70,45 @@ def payments(request):
         # product = Product.objects.get(id=items.product_id)
         # product.quantity -= items.quantity
         # product.save()
+
+    # filter most expensive item in order
+    # most_expensive = OrderItem.objects.filter(user=request.user).order_by('-price')[:1].get()
+    # print(most_expensive.product.supplier_id)
+    # products_based_on_supplier = Product.objects.filter(supplier_id= most_expensive.product.supplier_id)[:4]
+    # for i in products_based_on_supplier:
+    #     print(i)
+
+    # filter highest quantity in ordered history
+    highest_quantity= OrderItem.objects.filter(user=request.user).order_by('-quantity')[:1].get()
+    print(highest_quantity)
+    products_based_on_supplier = Product.objects.filter(supplier_id=highest_quantity.product.supplier_id).exclude(slug=highest_quantity.product.slug)[:6]
+  
+
+    
+    
     
     # Clear cart
     CartItem.objects.filter(user=request.user).delete()
 
+    order_detail = OrderItem.objects.filter(order__order_number=body['orderID'])
+    subtotal=0
+    for i in order_detail:
+        subtotal+= i.price * i.quantity
+    subtotal = round(subtotal,2)
+    
     # Send email to customer
-    mail_subject = 'Thank you for your order!'
-    message = render_to_string('orderReceived.html',{
-                    'user' :request.user,
-                    'order':order,
+    
+    context={'user':request.user,'order':order,'order_detail':order_detail,'subtotal':subtotal,'recommendation':products_based_on_supplier}
 
-            })
-    to_email = request.user.email
-    send_email = EmailMessage(mail_subject, message, to=[to_email])
-    send_email.send()
-
+    html_template = 'order_confirmation.html'
+    html_message = render_to_string(html_template, context)
+    subject = 'Thank You For Your Order!'
+    email_from = settings.EMAIL_HOST_USER
+    recipient_list = [request.user.email]
+    message = EmailMessage(subject, html_message,
+                            email_from, recipient_list)
+    message.content_subtype = 'html'
+    message.send()
     # Send order number and payment transaction id back to sendData function via JsonResponse and populate Thank you page
     data={
         'order_number':order.order_number,
@@ -212,3 +237,5 @@ class RequestRefundView(View):
             except ObjectDoesNotExist:
                 messages.info(self.request,f"This order does not exist")
                 return redirect("request-refund") # return to the same page
+
+                

@@ -21,46 +21,51 @@ class Buttons(QDialog):
         self.helpBtn.clicked.connect(self.goToHelp)
         self.infoBtn.clicked.connect(self.goToInfo)
 
-    #function to go to the inventory screen
     def goToInv(self):
+        '''function to go to the inventory screen.'''
         inventory = InvScreen()
         widget.addWidget(inventory)
         widget.setCurrentIndex(widget.currentIndex()+1)
 
-    #function to go to the customer orders screen
     def goToOrders(self):
+        '''function to go to the customer orders screen.'''
         orders = OrdersScreen()
         widget.addWidget(orders)
         widget.setCurrentIndex(widget.currentIndex()+1)
     
     def goToMarket(self):
+        '''function to go to Market screen.'''
         market = MarketScreen()
         widget.addWidget(market)
         widget.setCurrentIndex(widget.currentIndex()+1)
 
     def goToFinance(self):
+        '''function to go to Finance screen.'''
         finance = FinanceScreen()
         widget.addWidget(finance)
         widget.setCurrentIndex(widget.currentIndex()+1)
 
     def goToSettings(self):
+        '''function to go to Settings screen.'''
         settings = SettingsScreen()
         widget.addWidget(settings)
         widget.setCurrentIndex(widget.currentIndex()+1)
 
     def goToHelp(self):
+        '''function to go to Help screen.'''
         help = HelpScreen()
         widget.addWidget(help)
         widget.setCurrentIndex(widget.currentIndex()+1)
 
     def goToInfo(self):
+        '''function to go to Info screen.'''
         info = InfoScreen()
         widget.addWidget(info)
         widget.setCurrentIndex(widget.currentIndex()+1)
 
 
-#This class displays the welcome screen
 class WelcomeScreen(QDialog):
+    '''This class displays the welcome screen.'''
     def __init__(self):
         super(WelcomeScreen, self).__init__()
         loadUi(r'''backend_files\ui_files\welcome.ui''',self)
@@ -69,14 +74,14 @@ class WelcomeScreen(QDialog):
         self.loginBtn.clicked.connect(self.goToLogin)
         #self.pushButton_newAcc.clicked.connect(self.goToCreate)
 
-    #function to bring you to login page
     def goToLogin(self):
+        '''function to bring you to login page.'''
         login = LoginScreen()
         widget.addWidget(login)
         widget.setCurrentIndex(widget.currentIndex()+1)
 
-#This class displays the employee login screen
 class LoginScreen(QDialog):
+    '''This class displays the employee login screen.'''
     def __init__(self):
         super(LoginScreen, self).__init__()
         loadUi(r'''backend_files\ui_files\login.ui''',self)
@@ -85,14 +90,14 @@ class LoginScreen(QDialog):
         self.goBtn.clicked.connect(self.loginFunc)
         self.createBtn.clicked.connect(self.employeeCreate)
 
-    #function to bring you to the dashboard if you successfully log in
     def goToHome(self):
+        '''Function to bring you to the dashboard if you successfully log in.'''
         dashboard = HomeScreen()
         widget.addWidget(dashboard)
         widget.setCurrentIndex(widget.currentIndex()+1)
 
-    #function to login in. 
     def loginFunc(self):
+        '''Function to login'''
 
         #get the user input from the text fields
         username = self.lineEdit_username.text()
@@ -115,17 +120,18 @@ class LoginScreen(QDialog):
         widget.addWidget(create)
         widget.setCurrentIndex(widget.currentIndex()+1)
 
-#This class displays the create employee screen
+
 class CreateEmpScreen(QDialog):
+    '''This class displays the create employee screen.'''
     def __init__(self):
         super(CreateEmpScreen, self).__init__()
         loadUi(r'''backend_files\ui_files\createEmployee.ui''',self)
 
         #Implementation of the buttons on the page.
         self.createBtn.clicked.connect(self.signup)
-        
-    #function to create a record in the table employees
+
     def signup(self):
+        '''function to create a record in the table employees'''
         #get user input from text fields
         username = self.lineEdit_username.text()
         password = self.lineEdit_password.text()
@@ -153,6 +159,7 @@ class CreateEmpScreen(QDialog):
             widget.setCurrentIndex(widget.currentIndex()+1)
 
 class HomeScreen(Buttons):
+    '''This class implements the buttons on the HomeScreen'''
     def __init__(self):
         super(HomeScreen, self).__init__()
         loadUi(r'''backend_files\ui_files\home.ui''',self)
@@ -167,8 +174,9 @@ class HomeScreen(Buttons):
         self.infoBtn.clicked.connect(self.goToInfo)
 
 
-#This class displays the inventory screen
+
 class InvScreen(Buttons):
+    '''This class displays the inventory screen'''
     def __init__(self):
         super(InvScreen, self).__init__()
         loadUi(r'''backend_files\ui_files\inventory.ui''',self)
@@ -177,6 +185,7 @@ class InvScreen(Buttons):
         self.importBtn.clicked.connect(self.importData)
         self.fetchBtn.clicked.connect(self.fetchData)
         self.deleteBtn.clicked.connect(self.goToDelete)
+        self.addBtn.clicked.connect(self.goToAdd)
         self.updateBtn.clicked.connect(self.goToUpdate)
         self.ordersBtn.clicked.connect(self.goToOrders)
         self.marketBtn.clicked.connect(self.goToMarket)
@@ -184,10 +193,12 @@ class InvScreen(Buttons):
         self.settingsBtn.clicked.connect(self.goToSettings)
         self.helpBtn.clicked.connect(self.goToHelp)
         self.infoBtn.clicked.connect(self.goToInfo)
+        self.searchBtn.clicked.connect(self.searchData)
 
         self.fetchData()
 
     def fetchData(self):
+        '''Fetches data to display.'''
         result = dbscript.Database_Functions.fetchInventory()
 
         #starts row count at 0 and inserts all the data for each row
@@ -199,27 +210,51 @@ class InvScreen(Buttons):
             for column_number, data in enumerate(row_data):
                 self.tableWidget.setItem(row_number, column_number, QTableWidgetItem(str(data)))
 
+
+    def searchData(self):
+      '''Adds search function to search through inventory data'''
+        product = [self.lineEdit.text()]
+        result = dbscript.Database_Functions.searchInventory(product)
+
+        self.tableWidget.setRowCount(0)
+
+        for row_number, row_data in enumerate(result):
+            self.tableWidget.insertRow(row_number)
+
+            for column_number, data in enumerate(row_data):
+                self.tableWidget.setItem(row_number, column_number, QTableWidgetItem(str(data)))
+
     #function to import data from .csv file to mysql database
+
     def importData(self):
+        '''Calls import function from dbscript to import data to inventory.'''
         
         dbscript.Database_Functions.importInventory()
 
-    #function to open the delete product screen        
     def goToDelete(self):
+        '''Function to open delete product screen'''
         delete = DeleteScreen()
         delete.setFixedHeight(200)
         delete.setFixedWidth(500)
         delete.exec()
 
     #function to open the update product screen
+    def goToAdd(self):
+        add = AddScreen()
+        add.setFixedHeight(350)
+        add.setFixedWidth(500)
+        add.exec()
+
     def goToUpdate(self):
-        update = AddScreen()
+      '''Function to open the update product screen'''
+        update = UpdateScreen()
+
         update.setFixedHeight(350)
         update.setFixedWidth(500)
         update.exec()
 
-#This class displays the customer orders screen.
 class OrdersScreen(Buttons):
+    '''This class displays the customer orders screen.'''
     def __init__(self):
         super(OrdersScreen, self).__init__()
         loadUi(r'''backend_files\ui_files\orders.ui''',self)
@@ -233,13 +268,29 @@ class OrdersScreen(Buttons):
         self.helpBtn.clicked.connect(self.goToHelp)
         self.infoBtn.clicked.connect(self.goToInfo)
         self.importBtn.clicked.connect(self.importOrders)
+        self.searchBtn.clicked.connect(self.searchOrders)
 
         self.fetchData()
     def importOrders(self):
+        '''Imports orders from csv to MySQL'''
         Database_Functions.importOrders()
         
     def fetchData(self):
+        '''Fetches data from Orders to display'''
         result = dbscript.Database_Functions.fetchOrders()
+
+        #starts row count at 0 and inserts all the data for each row
+        self.tableWidget.setRowCount(0)
+
+        for row_number, row_data in enumerate(result):
+            self.tableWidget.insertRow(row_number)
+
+            for column_number, data in enumerate(row_data):
+                self.tableWidget.setItem(row_number, column_number, QTableWidgetItem(str(data)))
+
+    def searchOrders(self):
+        customer = [self.lineEdit.text()]
+        result = dbscript.Database_Functions.searchOrders(customer)
 
         #starts row count at 0 and inserts all the data for each row
         self.tableWidget.setRowCount(0)
@@ -253,6 +304,7 @@ class OrdersScreen(Buttons):
 
             
 class MarketScreen(Buttons):
+    '''This class displays the marketing screen.'''
     def __init__(self):
         super(MarketScreen, self).__init__()
         loadUi(r'''backend_files\ui_files\market.ui''',self)
@@ -270,6 +322,7 @@ class MarketScreen(Buttons):
 
 
     def dailyReport(self):
+        '''Creates and displays daily marketing report.'''
 
         date = self.lineDate.text()
         dailyP = Database_Functions.dailyProduct(date)
@@ -282,6 +335,7 @@ class MarketScreen(Buttons):
         self.lineCustomer.setText(str(dailyC[0]) + " with $" + str(dailyC[1]))
 
     def weeklyReport(self):
+        '''Creates and displays weekly marketing report.'''
 
         date = self.lineDate.text()
         weeklyP = Database_Functions.weeklyProduct(date)
@@ -294,7 +348,7 @@ class MarketScreen(Buttons):
         self.lineCustomer.setText(str(weeklyC[0]) + " with $" + str(weeklyC[1]))
 
     def monthlyReport(self):
-
+        '''Creates and displays monthly marketing report.'''
         date = self.lineDate.text()
         monthlyP = Database_Functions.monthlyProduct(date)
         self.lineProduct.setText(str(monthlyP[0]) + " with " + str(monthlyP[1]) + " sold")
@@ -307,6 +361,7 @@ class MarketScreen(Buttons):
     
         
 class FinanceScreen(Buttons):
+    '''This class implements the buttons on the finance screen.'''
     def __init__(self):
         super(FinanceScreen, self).__init__()
         loadUi(r'''backend_files\ui_files\finance.ui''',self)
@@ -339,6 +394,7 @@ class FinanceScreen(Buttons):
         diffOrders.main()
 
 class SettingsScreen(Buttons):
+    '''This class implements the buttons for the Settings screen.'''
     def __init__(self):
         super(SettingsScreen, self).__init__()
         loadUi(r'''backend_files\ui_files\settings.ui''',self)
@@ -352,6 +408,7 @@ class SettingsScreen(Buttons):
         self.infoBtn.clicked.connect(self.goToInfo)
 
 class HelpScreen(Buttons):
+    '''This class implements the buttons for the Help screen.'''
     def __init__(self):
         super(HelpScreen, self).__init__()
         loadUi(r'''backend_files\ui_files\help.ui''',self)
@@ -365,6 +422,7 @@ class HelpScreen(Buttons):
         self.infoBtn.clicked.connect(self.goToInfo)
 
 class InfoScreen(Buttons):
+    '''This class implements the buttons for the Info screen.'''
     def __init__(self):
         super(InfoScreen, self).__init__()
         loadUi(r'''backend_files\ui_files\info.ui''',self)
@@ -379,8 +437,8 @@ class InfoScreen(Buttons):
 
 
 
-#This class displays the delete product screen
 class DeleteScreen(QDialog):
+    '''This class displays the delete product screen'''
     def __init__(self):
         super(DeleteScreen, self).__init__()
         loadUi(r'''backend_files\ui_files\deleteData.ui''',self)
@@ -388,13 +446,13 @@ class DeleteScreen(QDialog):
         #Implementation of the buttons on the page.
         self.pushButton_commit.clicked.connect(self.deleteData)
 
-    #function to delete data from the database
     def deleteData(self):
+        '''function to delete data from the database'''
 
         product = self.lineEdit_product.text()
 
         dbscript.Database_Functions.deleteInventory(product)
-
+        self.label_result.setText("Product has been deleted from the database")
 
 #This class displays the update the 
 class AddScreen(QDialog):
@@ -405,8 +463,8 @@ class AddScreen(QDialog):
         #Implementation of the buttons on the page.
         self.pushButton_commit.clicked.connect(self.addData)
 
-    #function to add new data record to the database table inventory
     def addData(self):
+        '''function to add new data record to the database table inventory'''
 
         #get user input fields for new product and info
         product = self.lineEdit_product.text()
@@ -416,6 +474,28 @@ class AddScreen(QDialog):
         supplier = self.lineEdit_supplier.text()
 
         dbscript.Database_Functions.addInventory(product, quantity, wholesale, sale, supplier)
+        self.label_result.setText("Product has been added to the database")
+
+class UpdateScreen(QDialog):
+    def __init__(self):
+        super(UpdateScreen, self).__init__()
+        loadUi(r'''backend_files\ui_files\updateData.ui''',self)
+
+        #Implementation of the buttons on the page.
+        self.pushButton_commit.clicked.connect(self.updateData)
+
+    #function to add new data record to the database table inventory
+    def updateData(self):
+
+        #get user input fields for new product and info
+        product = self.lineEdit_product.text()
+        quantity = self.lineEdit_quantity.text()
+        wholesale = self.lineEdit_wholesale.text()
+        sale = self.lineEdit_sale.text()
+        supplier = self.lineEdit_supplier.text()
+
+        dbscript.Database_Functions.updateInventory(product, quantity, wholesale, sale, supplier)
+        self.label_result.setText("Product has been updated successfully")
 
 #call the database.py main() function and and open the welcome screen with fixed height and width 
 app = QApplication(sys.argv)
