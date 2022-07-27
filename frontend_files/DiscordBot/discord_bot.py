@@ -9,20 +9,20 @@ import mysql.connector as mc
 def recommendation(email):
     # searchDate = '2022-01-01'
     mydb = mc.connect(
-        host= os.getenv('DATABASE_SERVER'),
-        user= os.getenv('DATABASE_USERNAME'),
-        password=os.getenv('DATABASE_PASSWORD'),
-        database=os.getenv('DATABASE_NAME'),
-        port= os.getenv('DATABASE_PORT')
+        host= 'ctrlintel.net',
+        user= 'ctrlinte_admin',
+        password= 'CS3250!!',
+        database= 'ctrlinte_ci_db',
+        port= '3306'
     )
 
     cur = mydb.cursor()
-    query = "SELECT DISTINCT inventory.Supplier_ID from orders INNER JOIN inventory ON orders.Product_ID = inventory.Product_ID WHERE Cust_Email="+ "'" + email + "'" + "LIMIT 5;"
+    query = "SELECT DISTINCT product.supplier_id from customer_orders INNER JOIN product ON customer_orders.product_id = product.product_id WHERE cust_email="+ "'" + email + "'" + "LIMIT 5;"
     cur.execute(query)
 
 
     mostProduct = [i[0] for i in cur.fetchall()]
-    query="SELECT Sale_Price, Product_ID FROM inventory WHERE Supplier_ID IN (" + "'" + mostProduct[0]+"','"+ mostProduct[1]+"','"+ mostProduct[2]+"','" +mostProduct[3]+"','" + mostProduct[4]+ "') ORDER BY RAND() LIMIT 10 ;"
+    query="SELECT sale_Price, product_id FROM product WHERE supplier_id IN (" + "'" + mostProduct[0]+"','"+ mostProduct[1]+"','"+ mostProduct[2]+"','" +mostProduct[3]+"','" + mostProduct[4]+ "') ORDER BY RAND() LIMIT 10 ;"
     cur.execute(query)
     recommendations = cur.fetchall()
     # for i in recommendation:
@@ -32,15 +32,15 @@ def recommendation(email):
 def hist(email):
     
     mydb = mc.connect(
-        host= os.getenv('DATABASE_SERVER'),
-        user= os.getenv('DATABASE_USERNAME'),
-        password=os.getenv('DATABASE_PASSWORD'),
-        database=os.getenv('DATABASE_NAME'),
-        port= os.getenv('DATABASE_PORT')
+        host= 'ctrlintel.net',
+        user= 'ctrlinte_admin',
+        password= 'CS3250!!',
+        database= 'ctrlinte_ci_db',
+        port= '3306'
     )
 
     cur = mydb.cursor()
-    query = "SELECT Cust_Email, orders.Date, orders.Quantity, FORMAT((orders.Quantity* inventory.Sale_Price), 2), orders.Product_ID from orders INNER JOIN inventory ON orders.Product_ID = inventory.Product_ID WHERE Cust_Email="+ "'" + email + "'" + ";"
+    query = "SELECT cust_email, customer_orders.date, customer_orders.quantity, FORMAT((customer_orders.quantity * product.sale_price), 2), customer_orders.product_id from customer_orders INNER JOIN product ON customer_orders.product_id = product.product_id WHERE cust_email="+ "'" + email + "'" + ";"
     
     cur.execute(query)
 
@@ -52,15 +52,15 @@ def hist(email):
 def filter_below(price):
 
     mydb = mc.connect(
-        host= os.getenv('DATABASE_SERVER'),
-        user= os.getenv('DATABASE_USERNAME'),
-        password=os.getenv('DATABASE_PASSWORD'),
-        database=os.getenv('DATABASE_NAME'),
-        port= os.getenv('DATABASE_PORT')
+        host= 'ctrlintel.net',
+        user= 'ctrlinte_admin',
+        password= 'CS3250!!',
+        database= 'ctrlinte_ci_db',
+        port= '3306'
     )
 
     cur = mydb.cursor()
-    query = "SELECT Sale_Price, Product_ID FROM inventory WHERE Sale_Price <"+ price +" ORDER BY RAND() LIMIT 10;"
+    query = "SELECT sale_price, product_id FROM product WHERE sale_price <"+ price +" ORDER BY RAND() LIMIT 10;"
     
     cur.execute(query)
     budget = cur.fetchall()
@@ -70,15 +70,14 @@ def filter_below(price):
 def filter_above(price):
 
     mydb = mc.connect(
-        host= os.getenv('DATABASE_SERVER'),
-        user= os.getenv('DATABASE_USERNAME'),
-        password=os.getenv('DATABASE_PASSWORD'),
-        database=os.getenv('DATABASE_NAME'),
-        port= os.getenv('DATABASE_PORT')
+        host= 'ctrlintel.net',
+        user= 'ctrlinte_admin',
+        password= 'CS3250!!',
+        database= 'ctrlinte_ci_db',
+        port= '3306'
     )
-
     cur = mydb.cursor()
-    query = "SELECT Sale_Price, Product_ID FROM inventory WHERE Sale_Price >"+ price +" ORDER BY RAND() LIMIT 10;"
+    query = "SELECT sale_price, product_id FROM product WHERE sale_price >"+ price +" ORDER BY RAND() LIMIT 10;"
     
     cur.execute(query)
     deluxe = cur.fetchall()
@@ -88,15 +87,15 @@ def filter_above(price):
 def filter_between(price_above,price_below):
 
     mydb = mc.connect(
-        host= os.getenv('DATABASE_SERVER'),
-        user= os.getenv('DATABASE_USERNAME'),
-        password=os.getenv('DATABASE_PASSWORD'),
-        database=os.getenv('DATABASE_NAME'),
-        port= os.getenv('DATABASE_PORT')
+        host= 'ctrlintel.net',
+        user= 'ctrlinte_admin',
+        password= 'CS3250!!',
+        database= 'ctrlinte_ci_db',
+        port= '3306'
     )
 
     cur = mydb.cursor()
-    query = "SELECT Sale_Price, Product_ID FROM inventory WHERE Sale_Price >"+ price_above +" AND Sale_Price <"+ price_below + " ORDER BY RAND() LIMIT 10;"
+    query = "SELECT sale_price, product_id FROM product WHERE sale_price >"+ price_above +" AND sale_price <"+ price_below + " ORDER BY RAND() LIMIT 10;"
     
     cur.execute(query)
     moderate = cur.fetchall()

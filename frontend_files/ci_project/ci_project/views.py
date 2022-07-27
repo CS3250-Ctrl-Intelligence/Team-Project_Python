@@ -21,7 +21,7 @@ def contactUs(request):
             'message': message
         }
         message = '''\nNew message: {}\nFrom: {} {}'''.format(data['message'], data['name'], data['email'])
-        send_mail(data['subject'], message, '', ['controlintel19@gmail.com '])
+        send_mail(data['subject'], message, '', ['controlintel18@gmail.com '])
     return render(request,'contact.html')
 
 

@@ -81,7 +81,7 @@ def payments(request):
     # filter highest quantity in ordered history
     highest_quantity= OrderItem.objects.filter(user=request.user).order_by('-quantity')[:1].get()
     print(highest_quantity)
-    products_based_on_supplier = Product.objects.filter(supplier_id=highest_quantity.product.supplier_id).exclude(slug=highest_quantity.product.slug)[:6]
+    products_based_on_supplier = Product.objects.filter(supplier_id=highest_quantity.product.supplier_id).exclude(slug=highest_quantity.product.slug)[:8]
   
 
     
