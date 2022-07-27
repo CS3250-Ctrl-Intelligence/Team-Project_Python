@@ -44,8 +44,10 @@ def session_expired():
     now = extract_time(time)
     cart = Cart.objects.all()
     for id in cart:
+        print(id.date_added)
         session_time=extract_time(id.date_added)
-        print(session_time)
+        # print(now)
+        # print(now-session_time)
         if(now-session_time >=1):
             print("True")
             cart_item = CartItem.objects.filter(cart=id)

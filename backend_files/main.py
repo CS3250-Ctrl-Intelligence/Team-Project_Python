@@ -212,7 +212,7 @@ class InvScreen(Buttons):
 
 
     def searchData(self):
-      '''Adds search function to search through inventory data'''
+        '''Adds search function to search through inventory data'''
         product = [self.lineEdit.text()]
         result = dbscript.Database_Functions.searchInventory(product)
 
@@ -246,7 +246,7 @@ class InvScreen(Buttons):
         add.exec()
 
     def goToUpdate(self):
-      '''Function to open the update product screen'''
+        '''Function to open the update product screen'''
         update = UpdateScreen()
 
         update.setFixedHeight(350)
