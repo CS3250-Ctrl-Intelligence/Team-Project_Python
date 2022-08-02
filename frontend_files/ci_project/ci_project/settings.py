@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'fontawesomefree',
     'crispy_forms',
     'django_extensions',
+    'admin_honeypot',
 ]
 
 MIDDLEWARE = [
@@ -98,10 +99,10 @@ WSGI_APPLICATION = 'ci_project.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'ctrlinte_ci_db',
-        'USER': 'ctrlinte_admin',
-        'PASSWORD': 'CS3250!!',
-        'HOST': 'ctrlintel.net',
+        'NAME': 'my_database',
+        'USER': 'root',
+        'PASSWORD': '1244006Alexis',
+        'HOST': 'localhost',
         'PORT': '3306',
     }
 }
@@ -148,8 +149,8 @@ STATICFILES_DIRS =[STATIC_DIR,]
 
 
 # media files config
-MEDIA_URL = "/images/"
-MEDIA_ROOT = os.path.join(BASE_DIR,'static/images')
+MEDIA_URL = "/media/"
+MEDIA_ROOT = os.path.join(BASE_DIR,'/media')
 
 
 # Add this to settings.py

@@ -1,16 +1,6 @@
 /* Background */
 
-.background-pict {
-    background-image: linear-gradient(to top left, rgba(241,248,250,1),rgba(241,248,250,0.1)),url('headphones.png');
-    background-repeat: no-repeat;
-    background-position: center;
-    /*filter:blur(4px);
-    -webkit-filter: blur(4px);*/
-    background-attachment: fixed;
-    
-    height: 850px;
 
-}
 .card {
     text-align:center;
     margin-right: 40%;
@@ -27,4 +17,37 @@
     box-shadow: 1px 8px 20px grey;
     -webkit-transition:  box-shadow .6s ease-in;
 }
-   
+.blur {
+    height: 850px;
+    position:relative;
+    text-align:center;
+    padding-top: 17%;
+  }
+  
+.blur:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: linear-gradient(to top left, rgba(241,248,250,1),rgba(241, 248, 250, 0.1)),url('headphones.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    background-size: contain;
+    filter: blur(2px);
+    z-index:0;
+    opacity: .35;
+}
+.blur span {
+    position:relative;
+    z-index:1;
+}
+
+.title-font {
+    font-family: Optima;
+    font-weight: bold;
+    font-size:5rem;
+    text-size-adjust: auto;
+} 

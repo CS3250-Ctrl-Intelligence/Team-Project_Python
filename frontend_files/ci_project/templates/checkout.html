@@ -7,40 +7,40 @@
 <h2 class="heading">Checkout</h1>
 
 
-<div class="row ms-3">
-    <div class="box-element col-lg-4" style="padding: 0px 30px 30px 30px;">
-        <div class="box-element card mt-4">
-            <div class="cart-body" style="padding: 20px 20px 20px 20px;">
+<div class="row ms-3 main-card_">
+    <div class="col-lg-4 customer-info-card_">
+        <div class="box-element card">
+            <div class="card-body address-card_">
                 <h4 class="card-title mb-4">Shipping Address</h4>
                 <form action="{% url 'place_order' %}" method="POST">
                     {% csrf_token %}
                     <div class="row">
-                        <div class="col-lg-6">
+                        <div class="col-lg-6 col-md-6">
                             <label for="">First Name</label>
                             <input type="text" name="first_name" class="form-control" required>
                         </div>
-                        <div class="col-lg-6">
+                        <div class="col-lg-6 col-md-6">
                             <label for="">Last Name</label>
                             <input type="text" name="last_name" class="form-control" required>
                         </div>
-                        <div class="col-lg-12">
+                        <div class="col-lg-12 col-md-6">
                             <label for="">Email Address</label>
                             <input type="email" name="email" class="form-control" required>
                         </div>
-                        <div class="col-lg-12">
+                        <div class="col-lg-12 col-md-6">
                             <label for="">Address</label>
                             <input type="text" name="address" class="form-control" required>
                         </div>
-                        <div class="col-lg-4">
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-4">
                             <label for="">City</label>
                             <input type="text" name="city" class="form-control" required>
                         </div>
-                        <div class="col-lg-4">
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-4">
                             <label for="">State</label>
                             <input type="text" name="state" class="form-control" required>
                         </div>
                         
-                        <div class="col-lg-4">
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-4">
                             <label for="">Zip</label>
                             <input type="text" name="zipcode" class="form-control" required>
                         </div>
@@ -51,70 +51,80 @@
         </div>
         <br>
         <!-- Price Info-->
-        <div class="box-element">
+        <div class="box-element prices-card_" >
             <div class="row">
                 <div class="col-lg-6">
                     <h5>Subtotal: </h5>
                 </div>
                 <div class="col-lg-6">
-                    <p style="text-align: right;">$ {{total}}</p>
+                    <p class="text-right_">$ {{total}}</p>
                 </div>
                 <div class="col-lg-6">
                     <h5>Tax: </h5>
                 </div>
                 <div class="col-lg-6">
-                    <p style="text-align: right;">$ {{tax}}</p>
+                    <p class="text-right_">$ {{tax}}</p>
                 </div>
                 <div>
-                    <hr style="padding:0 17px 0 17px;">
+                    <hr class="line">
                 </div>
 
                 <div class="col-lg-6">
                     <h5>Total: </h5>
                 </div>
                 <div class="col-lg-6">
-                    <p style="text-align: right;">$ {{grand_total}}</p>
+                    <p class="text-right_">$ {{grand_total}}</p>
                 </div>
             </div>
-        <button type="submit" name="submit" class="btn btn-primary">Place Order</button>
+            <button type="submit" name="submit" class="btn btn-primary">Place Order</button>
         </div>
     </div>
     <!--Order Summary-->
-    <div class="col-lg-8" style="padding-right:30px;">
+    <div class="col-lg-8 order-summary-card_">
         <div class="box-element">
-            <h2>OrderSummary</h2>
+            <h2 class="text-center_">OrderSummary</h2>
 
             <hr>
             
             {% for item_in_cart in cart_items %}
-            <div class="card mb-3 mt-3 ms-3 me-3">
+            <div class="card mb-3 mt-3 ms-3 me-3 summary-border_">
+               
+
                 <div class="row no-gutters">
-                    <div class="col-md-6 col-lg-3 ">
+
+                    <!-- Item image -->
+                    <div class="col-lg-3  col-md-6">
                         <div>
-                            <img class="picture-float" src="{% static 'css/headphones.png' %}" alt="product-pict" style="width:300px; padding-bottom: 20px;">
+                            <img class="picture-float item-pic_" src="{% static 'css/headphones.png' %}" alt="product-pict">
                         </div>
                         <div>
-                            <h4 style=" padding-left: 10px;">Return by mail only</h4>
+                            <h4 class="text-center_">Return by mail only</h4>
                         </div>
                     </div>
-                    <div class="col-md-6 col-lg-3 ">
-                        <div style="padding-top: 20px; padding-bottom: 20px;">
+
+                    <!-- Item Title & Descriptions -->
+                    <div class="col-lg-3 col-md-6">
+                        <div>
                             <h3 class="card-title">{{item_in_cart.product.product_id}}</h3>
                         </div>
                         <div>
                             <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>     
-                        </div>    
-                    </div>
-                    <div class="col-lg-6">
-                        <div>
-                            <p style="text-align: right; padding-right: 15px; padding-top: 10px; font-size: 1.89rem;"></p>
                         </div>
-                        <div>
-                            <h3 style ="text-align: right; margin-top: 310px; padding-right: 15px;">Quantity: {{item_in_cart.quantity}} 
-                                <span style="padding-left:125px;">Price: $ {{item_in_cart.product.sale_price}}</span>
-                            </h3>
+                            <div>
+                                <h3> $ {{item_in_cart.product.sale_price}}</h3>
+                            </div>
+                    </div>
+ 
+                    <!-- Item Price -->
+
+                    <!-- Item Quantity -->
+                    <div class="col-lg-6 "  >
+                        <div class="qty-card_">                                                   
+                            <h3 class="text-right_ width-auto_">Qty: {{item_in_cart.quantity}}</h3>
                         </div>
                     </div>
+                    
+                    
                 </div>
             </div>
             {% endfor %}

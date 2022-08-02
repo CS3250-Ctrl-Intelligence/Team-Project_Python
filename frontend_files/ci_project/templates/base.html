@@ -22,73 +22,82 @@
   <script src="https://www.paypal.com/sdk/js?client-id=AcrsDZD_-zYS2KqqUK4BpfbHpufj7KkJjMtBYY5rK2R-NosuVjIiy_DkhjyXoL652Co8xMsAxUO8ViKY&currency=USD&disable-funding=card,paylater,venmo"></script>
   <!-- AcrsDZD_-zYS2KqqUK4BpfbHpufj7KkJjMtBYY5rK2R-NosuVjIiy_DkhjyXoL652Co8xMsAxUO8ViKY -->
 
+  <link rel="shortcut icon" type ="image/x-icon" href="{% static 'favicon.ico' %}">
 
   <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&display=swap" rel="stylesheet">
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&display=swap" rel="stylesheet"> 
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+
 
   <!-- Website Title -->
   <title>Ctrl Intelligence</title>
 </head>
 
-<body class="" style="overflow-x:hidden;">
-    <nav class="bg-black text-white navbar navbar-expand-lg  nav-pad navbar-dark " >
-      <div class="container-fluid">
-        <a class="navbar-brand" href="{% url 'home' %}" >Ctrl Intelligence</a>
+<body style="overflow-x:hidden;">
+
+    <nav class="navbar navbar-expand-lg nav-pad navbar-dark bg-black text-white " >
+      
+      
+      <div class="container-fluid">  
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
         aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarText">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-content nav-link active" aria-current="page" href="{% url 'home' %}">Home</a>
+        </button>
+      <div class="collapse navbar-collapse" id="navbarText" >
+        <ul class="navbar-nav mx-auto mb-2 mb-lg-0" >
+          <li class="nav-item nav-link-marg">
+            <a class="nav-content nav-link active" aria-current="page" href="{% url 'home' %}">HOME</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-content nav-link active"  href="{% url 'shop'%}">Shop</a>
+          <li class="nav-item nav-link-marg">                                                     
+            <a class="nav-content nav-link active"  href="{% url 'shop'%}">SHOP</a>
           </li>
-          <li class="nav-item dropdown">
-            <a class="nav-content nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
-            data-bs-toggle="dropdown" aria-expanded="false">
-            Category
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-            <li><a class="dropdown-item" href="{% url 'shop'%}">All Products</a></li>
-            {% for category in links%}
-            <li><a class="dropdown-item" href="{{category.get_url}}">{{category.name}}</a></li>
-            {% endfor %}
-          </ul>
-        </li>
-      </ul>
-      <span class="navbar-text span-margin">
-        {% if user.id is None %}
-        <div class=" widget-header">
-          <h5 style="font-size: 15px; " class="nav-content title text-muted">Welcome guest!</h5>
-          <div>
-            <a class="nav-content" href="{% url 'login' %}">Login</a> <span class="nav-content"> | </span>
-            <a class="nav-content" href="{% url 'register' %}">Register</a>
-            <a type="button" role="button" href="{% url 'cart' %}" class="nav-content btn btn-outline-light"> {{cart_count}}<i class="fa-solid fa-cart-shopping"></i></a>
-          </div>
-        </div>
-        {% else %}
-        <div class="nav-content widget-header">
-          <h5 style="font-size: 15px;" class="nav-content title text-muted">Welcome {{user.first_name}}</h5>
-          <div>
-            <a class="nav-content" href="{% url 'dashboard' %}">Dashboard</a> <span > | </span>
-            <a class="nav-content" href="{% url 'logout' %}">Logout</a>
+          <a class="d-none d-lg-block" href="{% url 'home' %}" ><img src="{% static 'images/ctrl_intel2.png' %}" class="ctrl-logo_"></a>
+          
+          <li class="nav-item nav-link-marg">                                                     
+            <a class="nav-content nav-link active"  href="{% url 'about'%}">TEAM</a>
+           
+          </li>
+          <li class="nav-item nav-link-marg">                                                     
             
-            <a type="button" role="button" href="{% url 'cart' %}" class="btn btn-outline-light"> {{cart_count}}<i class="fa-solid fa-cart-shopping"></i></a>
-          </div>
+            <a class="nav-content nav-link active"  href="{% url 'contact'%}">CONTACT</a>
+          </li>
           
-        </div>
-        {% endif %}
-        <div class="widget-header">
-          
-        </div>
-      </span>
+
+        </ul>
+      
     </div>
+    <span class="navbar-text span-margin">
+      {% if user.id is None %}
+      <div class=" widget-header">
+        <h5 class="nav-content title text-muted nav-welcome_">Welcome guest!</h5>
+        <div>
+          <a class="nav-content" href="{% url 'login' %}">Login</a> <span class="nav-content"> | </span>
+          <a class="nav-content" href="{% url 'register' %}">Register</a>
+          <a type="button" role="button" href="{% url 'cart' %}" class="nav-content btn btn-outline-light"> {{cart_count}}<i class="fa-solid fa-cart-shopping"></i></a>
+        </div>
+      </div>
+      {% else %}
+      <div class="nav-content widget-header">
+        <h5 style="font-size: 15px;" class="nav-content title text-muted">Welcome {{user.first_name}}</h5>
+        <div>
+          <a class="nav-content" href="{% url 'dashboard' %}">Dashboard</a> <span > | </span>
+          <a class="nav-content" href="{% url 'logout' %}">Logout</a>
+          
+          <a type="button" role="button" href="{% url 'cart' %}" class="btn btn-outline-light"> {{cart_count}}<i class="fa-solid fa-cart-shopping"></i></a>
+        </div>
+        
+      </div>
+      {% endif %}
+      <div class="widget-header">
+        
+      </div>
+    </span>
   </div>
 </nav>
 
@@ -128,7 +137,7 @@
             </div>
         </div>
         <div class="chatbox__button">
-            <button><img src="{% static 'images/chat.png'%}" width="30px"></button>
+            <button><img src="{% static 'images/chat.png'%}" class="chatbot-icon_"></button>
         </div>
     </div>
 </div>
@@ -140,60 +149,24 @@
     <script type="text/javascript" src="{% static 'js/app.js' %}"></script>
 
 </body>
-</html>
+
 
   <!-- Footer -->
-  <footer class="mt-auto bg-black text-white text-center ">
-    <!-- Grid container -->
-    <div class="container p-4">
-      <!--Grid row-->
-      <div class="row">
-        <!--Grid column-->
-        <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
-          <h5 class="text-uppercase">Footer Content</h5>
-
-          <p>
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iste atque ea quis
-            molestias. Fugiat pariatur maxime quis culpa corporis vitae repudiandae
-            aliquam voluptatem veniam, est atque cumque eum delectus sint!
-          </p>
-          <div class="github-button">
-            <a href="https://github.com/CS3250-Ctrl-Intelligence/Team-Project_Python"><i
-                class="github fa-brands fa-github"></i></a>
-          </div>
-
-        </div>
-        <!--Grid column-->
-
-        <!--Grid column-->
-        <div class="col-lg-3 col-md-6 mb-4 mb-md-0" >
-          <h5 class="text-uppercase mb-0">Links</h5>
-
-          <ul class="list-unstyled">
-            <li>
-              <a class="link-color link-underline" href="{% url 'home' %}" class="text-white">Home</a>
-            </li>
-            <li>
-              <a class="link-color link-underline" href="{% url 'about' %}" class="text-white">About us</a>
-            </li>
-            <li>
-              <a class="link-color link-underline" href="{% url 'contact' %}" class="text-white">Contact Us</a>
-            </li>
-          </ul>
-        </div>
-        <!--Grid column-->
-      </div>
-      <!--Grid row-->
+  <body>
+    <div class="footer-basic">
+        <footer>
+            <div class="social fa-github:hover"><a href="https://github.com/CS3250-Ctrl-Intelligence/Team-Project_Python"><i class="icon ion-social-github"></i></a>
+            <ul class="list-inline">
+                <li class="list-inline-item"><a href="{% url 'home' %}">Home</a></li>
+                <li class="list-inline-item"><a href="{% url 'contact' %}">Contact</a></li>
+                <li class="list-inline-item"><a href="{% url 'about' %}">About</a></li>
+            </ul>
+            <p class="copyright">CTRL Intelligence © 2022</p>
+        </footer>
     </div>
-    <!-- Grid container -->
-
-    <!-- Copyright -->
-    <div class="text-center" >
-      © 2020 Ctrl Intelligence
-    </div>
-
-  </footer>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
+  </body>
 
 </body>
 

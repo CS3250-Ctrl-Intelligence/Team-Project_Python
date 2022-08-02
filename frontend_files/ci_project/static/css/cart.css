@@ -3,3 +3,70 @@
     text-align: center;
     font-size: 4rem;
 }
+
+.testing {
+    width: 318px;
+    height: 355px;
+    min-width: 318px;
+    max-width: 355px;
+    margin-top: 20px;
+}
+.child {
+    display: inline-block;
+}
+
+.item-card_ {
+    border: 1px; 
+    border-style: solid;
+}
+
+.item-description_ {
+    text-align: right;
+    font-size: 1.89rem;
+    width: 100%;
+    height: auto;
+    padding-right: 10px;
+}
+
+.item-remove_ {
+    text-decoration: none; 
+    color: black;
+}
+
+.item-pic_ {
+    width:100%; 
+    height: auto;
+}
+
+.disclosure_ {
+    text-align: center;
+}
+
+.qty-card_ {
+    text-align: center;
+    position: relative;
+    top:40%;  
+    min-height: 50px;
+}
+
+.qty-text_ {
+    text-align: left; 
+    width: auto;
+}
+
+.symbols-color_ {
+    text-decoration: none; 
+    color: black;
+}
+
+.total-price-text_ {
+    text-align: right;
+}
+
+.line {
+    padding:0 17px 0 17px;
+}
+
+.checkout-btn {
+    text-align: center;
+}

@@ -10,16 +10,20 @@ body {
 }
 
 h1 {
-   text-align: center;
-   margin-top: 150px;
-   color: black;
+   text-align: center;  
+   color: white;
 }
 
 form {
-   max-width: 600px;
+   max-width: 400px;
    text-align: center;
-   margin: 20px auto;
+   margin: 0 auto;
   }
+
+.submit_ {
+  width: auto;
+  margin-top: 10px;
+}
 
 .submit-btn {
     background-color: black;
@@ -37,8 +41,8 @@ form {
 
 input, textarea {
     border:0; outline:0;
-    padding: 1em;
-    display: block;
+    
+    
     width: 100%;
     margin-top: 1em;
     font-family: 'Merriweather', sans-serif;
@@ -47,4 +51,32 @@ input, textarea {
   
 textarea {
     height: 126px;
+}
+
+.blur {
+  height: 1000px;
+  position:relative;
+  text-align:center;
+  padding-top: 5%;
+}
+
+.blur:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url(girl-contact.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+ 
+  z-index:-1;
+  
+}
+.blur span {
+  position:relative;
+  z-index:1;
 }

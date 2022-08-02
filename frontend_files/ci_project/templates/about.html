@@ -3,157 +3,153 @@
 {% block content %}
 
 <link rel="stylesheet" href="{% static 'css/about.css' %}">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;800&display=swap" rel="stylesheet">
 <main class="background">
+    <img src="{% static 'images/team B&W3.jpg' %}" class="main-team-pic_" alt="..." />
 
-    <h2 class="heading">Our Story</h2>
+    <h1 class="heading-format">Our Story</h1>
 
+    <div class="story-content" >
+        This is the live site for a software development course team project. 
+        It is built primarily with Django and MySQL database.
+        Other aspects of the project included working on a 5-person team with Github 
+        as our project repository, as well as utilizing Agile methodologies with 2-week sprints followed by product demonstrations.
+        In this course, students are divided into teams with similar interests, each team has one scrum master/product manager and the remaining members of the team function as engineers/developers
+        During the sprints, roles are rotated and new tasks are assigned. 
+    </div>
+    
 
-    <!-- Quotes -->
-    <div class="quote row">
-    
-        <div class="quote-left quote-style col-lg-6">
-            <h3>“Your most unhappy customers are your most important source of learning”</h3>
-            <h3>-Radzimierz Michanilina</h3>
-        </div>
-        <div class="quote-right quote-style col-lg-6">
-            <h3>“When you say it, it’s marketing. When your customer says it, it’s social proof”</h3>
-            <h3>-Hekabe Arthur</h3>
-        </div>
-    </div>
-    
-    
-    
-    <!--Welcome-->
-    <div class="welcome">
-        <h2 class="heading"> Our Purpose</h2>
-        <h3>Welcome to Ctrl Intelligence. Our passion for delighting customers drives us
-            to constantly invent on their behalf. Working backward from customer needs,
-            we're constantly seeking to improve our services, add benefits and features, and invent new products.
-        </h3>
-    </div>
-    <!-- Team Picture -->
-    <div class="square">
-        <div class="rotate-image"></div>
-    </div>
-    
-    <br class="br-pad">
-    <!--About us-->
-    <div class="value">
-        <h1>Our Value</h1>
-        <h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
-            laborum.</h3>
-    </div>
-    
-    <br class="br-pad">
     
     <!-- Leadership -->
-    <div class="heading-center container">
-        <h1>Leadership</h1>
-    </div>
+
+        <h1 class="heading-format">Leadership</h1>
+ 
+  
     
-    <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
-        <!-- Inner -->
-        <div class="carousel-inner">
-            <div class="carousel-item active" data-bs-interval="10000">
-                <!-- Single item -->
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-lg-4">
-                                <div class="card">
-                                    <img src="{% static 'images/brian.jpg' %}" class="developer card-img-top" alt="..." />
-                                    <div class="card-body">
-                                        <h5 class="contrast-on-white card-title">Brian Vasquez</h5>
-                                        <p class="contrast-on-white card-text">
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                                        </p>
-                                        <a href="https://www.linkedin.com/in/brian-vasquez-1413a6236" ><i class="fa-brands fa-linkedin"></i></a>
-                                        <a href="https://github.com/Brlan7"><i class="fa-brands fa-github"></i></a>
-                                    </div>
-                                </div>
-                            </div>
+   
+    <div class="container">   
     
-                            <div class="col-lg-4 d-none d-lg-block">
-                                <div class="card">
-                                    <img src="{% static 'images/cameron.jpg' %}" class="card-img-top"
-                                        alt="..." />
-                                    <div class="card-body">
-                                        <h5 class="contrast-on-white card-title">Cameron Spear</h5>
-                                        <p class="contrast-on-white card-text">
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                                        </p>
-                                        <a href="https://github.com/CameronSpear"><i class="fa-brands fa-github"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-    
-                            <div class="col-lg-4 d-none d-lg-block">
-                                <div class="card">
-                                    <img src="{% static 'images/matthew.jpg' %}" class="card-img-top"
-                                        alt="..." />
-                                    <div class="card-body">
-                                        <h5 class="contrast-on-white card-title">Matthew White</h5>
-                                        <p class="contrast-on-white card-text">
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                                        </p>
-                                        <a href="https://www.linkedin.com/in/matthew-white-a40a901a1/" ><i class="fa-brands fa-linkedin"></i></a>
-                                        <a href="https://github.com/Matthewjww"><i class="fa-brands fa-github"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div> <!-- Carosel item active-->
-    
-                <!-- Single item -->
-                <div class="carousel-item" style="position :relative; left:10%;">
-                    <div class="container" style="width:auto;">
-                        <div class="row">
-                            <div class="col-lg-4 col-md-12">
-                                <div class="card">
-                                    <img src="{% static 'images/seth.jpg' %}" class="card-img-top"
-                                        alt="..." />
-                                    <div class="card-body">
-                                        <h5 class="contrast-on-white card-title">Seth Hamilton</h5>
-                                        <p class="contrast-on-white card-text">
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                                        </p>
-                                        <a href="https://www.linkedin.com/in/seth-hamilton-bb6a28149/" ><i class="fa-brands fa-linkedin"></i></a>
-                                        <a href="https://github.com/SHamil36"><i class="fa-brands fa-github"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-    
-                            <div class="col-lg-4 d-none d-lg-block">
-                                <div class="card">
-                                    <img src="{% static 'images/tho.jpg' %}" class="developer card-img-top"
-                                        alt="..." />
-                                    <div class="card-body">
-                                        <h5 class="contrast-on-white card-title">Tho Le</h5>
-                                        <p class="contrast-on-white card-text">
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                                        </p>
-                                        <a href="https://www.linkedin.com/in/tle69/" ><i class="fa-brands fa-linkedin"></i></a>
-                                        <a href="https://github.com/FindingDorri"><i class="fa-brands fa-github"></i></a>
-                                    </div>
-                                </div>
-                            </div>     
-                        </div>
+    <div class="row">
+        <div class="col-auto margin-bot-pics">
+            <div class="card card-pic-dimensions">
+                <img src="{% static 'images/brian B&W.jpg' %}" class="card-img-top team-pic-dimensions_"  alt="..." />
+                <div class="card-body">
+                    <h5>Brian Vasquez</h5>
+                    <p>
+                        Full Stack Developer
+                    </p>
+                    <a href="https://www.linkedin.com/in/brian-vasquez-1413a6236" ><i class="fa-brands fa-linkedin icon-color"></i></a>
+                    <a href="https://github.com/Brlan7"><i class="fa-brands fa-github icon-color"></i></a>
+                </div>
+            </div>
+        </div>
+            <div class="col-auto margin-bot-pics">
+                <div class="card card-pic-dimensions">
+                    <img src="{% static 'images/lee B&W.png' %}" class="card-img-top team-pic-dimensions_"  
+                        alt="..." />
+                    <div class="card-body">
+                        <h5 class="member-title">Tho Le</h5>
+                        <p>
+                            Full Stack Developer
+                        </p>
+                        <a href="https://www.linkedin.com/in/tle69/" ><i class="fa-brands fa-linkedin icon-color"></i></a>
+                        <a href="https://github.com/FindingDorri"><i class="fa-brands fa-github icon-color"></i></a>
                     </div>
                 </div>
-        </div> <!-- Inner -->
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-    </button>
+            </div>
+            <div class="col-auto margin-bot-pics">
+                <div class="card card-pic-dimensions">
+                    <img src="{% static 'images/seth B&W.jpg' %}" class="card-img-top team-pic-dimensions_"
+                        alt="..." />
+                    <div class="card-body">
+                        <h5 class="">Seth Hamilton</h5>
+                        <p class="">
+                            Backend Developer
+                        </p>
+                        <a href="https://www.linkedin.com/in/seth-hamilton-bb6a28149/" ><i class="fa-brands fa-linkedin icon-color"></i></a>
+                        <a href="https://github.com/SHamil36"><i class="fa-brands fa-github icon-color"></i></a>
+                    </div>
+                </div>
+            </div>
+        
+        <div class="col-auto margin-bot-pics">
+            <div class="card card-pic-dimensions">
+                <img src="{% static 'images/matthew B&W.jpg' %}" class="card-img-top team-pic-dimensions_"
+                    alt="..." />
+                <div class="card-body">
+                    <h5 class="contrast-on-white card-title">Matthew White</h5>
+                    <p class="contrast-on-white card-text">
+                        Backend Developer
+                    </p>
+                    <a href="https://www.linkedin.com/in/matthew-white-a40a901a1/" ><i class="fa-brands fa-linkedin icon-color"></i></a>
+                    <a href="https://github.com/Matthewjww"><i class="fa-brands fa-github icon-color"></i></a>
+                </div>
+            </div>
+
+            
+
+        </div>
+        <div class="col-auto margin-bot-pics">
+            <div class="card card-pic-dimensions">
+                <img src="{% static 'images/cameron B&W.jpg' %}" class="card-img-top team-pic-dimensions_"
+                    alt="..." />
+                <div class="card-body">
+                    <h5 class="contrast-on-white card-title">Cameron Spear</h5>
+                    <p class="contrast-on-white card-text">
+                        Backend Developer
+                    </p>
+                    <a href="https://github.com/CameronSpear"><i class="fa-brands fa-github icon-color"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-auto margin-bot-pics">
+            <div class="card card-pic-dimensions">
+                <img src="{% static 'images/freeman B&W.png' %}" class="card-img-top team-pic-dimensions_"
+                    alt="..." />
+                <div class="card-body">
+                    <h5 class="">Freeman Bacon</h5>
+                    <p class="">
+                        Project Consultant
+                    </p>
+                    <a href="https://www.linkedin.com/in/fbacon/" ><i class="fa-brands fa-linkedin icon-color"></i></a>
+                    <a href="https://github.com/daedren30"><i class="fa-brands fa-github icon-color"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-auto margin-bot-pics">
+            <div class="card card-pic-dimensions">
+                <img src="{% static 'images/adam B&W.jpg' %}" class="card-img-top team-pic-dimensions_"
+                    alt="..." />
+                <div class="card-body">
+                    <h5 class="">Adam Wojdyla</h5>
+                    <p class="">
+                        Mentor
+                    </p>
+                    <a href="https://www.linkedin.com/in/adam-wojdyla/" ><i class="fa-brands fa-linkedin icon-color"></i></a>
+                    <a href="https://github.com/awojdyla89"><i class="fa-brands fa-github icon-color"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-auto margin-bot-pics">
+            <div class="card card-pic-dimensions">
+                <img src="{% static 'images/riley B&W.png' %}" class="card-img-top team-pic-dimensions_"
+                    alt="..." />
+                <div class="card-body">
+                    <h5 class="">Riley Strong</h5>
+                    <p class="">
+                        Mentor
+                    </p>
+                    <a href="https://www.linkedin.com/in/riley-strong-0101/" ><i class="fa-brands fa-linkedin icon-color"></i></a>
+                    <a href="https://github.com/riley-strong"><i class="fa-brands fa-github icon-color"></i></a>
+                </div>
+            </div>
+        </div>
     </div>
+</div> 
+
     <br class="br-pad">
     
     
