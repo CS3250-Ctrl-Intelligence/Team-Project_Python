@@ -3,3 +3,58 @@
     text-align: center;
     font-size: 4rem;
 }
+
+.text-center_ {
+    text-align: center;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.width-auto_ {
+    width: auto;
+}
+
+.main-card_ {
+    margin-bottom: 30px;
+}
+
+.customer-info-card_ {
+    padding: 0px 30px 30px 30px; 
+    margin-bottom: 75px;
+}
+
+.address-card_ {
+    padding: 20px 20px 20px 20px;
+}
+
+.prices-card_ {
+    width: 100%;  
+    min-height: auto;
+}
+
+.line {
+    padding:0 17px 0 17px;
+}
+
+.qty-card {
+    position: absolute; 
+    bottom: 0; 
+    right: 0; 
+    padding-right: 5px;
+}
+
+.order-summary-card_ {
+    padding-right:30px;
+}
+
+.summary-border_ {
+    border: 1px; 
+    border-style: solid;
+}
+
+.item-pic_ {
+    width:100%; 
+    height: auto;
+}

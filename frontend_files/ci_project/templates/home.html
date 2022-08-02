@@ -7,35 +7,35 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Anybody:wght@500;600&family=Bree+Serif&family=Metrophobic&display=swap" rel="stylesheet">
 
-    <div class="background-pict">
-    <h1 style="position: relative;left:100px; top:325px; font-family: 'Metrophobic', sans-serif; font-size: 7rem; font-weight: bold; color: black;">Whoa.</h1>
-        <p style="position: relative;left:100px; top:350px;">Introducing Max Air— a perfect balance of exhilarating <br> high-fidelity audio and the effortless magic of MaxAir. <br> The ultimate personal listening experience is here with <br> Active Noise Cancellation with Transparency Mode.</p>
+    <div class="blur title-font" >
+        <picture>
+            <img src="{% static 'images/CTRL_title.png' %}" style="height: auto; width: 60%;">
+        </picture>
     </div>
-    
-    <br class="br-pad">
-    <br class="br-pad">
-    <br class="br-pad"> 
-      <h2 style="text-align:center; font-size: 3rem; font-weight: bold;"> Featured Products <h2>
+        
+    <h2 style="text-align:center; font-size: 3rem; font-weight: bold;"> Featured Products </h2>
     <!--Adds featured products to homepage by adding a card layout and loading products from ci_shop.product and filtering by featured (see views.py) -->
     <br class="br-pad">
-    <div class="row" >
-        {% for product in data%}
-        <div class=" col-lg-4 col-md-6" style="padding-right:275px; padding-bottom:100px;" >
-            <div class=" bg-transparent card card-product-grid" >
-                    <a href="{{product.get_url}}" style="text-decoration: none; color:black;">
-                    <div >
-                        <img  class="product-image" src="{% static 'css/headphones.png' %}">                     
-                   </div> <!-- img-wrap.// -->
-                    
-                        <div class="fix-height">
-                         <h4>{{product.product_id}} <span class="price" style="font-size: 1rem; font-weight: 500;">  $ {{product.sale_price}}   </span></h4>
-                            
-                        </div>
-                    </a>
-                </div> <!-- card-->
-        </div> <!-- col.// -->
-        {%endfor%}
-    </div> <!-- row end.// -->
+    <div class="container">
+        <div class="row" >
+            {% for product in data%}
+            <div class="col-lg-4 col-md-6" >
+                <div class=" bg-transparent card card-product-grid" style="margin:30px;" >
+                        <a href="{{product.get_url}}" style="text-decoration: none; color:black;">
+                        <div>
+                            <img  class="product-image" src="{% static 'css/headphones.png' %}">                     
+                       </div> <!-- img-wrap.// -->
+                        
+                            <div class="fix-height">
+                             <h4>{{product.product_id}} <span class="price" style="font-size: 1rem; font-weight: 500;">  $ {{product.sale_price}}   </span></h4>
+                            </div>
+                        </a>
+                    </div> <!-- card-->
+            </div> <!-- col.// -->
+            {%endfor%}
+        </div> <!-- row end.// -->
+    </div>
+    
 
     
 {% endblock %}

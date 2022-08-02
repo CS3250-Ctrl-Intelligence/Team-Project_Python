@@ -1,0 +1,46 @@
+/* Login css */
+
+* {
+    box-sizing: border-box;
+}
+
+header {
+    text-align: center;
+    color: white;
+    font-size: 2em;
+    margin-top: 5px;
+ }
+
+form {
+    max-width: 450px;
+    text-align: center;
+    margin: 20px auto;
+   }
+.blur {
+    height: 1000px;
+
+    position:relative;
+    text-align:center;
+    padding-top:5%;
+  }
+  
+.blur:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url(boy-login.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+
+    z-index:-1;
+    
+}
+.blur span {
+    position:relative;
+    z-index:1;
+}
+

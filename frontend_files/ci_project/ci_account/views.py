@@ -4,7 +4,7 @@ from django.shortcuts import render,redirect
 from django.contrib import messages,auth
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
-
+from django.shortcuts import get_object_or_404
 # Email verification
 from django.contrib.sites.shortcuts import get_current_site
 from django.template.loader import render_to_string
@@ -14,8 +14,8 @@ from django.contrib.auth.tokens import default_token_generator
 from django.core.mail import EmailMessage,EmailMultiAlternatives
 from django.template import loader
 
-from ci_account.forms import RegistrationForm
-from ci_account.models import Account
+from ci_account.forms import RegistrationForm,UserProfileForm,UserForm
+from ci_account.models import Account,UserProfile
 from ci_cart.views import _cart_session,time_reformat,extract_time
 from ci_cart.models import Cart,CartItem
 from ci_order.models import Order,OrderItem,Payment
@@ -159,3 +159,23 @@ def order_detail(request,order_id):
         'subtotal':subtotal,
     }
     return render(request,'order_detail.html',context)
+
+@login_required(login_url='login')
+def edit_profile(request):
+    userprofile = get_object_or_404(UserProfile,user=request.user)
+    if request.method == "POST":
+        user_form = UserForm(request.POST, instance=request.user)
+        profile_form = UserProfileForm(request.POST,request.FILES,instance=userprofile)
+        if user_form.is_valid and profile_form.is_valid:
+            user_form.save()
+            profile_form.save()
+            messages.success(request,'Your profile has been updated')
+            return redirect('edit_profile')
+    else:
+        user_form =UserForm(instance=request.user)
+        profile_form = UserProfileForm(instance=userprofile)
+    context = {
+        'user_form':user_form,
+        'profile_form' :profile_form,
+    }
+    return render(request,'edit_profile.html',context)

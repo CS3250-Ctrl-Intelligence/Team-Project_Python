@@ -12,8 +12,74 @@
     <h2 class="heading">Shopping Cart</h2>
     <br>
 
-    <div class="row" style="padding-left: 60px; padding-right:60px;">
-        <div class="col-lg-3" style="padding-right:100px;">
+    <div class="row">
+        <!-- Cart Items -->
+        <div class="col-lg-9">
+            <div class="box-element" >
+                {% for item_in_cart in cart_items %}
+                <div class="card mb-3 mt-3 ms-3 me-3 item-card_">
+                    <!-- Item Delete Button -->
+                    <p class="item-description_">
+                        <a href="{% url 'cart_item_remove' item_in_cart.product.id %}" type="button"><i class="fa-solid fa-xmark item-remove_"></i> </a>
+                    </p>
+
+                    <div class="row no-gutters">
+
+                        <!-- Item image -->
+                        <div class="col-lg-3  col-md-6">
+                            <div>
+                                <img class="picture-float item-pic_" src="{% static 'css/headphones.png' %}" alt="product-pict">
+                            </div>
+                            <div>
+                                <h4 class="disclosure_">Return by mail only</h4>
+                            </div>
+                        </div>
+
+                        <!-- Item Title & Descriptions -->
+                        <div class="col-lg-3 col-md-6">
+                            <div>
+                                <h3 class="card-title">{{item_in_cart.product.product_id}}</h3>
+                            </div>
+                            <div>
+                                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>     
+                            </div>
+                                <div>
+                                    <h3 >$ {{item_in_cart.product.sale_price}}</h3>
+                                </div>
+                        </div>
+ 
+                        <!-- Item Quantity -->
+                        <div class="col-lg-6 " >
+                            <div class="qty-card_">
+                                <div class="child">
+                                    <h3 class="qty-text_">Qty</h3>
+                                </div>
+                                <div  class="child">
+                                    <a class="symbols-color_" href="{% url 'cart_remove' item_in_cart.product.id %}" type="button" id="button-plus"> 
+                                        <i class="fa-solid fa-minus"></i> 
+                                    </a>
+                                    {{item_in_cart.quantity}} 
+                                    <a class="symbols-color_" href="{% url 'cart_add' item_in_cart.product.id %}" type="button" id="button-minus">
+                                        <i class="fa-solid fa-plus"></i>                
+                                    </a>
+    
+                                </div>
+                            </div>
+                                
+                            
+                        </div>
+                        
+                        
+                    </div>
+                </div>
+                {% endfor %}
+                
+            </div>
+
+        </div>
+
+        <!-- Checkout Information -->
+        <div class="col-lg-3 testing" >
             <div class="mr-auto box-element">
                 <br>
                 <div class="row">
@@ -21,26 +87,25 @@
                         <h5>Subtotal: </h5>
                     </div>
                     <div class="col-lg-6">
-                        <p style="text-align: right;">$ {{total}}</p>
+                        <p class="total-price-text_">${{total}}</p>
                     </div>
                     <div class="col-lg-6">
                         <h5>Tax: </h5>
                     </div>
                     <div class="col-lg-6">
-                        <p style="text-align: right;">$ {{tax}}</p>
+                        <p class="total-price-text_">${{tax}}</p>
                     </div>
                     <div>
-                        <hr style="padding:0 17px 0 17px;">
+                        <hr class="line">
                     </div>
-
                     <div class="col-lg-6">
                         <h5>Total: </h5>
                     </div>
                     <div class="col-lg-6">
-                        <p style="text-align: right;">$ {{grand_total}}</p>
+                        <p class="total-price-text_">${{grand_total}}</p>
                     </div>
                 </div>
-                <div style="text-align:right;">
+                <div class="checkout-btn_">
                     <a href="{% url 'checkout' %}" class="checkout btn btn-outline-dark">Check out</a>
 
                 </div>
@@ -48,73 +113,13 @@
             </div>
             <br>
         </div>
-
-    <div class="col-lg-9">
-        <div class="box-element " >
-            {% for item_in_cart in cart_items %}
-            <div class="card mb-3 mt-3 ms-3 me-3">
-                <div class="row no-gutters">
-                    <div class="col-md-6 col-lg-3 ">
-                        <div>
-                            <img class="picture-float" src="{% static 'css/headphones.png' %}" alt="product-pict" style="width:300px; padding-bottom: 20px;">
-                        </div>
-                        <div>
-                            <h4 style=" padding-left: 10px;">Return by mail only</h4>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-3 ">
-                        <div style="padding-top: 20px; padding-bottom: 20px;">
-                            <h3 class="card-title">{{item_in_cart.product.product_id}}</h3>
-                        </div>
-                        <div>
-                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>     
-                        </div>    
-                        
-                    </div>
-                    <div class="col-lg-6">
-                        
-                        <div>
-                            <p style="text-align: right; padding-right: 15px; padding-top: 10px; font-size: 1.89rem;">
-                                <a href="{% url 'cart_item_remove' item_in_cart.product.id %}" type="button"><i class="fa-solid fa-xmark" style="text-decoration: none; color: black;"></i> </a>
-
-                            </p>
-                        </div>
-                        <div>
-
-                            <h3 style ="text-align: right; margin-top: 310px; padding-right: 15px;">Quantity: 
-                                <a href="{% url 'cart_remove' item_in_cart.product.id %}"  type="button" id="button-plus" style="text-decoration: none; color: black;"> 
-                                    <i class="fa-solid fa-minus"></i> 
-                                </a>
-                                
-                                {{item_in_cart.quantity}} 
-                                <a href="{% url 'cart_add' item_in_cart.product.id %}" type="button" id="button-minus" style="text-decoration: none; color: black;">
-                                    <i class="fa-solid fa-plus"></i>                
-                                </a>
-                                <span style="padding-left:125px;">Price: $ {{item_in_cart.product.sale_price}}</span>
-                            </h3>
-                            
-                        </div>
-    
-                                
-                                
-                        
-                        
-                        
-                    </div>
-                </div>
-            </div>
-            {% endfor %}
-            
-        </div>
-
+        
     </div>
-
-
-    </div>
+    <!-- Foot Notes -->
     <br>
     <hr>
 
-    <div style="text-align: center;">
+    <div class="disclosure_">
         <p>The price and availability of items are subject to change. The Cart is a temporary place to store a list of
             your items and reflects each item's most recent price. </p>
     </div>

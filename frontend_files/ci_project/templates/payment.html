@@ -7,7 +7,7 @@
 <script src="https://js.stripe.com/v3/"></script>
 <h2 class="heading"> Review Your Order and Make Payment</h2>
 
-<div class="row" style="padding-left: 60px; padding-right:60px;">
+<div class="row" style="padding-left: 60px; padding-right:60px; ">
     <!-- Information-->
     <div class="col-lg-9">
         <div class="card">
@@ -32,51 +32,47 @@
             </div>
         </div>
         <br>
-        <div class="card">
+        <div class="card" style="margin-bottom: 20px;">
             <h5 class="card-header">Product Review</h5>
             {% for item_in_cart in cart_items %}
-            <div class="card mb-3 mt-3 ms-3 me-3">
-                <div class="card-body">
-                    <div class="row no-gutters">
-                        <div class="col-md-6 col-lg-3 ">
-                            <div>
-                                <img class="picture-float" src="{% static 'css/headphones.png' %}" alt="product-pict"
-                                    style="width:300px; padding-bottom: 20px;">
-                            </div>
-                            <div>
-                                <h4 style=" padding-left: 10px;">Return by mail only</h4>
-                            </div>
+            <div class="card mb-3 mt-3 ms-3 me-3" style="border: 1px; border-style: solid;" >
+
+                <div class="row no-gutters">
+
+                    <!-- Item image -->
+                    <div class="col-lg-3  col-md-6">
+                        <div>
+                            <img class="picture-float" src="{% static 'css/headphones.png' %}" alt="product-pict" style="width:100%; height: auto;">
                         </div>
-                        <div class="col-md-6 col-lg-3 ">
-                            <div style="padding-top: 20px; padding-bottom: 20px;">
-                                <h3 class="card-title">{{item_in_cart.product.product_id}}</h3>
-                            </div>
-                            <div>
-                                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                                    tempor incididunt ut labore et dolore magna aliqua. </p>
-                            </div>
-    
+                        <div>
+                            <h4 style="text-align: center;">Return by mail only</h4>
                         </div>
-                        <div class="col-lg-6">
-    
-    
-                            <div>
-    
-                                <h3 style="text-align: right; margin-top: 310px; padding-right: 15px;">Quantity:
-    
-                                    {{item_in_cart.quantity}}
-    
-                                    <span style="padding-left:125px;">Price: $ {{item_in_cart.product.sale_price}}</span>
-                                </h3>
-                            </div>
-    
-                        </div>
-    
                     </div>
 
+                    <!-- Item Title & Descriptions -->
+                    <div class="col-lg-3 col-md-6">
+                        <div>
+                            <h3 class="card-title">{{item_in_cart.product.product_id}}</h3>
+                        </div>
+                        <div>
+                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>     
+                        </div>
+                            <div>
+                                <h3> $ {{item_in_cart.product.sale_price}}</h3>
+                            </div>
+                    </div>
+ 
+                    <!-- Item Price -->
 
+                    <!-- Item Quantity -->
+                    <div class="col-lg-6 "  >
+                        <div style="position: absolute; bottom: 0; right: 0; padding-right: 5px; " >                                                   
+                            <h3 style ="text-align: right; width: auto; ">Qty: {{item_in_cart.quantity}}</h3>
+                        </div>
+                    </div>
+                    
+                    
                 </div>
-                
             </div>
                 {% endfor %}
 
