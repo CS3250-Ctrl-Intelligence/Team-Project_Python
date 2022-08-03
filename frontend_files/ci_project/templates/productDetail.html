@@ -5,7 +5,7 @@
 
 <link rel="stylesheet" href="{% static 'css/productDetail.css' %}">
 
-<div class="container" >
+<div class="container">
     <div class="card mb-3" style=" border-radius: 30px; margin: 100px auto 200px auto; width: 70%;">
         <div class="row " >
           <div class="col-lg-6" style="padding-left:100px; padding-top: 25px; padding-bottom:25px;">
@@ -49,10 +49,10 @@
     <h3 style="text-align: center;">Check out these other products!</h3>
     <br class="br-pad">
     <div class="container">
-      <div class="row" >
+      <div class="row justify-content-center">
           {% for product in related %}
-          <div class= "col-lg-4 col-md-6">
-              <div class="bg-transparent carda card-product-grid" style="margin: 30px;">
+          <div class= "col-lg-4 col-auto">
+              <div class="bg-transparent card" style="margin: 15px 0;">
                       <a href="{{product.get_url}}" style="text-decoration: none; color:black;">
                       <div>
                           <img  class="product-image" src="{% static 'css/headphones.png' %}">

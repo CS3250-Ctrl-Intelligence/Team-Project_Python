@@ -12,116 +12,70 @@
 
 <!---------------------------------------------- Product View  --------------------------------------------->
 
-<div style="padding-left: 10%; font-size: 1.5em;">
+<div style=" font-size: 1.5em;">
     <header class=" mb-4 pb-3">
         <div class="item-count">
             <p> {{product_count}} Items found</p>
-            
-            <hr >
-            
+            <hr> 
         </div>
     </header><!-- sect-heading -->
-
 </div>
 
-
-<div style="padding-left: 10%;">
-            <div class="container">
-                <div class="row" >
-                    {% for product in products %}
-                    <div class=" col-lg-4 col-md-6" >
-                        <div class=" bg-transparent card card-product-grid" style="margin:30px;" >
-                                <a href="{{product.get_url}}" style="text-decoration: none; color:black;">
-                                <div>
-                                    <img  class="product-image" src="{% static 'css/headphones.png' %}" style="height: auto; width: 60%;">                     
-                               </div> 
-                                
-                                    <div class="fix-height">
-                                     <h4>{{product.product_id}} <span class="price" style="font-size: 1rem; font-weight: 500;">  $ {{product.sale_price}}   </span></h4>
-                                        {% if product.quantity <= 0 %}
-                                            <h5 class="text-danger">Out of Stock</h5>
-                                        {% else %}
-                                            <a href="{% url 'cart_add' product.id %}" class="btn btn-primary">Add to Cart</a>
-                                        {% endif %}
-                                
-                                    </div>
-                                    <br>
-                                </a>
-                            </div> 
-                    </div> 
-                    {%endfor%}
-                </div> 
-            </div>
-{% comment %}
-            <div class="container">
-
-                <div class="row">
-                    {% for product in products %}
-                    <div class="col-lg-3 col-md-4" style="margin-bottom:50px;padding-left:50px;border:none; width: auto; height: auto;">
-                    
+<div>
+    <div class="container">
+        <div class="row justify-content-center">
+            {% for product in products %}
+            <div class="col-lg-4 col-auto" style="margin: 15px 0;">
+                <div class="bg-transparent card">
                     <a href="{{product.get_url}}" style="text-decoration: none; color:black;">
-                        <div style="padding-bottom: 15px;" class=" bg-transparent card card-product-grid">
-                            <div>
-                                <img style="padding-left:10px;" class="product-image"
-                                src="{% static 'css/headphones.png' %}">
-                            </div> <!-- img-wrap.// -->
-                            
-                            <div class="fix-height" style="text-align: center;">
-                                <h4>{{product.product_id}} </h4>
-                                <span class="price" style="font-size: 1rem; font-weight: 500; padding-right:7px;"> $
-                                    {{product.sale_price}} </span>
-                                    <!-- <div style="padding-left:27%;"> -->
-                                        {% if product.quantity <= 0 %}
-                                        <h5 class="text-danger">Out of Stock</h5>
-                                        {% else %}
+                        <img  class="product-image" src="{% static 'css/headphones.png' %}">                     
+                        <div>
+                            <h4>{{product.product_id}} <span class="price" style="font-size: 1rem; font-weight: 500;">  $ {{product.sale_price}}   </span></h4>
+                            {% if product.quantity <= 0 %}
+                                <h5 class="text-danger">Out of Stock</h5>
+                            {% else %}
                                 <a href="{% url 'cart_add' product.id %}" class="btn btn-primary">Add to Cart</a>
-                                {% endif %}
-                                
-                                
-                                
-                                
-                            </div>
-                        </div> <!-- card-->
+                            {% endif %}
+                        </div>
+                        <br>
                     </a>
-                </div> <!-- col.// -->
-                {%endfor%}
-                </div> <!-- row end.// -->
-            </div>
-            {% endcomment %}
-       
-
+                </div> 
+            </div> 
+            {%endfor%}
+        </div> 
+    </div>
         <!-- Implement django paginaytor to help seperate data across several pages, with "Previous/Next" links-->
-        <nav class="mt-4" aria-label="Page navigation sample" style="padding-left: 50%; padding-right: 50%;">
-            {% if products.has_other_pages %}
-            <ul class="pagination">
-                <!-- check to see if the current page has any previous pages-->
-                {% if products.has_previous %}
-                <li class="page-item "><a class="page-link" href="?page={{products.previous_page_number}}">Previous</a>
-                </li>
-                {% else %}
-                <!-- Disable link to go to previous page-->
-                <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
-                {% endif %}
-                {% for i in products.paginator.page_range%}
-                {% if products.number == i %}
-                <!--Page currently in-->
-                <li class="page-item active"><a class="page-link" href="#">{{i}}</a></li>
-                {% else %}
-                <!-- {Pages currentlt not in}-->
-                <li class="page-item"><a class="page-link" href="?page={{i}}">{{i}}</a></li>
-                {% endif %}
-                {% endfor %}
-                <!-- check to see if the current page has any next pages-->
-                {% if products.has_next %}
-                <li class="page-item"><a class="page-link" href="?page={{products.next_page_number}}">Next</a>
-                </li>
-                {% else %}
-                <!-- Disable link to go to next page-->
-                <li class="page-item disabled"><a class="page-link" href="#">Next</a></li>
-                {% endif %}
-            </ul>
+    <nav class="mt-4" aria-label="Page navigation sample" style="padding-left: 50%; padding-right: 50%;">
+        {% if products.has_other_pages %}
+        <ul class="pagination">
+            <!-- check to see if the current page has any previous pages-->
+            {% if products.has_previous %}
+            <li class="page-item "><a class="page-link" href="?page={{products.previous_page_number}}">Previous</a>
+            </li>
+            {% else %}
+            <!-- Disable link to go to previous page-->
+            <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
             {% endif %}
-        </nav>
+            {% for i in products.paginator.page_range%}
+            {% if products.number == i %}
+            <!--Page currently in-->
+            <li class="page-item active"><a class="page-link" href="#">{{i}}</a></li>
+            {% else %}
+            <!-- {Pages currentlt not in}-->
+            <li class="page-item"><a class="page-link" href="?page={{i}}">{{i}}</a></li>
+            {% endif %}
+            {% endfor %}
+            <!-- check to see if the current page has any next pages-->
+            {% if products.has_next %}
+            <li class="page-item"><a class="page-link" href="?page={{products.next_page_number}}">Next</a>
+            </li>
+            {% else %}
+            <!-- Disable link to go to next page-->
+            <li class="page-item disabled"><a class="page-link" href="#">Next</a></li>
+            {% endif %}
+        </ul>
+        {% endif %}
+    </nav>
 
 </div> <!-- container .//  -->
 

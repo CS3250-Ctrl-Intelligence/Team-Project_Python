@@ -4,10 +4,10 @@
 
 <link rel="stylesheet" href="{% static 'css/checkout.css' %}">
 
-<h2 class="heading">Checkout</h1>
+<h2 class="heading">Checkout</h2>
+<div class="container-fluid">
 
-
-<div class="row ms-3 main-card_">
+<div class="row justify-content-center main-card_">
     <div class="col-lg-4 customer-info-card_">
         <div class="box-element card">
             <div class="card-body address-card_">
@@ -79,13 +79,13 @@
             <button type="submit" name="submit" class="btn btn-primary">Place Order</button>
         </div>
     </div>
+
     <!--Order Summary-->
-    <div class="col-lg-8 order-summary-card_">
+    <div class="col-lg-8 ">
         <div class="box-element">
             <h2 class="text-center_">OrderSummary</h2>
 
             <hr>
-            
             {% for item_in_cart in cart_items %}
             <div class="card mb-3 mt-3 ms-3 me-3 summary-border_">
                
@@ -103,7 +103,7 @@
                     </div>
 
                     <!-- Item Title & Descriptions -->
-                    <div class="col-lg-3 col-md-6">
+                    <div class="col-lg-3 col-md-6 text-center_">
                         <div>
                             <h3 class="card-title">{{item_in_cart.product.product_id}}</h3>
                         </div>
@@ -115,12 +115,10 @@
                             </div>
                     </div>
  
-                    <!-- Item Price -->
-
                     <!-- Item Quantity -->
-                    <div class="col-lg-6 "  >
-                        <div class="qty-card_">                                                   
-                            <h3 class="text-right_ width-auto_">Qty: {{item_in_cart.quantity}}</h3>
+                    <div class="col-lg-6">
+                        <div class="qty-card_ text-center_">                                                   
+                            <h3 class="text-right_">Qty: {{item_in_cart.quantity}}</h3>
                         </div>
                     </div>
                     
@@ -135,9 +133,11 @@
         </div>
         
     </div>
-</form>
+
 </div>
 
+</form>
+</div>
 
 
 {% endblock %}

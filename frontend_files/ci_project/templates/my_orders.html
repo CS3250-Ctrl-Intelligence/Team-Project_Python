@@ -2,7 +2,8 @@
 {% load static%}
 {% block content %}
 
-<link rel="stylesheet" <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">>
+<link rel="stylesheet" <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+<link rel="stylesheet" href="{% static 'css/my_orders.css' %}">
 
 
 <h2 class="heading">My Order</h2>
@@ -12,9 +13,9 @@
 
         <main class="col-lg-9 col-md-9">
             <div class="card">
-                <table class="table table-hover">
-                    <thead>
-                      <tr>
+                <table class="table table-hover" style="text-align: right;"> 
+                    <thead role="rowgroup">
+                      <tr role="row">
                         <th scope="col">Order #</th>
                         <th scope="col">Billing Name</th>
                         <th scope="col">Email</th>
@@ -26,7 +27,7 @@
                     <tbody>
                         {% for order in orders %}
                       <tr>
-                        <th scope="row"> <a href="{% url 'order_detail' order.order_number %}">{{order.order_number}} </a> </th>
+                        <td scope="cell"> <a href="{% url 'order_detail' order.order_number %}">{{order.order_number}}</a></td>
                         <td>{{order.first_name}} {{order.last_name}}</td>
                         <td>{{order.email}}</td>
                         <td>$ {{order.order_total}}</td>
@@ -39,7 +40,6 @@
                           <button type="button" class="btn btn-secondary" disabled>Non-Refundable</button>
                           {% endif %}
                         </a>
-
                         </td>
                       </tr>
                       {% endfor %}

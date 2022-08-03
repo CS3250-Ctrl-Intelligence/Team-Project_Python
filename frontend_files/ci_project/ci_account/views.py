@@ -5,6 +5,7 @@ from django.contrib import messages,auth
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
+
 # Email verification
 from django.contrib.sites.shortcuts import get_current_site
 from django.template.loader import render_to_string
@@ -13,6 +14,7 @@ from django.utils.encoding import force_bytes
 from django.contrib.auth.tokens import default_token_generator
 from django.core.mail import EmailMessage,EmailMultiAlternatives
 from django.template import loader
+
 
 from ci_account.forms import RegistrationForm,UserProfileForm,UserForm
 from ci_account.models import Account,UserProfile
@@ -36,6 +38,12 @@ def register(request):
             user = Account.objects.create_user(first_name = first_name, last_name = last_name,username = username,email=email,password= password)
             user.save()
             
+            # create user profile
+            profile = UserProfile()
+            profile.user_id = user.id
+            profile.profile_picture = 'default-pict/default_profile_icon.jpg'
+            profile.save()
+
             # implement user activation
             current_site = get_current_site(request)
             mail_subject = 'Please activate your account'
@@ -117,8 +125,10 @@ def dashboard(request):
     # Finc the total amount of order the user made
     orders = Order.objects.order_by('-created_at').filter(user_id=request.user.id, is_ordered=True)
     order_count = orders.count()
+    userprofile = UserProfile.objects.get(user_id = request.user.id)
     context={
         'order_count':order_count,
+        'userprofile':userprofile,
     }
     return render(request,'dashboard.html',context)
 
@@ -177,5 +187,6 @@ def edit_profile(request):
     context = {
         'user_form':user_form,
         'profile_form' :profile_form,
+        'userprofile':userprofile,
     }
     return render(request,'edit_profile.html',context)
