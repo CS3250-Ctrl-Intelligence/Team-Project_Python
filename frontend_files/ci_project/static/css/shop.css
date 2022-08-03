@@ -1,10 +1,7 @@
 /* --------Shop----------- */
 
 
-.product-image {
-    width: 40%;
-    height: auto;
-}
+
 
 .heading {
     padding-top: 15px;
@@ -14,10 +11,8 @@
 
 
 .card {
-    text-align:center;
-    margin: auto;
-    width: 70%;
-    min-width: 200px;
+    text-align: center;
+    width: 100%;
     height: auto;
     background: white;
     box-shadow: 0px 0px 0px grey;

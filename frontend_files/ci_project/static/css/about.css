@@ -1,19 +1,25 @@
 /* About Css */
 
 .team-pic-dimensions_ {
-height: 300px;
-width: 253px;
+    height: 285px;
+    width: 253px;
+    opacity: .8;
+}
+
+.team-pic-dimensions_:hover {
+    opacity: 1;
 }
 
 .main-team-pic_ {
     max-width: 100%;
+    opacity: 90%;
 }
 
-.icon-color {
+.icon {
     color: black;
 }
 
-.icon-color:hover {
+.icon:hover {
     color: orange;
 }
 
@@ -45,4 +51,12 @@ width: 253px;
 .card-pic-dimensions {
     width: auto;
     height: 425px;
+}
+
+.text-center_ {
+    text-align: center;
+}
+
+.role-text-size_ {
+    font-size: .87em;
 }

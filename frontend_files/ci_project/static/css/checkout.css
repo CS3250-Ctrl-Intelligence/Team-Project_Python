@@ -38,7 +38,7 @@
     padding:0 17px 0 17px;
 }
 
-.qty-card {
+.qty-card_ {
     position: absolute; 
     bottom: 0; 
     right: 0; 
@@ -46,7 +46,7 @@
 }
 
 .order-summary-card_ {
-    padding-right:30px;
+    padding: 0 15px;
 }
 
 .summary-border_ {

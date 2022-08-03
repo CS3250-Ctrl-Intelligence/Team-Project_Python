@@ -3,13 +3,15 @@
 {% block content %}
 <link rel="stylesheet" href="{% static 'css/login.css' %}">
 <section class="section-conten padding-y" style="min-height:84vh">
-      
   {% if request.GET.command == 'verification' %}
-    <div class="container" style="max-width: 380px; margin-top:100px;">
-      Thank you for joining Ctrl Intelligence beta! We'll send you an invite to your email address at [{{ request.GET.email }}] to get started soon! Have questions about our products? We'd love to help! Just hit reply :)
-      Our Best,
-      Ctrl Intelligence
+  <div class="blur2">  
+    <div class="card mx-auto text-white " style="max-width:500px; margin-top:60px; background-color:rgba(0, 0, 0, 0.5); " > 
+      <p>Thanks for joining.</p>
+      <p>To complete your registration verify your email.</p>
+      <p>Already verified? <a href="{% url 'login' %}" class="text-warning">Login</a> </p>
+
     </div>
+  </div>
   {% else %}
   <div class="blur title-font">
     <div class="card mx-auto " style="max-width:300px; margin-top:40px; background-color: rgba(0, 0, 0, 0.5); " > 
@@ -29,7 +31,7 @@
   </div>
 
     
-{% endif %} 
+  {% endif %} 
 </section>
   
 {% endblock %}
