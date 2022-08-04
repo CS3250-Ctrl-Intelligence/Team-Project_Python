@@ -7,28 +7,27 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Anybody:wght@500;600&family=Bree+Serif&family=Metrophobic&display=swap" rel="stylesheet">
 
-    <div class="blur title-font" >
-        <picture>
-            <img src="{% static 'images/CTRL_title.png' %}" style="height: auto; width: 60%;">
-        </picture>
+    <div class="background-pict_" >
+        <h1 class="title-font_">CTRL INTELLIGENCE</h1>
     </div>
-    <br>
-    <h2 style="text-align:center; font-size: 3rem; font-weight: bold;"> Featured Products </h2>
-    <!--Adds featured products to homepage by adding a card layout and loading products from ci_shop.product and filtering by featured (see views.py) -->
     
+    <br>
+    
+    <h2 class="sub-title_"> Featured Products </h2>
+    <!--Adds featured products to homepage by adding a card layout and loading products from ci_shop.product and filtering by featured (see views.py) -->
     <div class="container">
         <div class="row justify-content-center">
             {% for product in data%}
-            <div class="col-lg-4 col-auto" style="margin: 15px 0;" >
+            <div class="col-lg-4 col-auto main-card_">
                 <div class="bg-transparent card">
-                    <a href="{{product.get_url}}" style="text-decoration: none; color:black;">
-                        <img class="product-image" src="{% static 'css/headphones.png' %}">                     
-                        <h4>{{product.product_id}} <span class="price" style="font-size: 1rem; font-weight: 500;">  $ {{product.sale_price}}    </span></h4>
+                    <a class="text-decoration-none text-dark" href="{{product.get_url}}">
+                        <img class="product-image" src="{% static 'images/headphones.png' %}">                     
+                        <h4>{{product.product_id}} <span class="price_">  $ {{product.sale_price}}    </span></h4>
                     </a>
-                </div> <!-- card-->
-            </div> <!-- col.// -->
+                </div> 
+            </div> 
             {%endfor%}
-        </div> <!-- row end.// -->
+        </div> 
     </div>
     
     <br>/

@@ -15,10 +15,13 @@ h1 {
 }
 
 form {
-   max-width: 400px;
-   text-align: center;
-   margin: 0 auto;
-  }
+  width: 80%;
+  height: auto;  
+  max-width: 400px;
+  min-width: 325px;
+  text-align: center;
+  margin: 0 auto;
+}
 
 .submit_ {
   width: auto;
@@ -53,21 +56,21 @@ textarea {
     height: 126px;
 }
 
-.blur {
+.background-pict_ {
   height: 1000px;
   position:relative;
   text-align:center;
   padding-top: 5%;
 }
 
-.blur:before {
+.background-pict_:before {
   content: "";
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background-image: url(girl-contact.jpg);
+  background-image: url(/static/images/girl-contact.jpg);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -76,7 +79,13 @@ textarea {
   z-index:-1;
   
 }
-.blur span {
+.background-pict_ span {
   position:relative;
   z-index:1;
+}
+
+@media(max-width:400px){
+  .background-pict_{
+      height: 750px;
+  }
 }

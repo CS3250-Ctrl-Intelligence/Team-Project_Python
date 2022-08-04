@@ -11,3 +11,30 @@ td,th {
     border:1px solid #000;
     padding:8px;
 }
+
+.card_ {
+    width: 70%; 
+    margin: auto;
+}
+
+.text_ {
+    text-align: right; 
+    line-height: 1;
+}
+
+.text-right_ {
+    text-align: right;
+}
+
+.card-contents_ {
+    text-align: right; 
+    line-height: 1;
+}
+
+.bold_ {
+    font-weight: bold;
+}
+
+.text-right_ {
+    text-align: right;
+}

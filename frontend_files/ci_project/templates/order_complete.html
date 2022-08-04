@@ -8,8 +8,8 @@
 
 <h2 class="heading"> Payment Successful</h2>
 
-<div class="box-element"style="width:60%; margin:auto;">
-    <div style="text-align:right; line-height: 1;">
+<div class="box-element card_">
+    <div class="text_">
         <h5>Invoiced To</h5>
         <p>{{order.first_name}} {{order.last_name}}</p>
         <p>{{order.address}}</p>
@@ -45,7 +45,7 @@
 
     </table>
     
-    <div style="text-align:right">
+    <div class="text-right_">
         <h5>Subtotal: $ {{subtotal}}</h5>
         <h5>Tax: ${{order.tax}}</h5>
         <h5>Total: ${{order.order_total}}</h5>

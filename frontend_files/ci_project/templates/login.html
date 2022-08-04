@@ -2,29 +2,34 @@
 {% load static %}
 {% block content %}
 <link rel="stylesheet" href="{% static 'css/login.css' %}">
-<section class="section-conten padding-y" style="min-height:84vh">
+
+<!-- Register page -->
+
+<section class="section-conten padding-y">
   {% if request.GET.command == 'verification' %}
   <div class="blur2">  
-    <div class="card mx-auto text-white " style="max-width:500px; margin-top:60px; background-color:rgba(0, 0, 0, 0.5); " > 
+    <div class="card mx-auto text-white register-card_" > 
       <p>Thanks for joining.</p>
       <p>To complete your registration verify your email.</p>
       <p>Already verified? <a href="{% url 'login' %}" class="text-warning">Login</a> </p>
-
     </div>
   </div>
+
+<!-- Login page -->
+
   {% else %}
-  <div class="blur title-font">
-    <div class="card mx-auto " style="max-width:300px; margin-top:40px; background-color: rgba(0, 0, 0, 0.5); " > 
+  <div class="login-background_ title-font">
+    <div class="card mx-auto login-card_"> 
       <br>
-      <header class="mb-4" style="text-align: center;"><h4>Login</h4></header>
+      <header class="mb-4 text-center_"><h4>Login</h4></header>
       <form action="{% url 'login' %}" method="POST">
         {% csrf_token %}
         <div>
-            <input style="margin-bottom:10px;" type="email" class="form-control" name="email" id="email" placeholder="Email Address">
-            <input style="margin-bottom:10px;" type="password" class="form-control" name="password" placeholder="Password" >
-            <a style="margin-bottom:10px;" href="#" class="float-right link-warning">Forgot password?</a>
-            <button style="margin-bottom:10px;" type="submit" class="btn btn-dark ">Login </button>
-            <p style="margin-bottom:10px;" class="text-center mt-4 text-white">Don't have account? <a href="{% url 'register' %}" class="link-warning">Sign up</a></p>
+            <input type="email" class="form-control margin-bot_" name="email" id="email" placeholder="Email Address">
+            <input type="password" class="form-control margin-bot_" name="password" placeholder="Password" >
+            <a href="#" class="float-right link-warning margin-bot_">Forgot password?</a>
+            <button type="submit" class="btn btn-dark margin-bot_">Login </button>
+            <p class="text-center mt-4 text-white margin-bot_">Don't have account? <a href="{% url 'register' %}" class="link-warning">Sign up</a></p>
         </div>
       </form>
     </div>

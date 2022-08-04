@@ -1,10 +1,50 @@
 
 /* -----------Base-------------- */
 /* navigation menu */
+body{
+  --nav-load-time: 300ms;
+  --nav-link-load-time: 500ms;
+  --article-load-delay: calc(var(--nav-load-time) + var(--nav-link-load-time))
+}
+
 
 #title {
     color: white!important;
 }
+
+/* Navigation bar */
+nav {
+  
+  animation: nav-load var(--nav-load-time) ease-in;
+}
+
+nav li {
+  
+  animation-name: nav-link-load;
+  animation-duration: var(--nav-link-load-time);
+  animation-timing-function: ease-in;
+  animation-delay: var(--nav-load-time);
+  animation-fill-mode: forwards;
+  transform: scale(0);
+}
+nav li:nth-child(1){
+  animation-name: nav-left-link-load;
+  transform: translateX(-1000%);
+}
+
+nav li:nth-child(2){
+  animation-name: nav-left-link-load;
+  transform: translateX(-1000%);
+}
+nav li:nth-child(4){
+  animation-name: nav-right-link-load;
+  transform: translateX(1000%);
+}
+nav li:nth-child(5){
+  animation-name: nav-right-link-load;
+  transform: translateX(1000%);
+}
+
 
 .navbar-brand {
     font-size: 2.5rem;
@@ -20,14 +60,18 @@
     text-decoration: none;
 }
 
-.nav-pad {   
-    padding-top: 0px;
-    padding-bottom: 0px;
+
+
+nav li:hover{
+  background-color: #FFFFFF44;
 }
 .span-margin {
     width:auto;
 }
 
+
+
+/* Shopping cart icon */
 .cart {
     width: 52px;
     height: 52px;
@@ -35,6 +79,7 @@
 .cart-icon {
     font-size: 0.5rem;
 }
+
 
 .br-pad {
     display: block;
@@ -49,7 +94,6 @@
 .nav-welcome_ {
     font-size: 15px;
 }
-
 
 /* Chatbot */
 .chatbot-icon_ {
@@ -133,20 +177,15 @@
 
 
 
-/* --------Shop----------- */
-/* Shop */
-
+/* Fetured Items */
 .product-image {
     width: 300px;
     height: 300px;
 }
 
 
+/* Feature items hover shadow */
 
-
-
-/* Cart */
-/*cart.html css*/
 .box-element {
     box-shadow: hsl(0, 0%, 80%) 0 0 16px;
     background-color: #ffff;
@@ -154,14 +193,66 @@
     padding: 10px;
 }
 
-
 .form-field {
-    width:300px;
+    width: 300px;
     display: inline-block;
-    padding:5px;
+    padding: 5px;
 }
 
 
 .nav-link-marg {
     margin:auto 80px auto 80px;
+}
+
+
+@keyframes nav-load {
+  0%{
+    transform: translateY(-100%)
+  }
+  100%{
+    transform: translateY(0)
+  }
+
+}
+
+@keyframes nav-link-load {
+  0% {
+    transform: scale(0);
+  }
+
+  90% {
+    transform: scale(1.1);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes nav-left-link-load {
+  0% {
+    transform: translateX(-1000%);
+  }
+
+  90% {
+    transform: translateX(50%);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes nav-right-link-load {
+  0% {
+    transform: translateX(1000%);
+  }
+
+  90% {
+    transform: translateX(-50%);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
 }

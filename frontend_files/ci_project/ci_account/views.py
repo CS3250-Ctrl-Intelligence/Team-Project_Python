@@ -23,6 +23,8 @@ from ci_cart.models import Cart,CartItem
 from ci_order.models import Order,OrderItem,Payment
 
 import datetime
+
+
 def register(request):
    # handle submission
     if request.method =='POST':
@@ -52,7 +54,6 @@ def register(request):
                     'domain' :current_site,
                     'uid': urlsafe_base64_encode(force_bytes(user.pk)),
                     'token': default_token_generator.make_token(user)
-
             })
             to_email = email
             send_email = EmailMessage(mail_subject, message, to=[to_email])

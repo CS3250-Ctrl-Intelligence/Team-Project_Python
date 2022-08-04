@@ -19,9 +19,11 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
   </script>
-  <script src="https://www.paypal.com/sdk/js?client-id=AcrsDZD_-zYS2KqqUK4BpfbHpufj7KkJjMtBYY5rK2R-NosuVjIiy_DkhjyXoL652Co8xMsAxUO8ViKY&currency=USD&disable-funding=card,paylater,venmo"></script>
-  <!-- AcrsDZD_-zYS2KqqUK4BpfbHpufj7KkJjMtBYY5rK2R-NosuVjIiy_DkhjyXoL652Co8xMsAxUO8ViKY -->
 
+  <!-- Paypal script -->
+  <script src="https://www.paypal.com/sdk/js?client-id=AcrsDZD_-zYS2KqqUK4BpfbHpufj7KkJjMtBYY5rK2R-NosuVjIiy_DkhjyXoL652Co8xMsAxUO8ViKY&currency=USD&disable-funding=card,paylater,venmo"></script>
+  
+  <!-- Favicon -->
   <link rel="shortcut icon" type ="image/x-icon" href="{% static 'favicon.ico' %}">
 
   <!-- Fonts -->
@@ -32,16 +34,16 @@
   <!-- Bootstrap -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
-  <link rel="stylesheet" href="assets/css/style.css">
+  
 
 
   <!-- Website Title -->
   <title>Ctrl Intelligence</title>
 </head>
 
-<body style="overflow-x:hidden;">
+<body>
 
-    <nav class="navbar navbar-expand-lg nav-pad navbar-dark bg-black text-white " >
+    <nav class=" navbar navbar-expand-lg nav-pad navbar-dark bg-black text-white p-0" >
       
       
       <div class="container-fluid">  
@@ -84,7 +86,7 @@
       </div>
       {% else %}
       <div class="nav-content widget-header">
-        <h5 style="font-size: 15px;" class="nav-content title text-muted">Welcome {{user.first_name}}</h5>
+        <h5 class="nav-content title text-muted nav-welcome_">Welcome {{user.first_name}}</h5>
         <div>
           <a class="nav-content" href="{% url 'dashboard' %}">Dashboard</a> <span > | </span>
           <a class="nav-content" href="{% url 'logout' %}">Logout</a>
@@ -108,51 +110,12 @@
     {% endblock %}
   </main>
 
-<!-- Chat Bot -->
 
-<link rel="stylesheet" href="{% static 'css/chatbot.css' %}" />
-<head>
-    <meta charset="UTF-8">
-    <title>Chatbot</title>
-</head>
-<body>
-<div class="container">
-    <div class="chatbox">
-        <div class="chatbox__support">
-            <div class="chatbox__header">
-                <div class="chatbox__image--header">
-                    <img src="https://img.icons8.com/color/48/000000/circled-user-female-skin-type-5--v1.png" alt="image">
-                </div>
-                <div class="chatbox__content--header">
-                    <h4 class="chatbox__heading--header">Chat support</h4>
-                    <p class="chatbox__description--header">Hi. My name is Sofi. How can I help you?</p>
-                </div>
-            </div>
-            <div class="chatbox__messages">
-                <div></div>
-            </div>
-            <div class="chatbox__footer">
-                <input type="text" placeholder="Write a message...">
-                <button class="chatbox__send--footer send__button">Send</button>
-            </div>
-        </div>
-        <div class="chatbox__button">
-            <button><img src="{% static 'images/chat.png'%}" class="chatbot-icon_"></button>
-        </div>
-    </div>
-</div>
-
-    <script >
-        $SCRIPT_ROOT = {request.script_root|tojson|safe };
-    </script>
-
-    <script type="text/javascript" src="{% static 'js/app.js' %}"></script>
-
-</body>
+  
 
 
   <!-- Footer -->
-  <body>
+
     <div class="footer-basic">
         <footer>
             <div class="social fa-github:hover"><a href="https://github.com/CS3250-Ctrl-Intelligence/Team-Project_Python"><i class="icon ion-social-github"></i></a>
@@ -164,9 +127,8 @@
             <p class="copyright">CTRL Intelligence © 2022</p>
         </footer>
     </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
-  </body>
+   
+ 
 
 </body>
 

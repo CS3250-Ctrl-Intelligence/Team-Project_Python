@@ -6,24 +6,17 @@
 <link rel="stylesheet" href="{% static 'css/productDetail.css' %}">
 
 <div class="container">
-    <div class="card mb-3" style=" border-radius: 30px; margin: 100px auto 200px auto; width: 70%;">
+    <div class="card mb-3 main-card_">
         <div class="row " >
-          <div class="col-lg-6" style="padding-left:100px; padding-top: 25px; padding-bottom:25px;">
-            <img src="{% static 'css/headphones.png' %}" width= "70%"; height="auto"; alt="...";>
+          <div class="col-lg-6 padding-top_">
+            <img class="" src="{% static 'images/headphones.png' %}" width= "70%"; height="auto"; alt="...";>
           </div>
-          <div class="col-lg-6" style="padding-right:100px; padding-top:45px;">
+          <div class="col-lg-6 padding-top_">
             <div class="card-body">
-              <h5 class="card-title" style="font-size: 3rem;">{{product_detail.product_id}}</h5>
+              <h5 class="card-title description-text_">{{product_detail.product_id}}</h5>
               <h6 class="card-title">$ {{product_detail.sale_price}}</h6>
               <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-              <!-- <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p> -->
-              <!-- <label for="select">Qty</label>
-                <select id="select">
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                </select> -->
+             
                 {% if product_detail.quantity <= 0 %}
                     <h5 class="text-danger">Out of Stock</h5>
                 {% else %}
@@ -39,27 +32,27 @@
       </div>
 </div>
 <br class="br-pad">
-<h3 style="text-align: center;">Customer reviews</h3>
-<div class="container" style="text-align: left; margin-bottom: 100px; width: 50%;">
+<h3 class="text-center_">Customer reviews</h3>
+<div class="container reviews-content_">
     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, 
     quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in 
     voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
 </div>
 <!--Related Products -->
-    <h3 style="text-align: center;">Check out these other products!</h3>
+    <h3 class="text-center_">Check out these other products!</h3>
     <br class="br-pad">
     <div class="container">
       <div class="row justify-content-center">
           {% for product in related %}
           <div class= "col-lg-4 col-auto">
-              <div class="bg-transparent card" style="margin: 15px 0;">
-                      <a href="{{product.get_url}}" style="text-decoration: none; color:black;">
+              <div class="bg-transparent card featured-card_">
+                      <a class="text-decoration-none text-dark" href="{{product.get_url}}">
                       <div>
-                          <img  class="product-image" src="{% static 'css/headphones.png' %}">
+                          <img  class="product-image" src="{% static 'images/headphones.png' %}">
                       </div> <!-- img-wrap.// -->
 
                           <div class="fix-height">
-                            <h4 style="text-align: center;">{{product.product_id}} <span class="price" style="font-size: 1rem; font-weight: 500;">  $ {{product.sale_price}}   </span></h4>
+                            <h4 class="text-center_">{{product.product_id}} <span class="price_">  $ {{product.sale_price}}   </span></h4>
                           </div>
                       </a>
                   </div> <!-- card-->

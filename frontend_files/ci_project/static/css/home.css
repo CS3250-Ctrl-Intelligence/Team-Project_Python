@@ -1,5 +1,3 @@
-/* Background */
-
 
 .card {
     text-align:center;
@@ -14,22 +12,38 @@
 .card:hover { 
     box-shadow: 1px 8px 20px grey;
     -webkit-transition:  box-shadow .6s ease-in;
+   
 }
-.blur {
+
+.main-card_ {
+    margin: 15px 0;
+}
+
+.price_ {
+    font-size: 1rem; 
+    font-weight: 500;
+}
+
+.home-pic_ {
+    height: auto; 
+    width: 60%;
+}
+
+.background-pict_ {
     height: 850px;
     position:relative;
     text-align:center;
     padding-top: 17%;
   }
   
-.blur:before {
+.background-pict_:before {
     content: "";
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background-image: linear-gradient(to top left, rgba(241,248,250,1),rgba(241, 248, 250, 0.1)),url('headphones.png');
+    background-image: linear-gradient(to top left, rgba(241,248,250,1),rgba(241, 248, 250, 0.1)),url('/static/images/headphones.png');
     background-repeat: no-repeat;
     background-position: center;
     background-attachment: fixed;
@@ -38,14 +52,39 @@
     z-index:0;
     opacity: .35;
 }
-.blur span {
+
+.background-pict_ span {
     position:relative;
     z-index:1;
 }
 
-.title-font {
-    font-family: Optima;
+@media screen and (min-width: 870px) {
+    .title-font_ {
+        font-family: Optima;
+        font-size: 7.5em;
+        width: 100%;
+        height: auto;
+    }
+}
+
+@media screen and (max-width: 869px) {
+    .title-font_ {
+        font-family: Optima;
+        font-size: 3.5em;
+        width: 100%;
+        height: auto;
+    }
+}
+
+
+.sub-title_ {
+    text-align: center; 
+    font-size: 4vw; 
     font-weight: bold;
-    font-size:5rem;
-    text-size-adjust: auto;
-} 
+}
+
+@media(max-width:768px){
+    .background-pict_{
+        height: 500px;
+    }
+}
