@@ -1,6 +1,9 @@
 
 /* -----------Base-------------- */
 /* navigation menu */
+html,body {
+  height:100%;
+}
 body{
   --nav-load-time: 300ms;
   --nav-link-load-time: 500ms;

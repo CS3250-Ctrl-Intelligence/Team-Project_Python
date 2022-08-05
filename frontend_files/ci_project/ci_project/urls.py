@@ -20,7 +20,7 @@ from django.conf.urls.static import static
 from ci_project import views
 
 urlpatterns = [
-    path('admin/',include('admin_honeypot.urls', namespace='admin_honeypot')),
+
     path('', views.home, name='home'),
     path('contactUs/',views.contactUs,name='contact'),
     path('about/',views.about,name='about'),
