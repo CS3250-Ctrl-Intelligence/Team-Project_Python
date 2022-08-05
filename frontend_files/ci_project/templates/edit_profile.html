@@ -11,9 +11,9 @@
         {% include 'dashboard_sidebar.html' %}
 
         <main class="col-lg-9 col-md-9">
-            <div class="card" style="padding:10px;">
+            <div class="card">
               <div>
-                <img src="{{userprofile.profile_picture.url}}" alt="Profile Picture" width="100" style="border-radius: 50%; ">
+                <img class="profile-pic_" src="{{userprofile.profile_picture.url}}" alt="Profile Picture">
               </div>
                 <form action="{% url 'edit_profile' %}" method="POST" enctype="multipart/form-data">
                     {% csrf_token %}

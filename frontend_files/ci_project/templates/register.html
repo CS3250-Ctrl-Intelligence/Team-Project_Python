@@ -4,31 +4,29 @@
 <link rel="stylesheet" href="{% static 'css/register.css' %}">
 <section class="section-content padding-y">
 
-    <div class="blur title-font"> 
+    <div class="background-pict_ title-font"> 
 
-        <div class="card mx-auto" style="max-width:520px; margin-top:40px;  background-color: rgba(0, 0, 0, 0.5); ">
+        <div class="card mx-auto register-card_">
         <article class="card-body">
         {% include 'alert.html'%}
         <header class="mb-4 text-white text-center" ><h4>Create an Account</h4></header>
         <form action="{% url 'register'%}" method="POST">
         {% csrf_token %}
     
-            <div style="width: 70%; margin:auto; ">
+            <div class="form-style_">
                 {{form.first_name}}
                 <br>
                 {{form.last_name}}
                 <br>
                 {{form.email}}
                 <br>
-                
                 {{form.password}}
                 <br>                       
                 {{form.password_confirmation}}
                 <br>
-                <div style="text-align: center;">
+                <div class="text-center">
                     <button type="submit" class="btn btn-dark"> Create your account  </button>
                 </div>
-            
                 {{form.email.errors}}
                 {{form.non_field_errors}}
                 <p class="text-center mt-4 text-white">Have an account? <a href="{% url 'login'%}" class="link-warning">Log In</a></p>  

@@ -1,52 +1,66 @@
 
+* {
+    box-sizing: border-box;
+}
+
+.order-text_ {
+    text-decoration: none; 
+    color: black;
+}
+
+.table {
+width: 100%;
+border-collapse: collapse;
+}
+
+.table td,.table th {
+    padding:12px 15px;
+    border:1px solid #ddd;
+    text-align: center;
+   
+}
+
+
+.table th {
+    background-color: black;
+    color:#ffffff;
+}
+
+.table body tr:nth-child(even){
+    background-color: #f5f5f5;
+}
+.table tr{
+    background-color: #ffffff;
+}
+
+/* responsive */
 @media
-    only screen 
-    and (max-width: 760px), (min-device-width: 768px) 
-    and (max-device-width: 1024px) {
-        /* Force table to not be like tables anymore */
-        table, thead, tbody, th, td, tr {
-            display: block;
-        }
-
-        /* Hide table headers (but not display: none;, for accessibility) */
-        thead tr {
-            position: absolute;
-            top: -9999px;
-            left: -9999px;
-        }
-
-        tr {
-        margin: 0 0 1rem 0;
-        }
-
-        tr:nth-child(odd) {
-        background: #ccc;
-        }
-
-        td {
-			/* Behave  like a "row" */
-			border: none;
-			border-bottom: 1px solid #eee;
-			position: relative;
-			padding-left: 50%;
-		}
-
-		td:before {
-			/* Now like a table header */
-			position: absolute;
-			/* Top/left values mimic padding */
-			top: 0;
-			left: 6px;
-			width: 45%;
-			padding-right: 10px;
-			
-		}
-
-        td:nth-of-type(1):before { content: "Order #"; }
-		td:nth-of-type(2):before { content: "Billing Name"; }
-		td:nth-of-type(3):before { content: "Email"; }
-		td:nth-of-type(4):before { content: "Order Total"; }
-		td:nth-of-type(5):before { content: "Date"; }
-		td:nth-of-type(6):before { content: "Refund Request"; }
-	
+only screen 
+and (max-width: 760px), (min-device-width: 768px) 
+and (max-device-width: 1024px){
+    .table thead{
+        display:none;
     }
+    .table,.table tbody, .table tr, .table td {
+        display:block;
+    width:100%;
+    }
+    .table tr{
+        margin-bottom: 15px;
+    }
+    .table td {
+        text-align: right;
+        padding-left: 50%;
+        position: relative;
+    }
+    .table td::before{
+        content: attr(data-label);
+        position:absolute;
+        left:0;
+        width:50%;
+        padding-left: 15px;
+        font-size:15px;
+        font-weight: bold;
+        text-align: left;
+    }
+}

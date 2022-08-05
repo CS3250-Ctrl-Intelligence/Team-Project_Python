@@ -1,4 +1,12 @@
 
+.text-center_ {
+    text-align: center;
+}
+
+.padding-top_ {
+    padding-top: 25px;
+}
+
 .card {
     text-align: center;
     width: 100%;
@@ -12,4 +20,30 @@
 .card:hover { 
     box-shadow: 1px 8px 20px grey;
     -webkit-transition:  box-shadow .6s ease-in;
+}
+
+.main-card_ {
+    border-radius: 30px; 
+    margin: 100px auto 200px auto; 
+    width: 70%;
+}
+
+.description-text_ {
+    font-size: 3rem;
+}
+
+.reviews-content_ {
+    text-align: left; 
+    margin-bottom: 100px; 
+    width: 50%;
+}
+
+.featured-card_ {
+    margin: 15px 0;
+}
+
+
+.price_ {
+    font-size: 1rem; 
+    font-weight: 500;
 }

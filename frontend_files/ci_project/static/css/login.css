@@ -16,7 +16,7 @@ form {
     text-align: center;
     margin: 20px auto;
    }
-.blur {
+.login-background_ {
     height: 1000px;
 
     position:relative;
@@ -24,14 +24,14 @@ form {
     padding-top:5%;
   }
   
-.blur:before {
+.login-background_:before {
     content: "";
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background-image: url(boy-login.jpg);
+    background-image: url(/static/images/boy-login.jpg);
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -39,7 +39,7 @@ form {
     z-index:-1;
     
 }
-.blur span {
+.login-background_ span {
     position:relative;
     z-index:1;
 }
@@ -59,7 +59,7 @@ form {
     left: 0;
     right: 0;
     bottom: 0;
-    background-image: url(laptop-bg.jpg);
+    background-image: url(/static/images/laptop-bg.jpg);
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -72,3 +72,27 @@ form {
     z-index:1;
 }
 
+.register-card_ {
+    max-width:500px; 
+    margin-top:60px; 
+    background-color:rgba(0, 0, 0, 0.5); 
+}
+
+.login-card_ {
+    max-width:300px; 
+    margin-top:40px; 
+    background-color: rgba(0, 0, 0, 0.5); 
+}
+
+.text-center_ {
+    text-align: center;
+}
+
+.margin-bot_ {
+    margin-bottom: 10px;
+}
+@media(max-width:768px){
+    .login-background_{
+        height: 700px;
+    }
+}

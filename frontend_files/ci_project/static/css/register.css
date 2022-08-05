@@ -1,20 +1,20 @@
 /* Register CSS */
 
-.blur {
+.background-pict_ {
     height: 1000px;
     position:relative;
     text-align:center;
     padding-top:5%;
   }
   
-.blur:before {
+.background-pict_:before {
     content: "";
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background-image: url(girl-register.jpg);
+    background-image: url(/static/images/girl-register.jpg);
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -22,7 +22,17 @@
     z-index:-1;
     
 }
-.blur span {
+.background-pict_ span {
     position:relative;
     z-index:1;
+}
+
+.register-card_ {
+    max-width:520px; 
+    margin-top:40px;  
+    background-color: rgba(0, 0, 0, 0.5); 
+}
+.form-style_{
+    width: 70%;
+    margin:auto;
 }

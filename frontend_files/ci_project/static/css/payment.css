@@ -3,3 +3,50 @@
     text-align: center;
     font-size: 4rem;
 }
+
+.main-card_ {
+    padding-left: 60px; 
+    padding-right:60px; 
+}
+
+.text-center_ {
+    text-align: center;
+}
+
+.text-right_ {
+    text-align: right;
+}
+
+.padding-right_ {
+    padding-right: 100px;
+}
+
+.margin-bot_ {
+    margin-bottom: 20px;
+}
+
+.border_ {
+    border: 1px; 
+    border-style: solid;
+}
+
+.line_ {
+    padding:0 17px 0 17px;
+}
+
+.item-pic_ {
+    width: 100%; 
+    height: auto;
+}
+
+.qty-card_ {
+    position: absolute; 
+    bottom: 0; 
+    right: 0; 
+    padding-right: 5px; 
+}
+
+.qty-card-text_ {
+    text-align: right; 
+    width: auto; 
+}

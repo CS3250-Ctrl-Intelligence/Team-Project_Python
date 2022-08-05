@@ -2,15 +2,14 @@
 {% load static %}
 {% block content%}
 
+<!-- Order detail within dashboard -->
+
+
 <link rel="stylesheet" href="{% static 'css/order_complete.css' %}">
 
-
-
-
-
-<div class="box-element"style="width:60%; margin:auto;">
-    <div style="text-align:right; line-height: 1;">
-        <h5 style="font-weight:bold;"> Invoiced To</h5>
+<div class="box-element card_">
+    <div class="card-contents_">
+        <h5 class="bold_"> Invoiced To</h5>
         <p>{{order.first_name}} {{order.last_name}}</p>
         <p>{{order.address}}</p>
         <p>{{order.city}}, {{order.state}} {{order.zipcode}}</p>
@@ -45,7 +44,7 @@
 
     </table>
     
-    <div style="text-align:right">
+    <div class="text-right_">
         <h5>SubTotal: ${{subtotal}}</h5>
         <h5>Tax: ${{order.tax}}</h5>
         <h5>Total: ${{order.order_total}}</h5>

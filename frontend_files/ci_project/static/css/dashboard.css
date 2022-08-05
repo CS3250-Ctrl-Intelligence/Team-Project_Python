@@ -4,3 +4,23 @@
     font-size: 4rem;
 }
 
+.dashboard-content-orders_ {
+    text-align:center; 
+    font-weight:bold; 
+    position: relative; 
+    top:30%;
+}
+
+.dashboard-content-info_ {
+    text-align: center; 
+    padding: 10px;
+}
+
+.profile-pic_ {
+    width: 100px;
+    border-radius: 50%;
+}
+
+.card {
+    padding: 10px;
+}

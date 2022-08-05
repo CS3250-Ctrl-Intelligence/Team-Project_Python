@@ -10,7 +10,7 @@
     <div class="row justify-content-center align-items-center">
         {% include 'dashboard_sidebar.html' %}
 
-        <main class="col-lg-9 col-md-9">
+        <main class="col-lg-9 ">
             <div class="card">
                 <div class="card-header">
                    <b> Logged in as :</b>  {{user.first_name}} {{ user.last_name}}
@@ -18,15 +18,15 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-lg-6 ">
-                            <div class="" style="text-align:center; font-weight:bold; position: relative; top:30%;">
-                                <h5 > Total Order </h5>
-                                <p >{{order_count}}</p>
+                            <div class="dashboard-content-orders_">
+                                <h5>Total Order </h5>
+                                <p>{{order_count}}</p>
                                 <a href="{% url 'my_orders' %}">View Orders</a>
                             </div>
                         </div>
                         <div class="col-lg-6">
-                            <div class="border" style="text-align: center; padding: 10px;">
-                                <img src="{{userprofile.profile_picture.url}}" alt="Profile Picture" width="100" style="border-radius: 50%; ">
+                            <div class="border dashboard-content-info_">
+                                <img class="profile-pic_" src="{{userprofile.profile_picture.url}}" alt="Profile Picture">
                                 
                                 <p>{{user.email}}</p>
                                 <p>{{userprofile.address}} {{userprofile.city}}, {{userprofile.state}} {{userprofile.zip}}</p>
@@ -43,6 +43,7 @@
 
 
 </div>
+
 
 
 {% endblock %}

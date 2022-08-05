@@ -7,7 +7,7 @@
 <script src="https://js.stripe.com/v3/"></script>
 <h2 class="heading"> Review Your Order and Make Payment</h2>
 
-<div class="row" style="padding-left: 60px; padding-right:60px; ">
+<div class="row main-card_">
     <!-- Information-->
     <div class="col-lg-9">
         <div class="card">
@@ -32,20 +32,20 @@
             </div>
         </div>
         <br>
-        <div class="card" style="margin-bottom: 20px;">
+        <div class="card margin-bot_">
             <h5 class="card-header">Product Review</h5>
             {% for item_in_cart in cart_items %}
-            <div class="card mb-3 mt-3 ms-3 me-3" style="border: 1px; border-style: solid;" >
+            <div class="card mb-3 mt-3 ms-3 me-3 border_">
 
                 <div class="row no-gutters">
 
                     <!-- Item image -->
                     <div class="col-lg-3  col-md-6">
                         <div>
-                            <img class="picture-float" src="{% static 'css/headphones.png' %}" alt="product-pict" style="width:100%; height: auto;">
+                            <img class="picture-float item-pic_" src="{% static 'images/headphones.png' %}" alt="product-pict">
                         </div>
                         <div>
-                            <h4 style="text-align: center;">Return by mail only</h4>
+                            <h4 class="text-center_">Return by mail only</h4>
                         </div>
                     </div>
 
@@ -66,8 +66,8 @@
 
                     <!-- Item Quantity -->
                     <div class="col-lg-6 "  >
-                        <div style="position: absolute; bottom: 0; right: 0; padding-right: 5px; " >                                                   
-                            <h3 style ="text-align: right; width: auto; ">Qty: {{item_in_cart.quantity}}</h3>
+                        <div class="qty-card_"  >                                                   
+                            <h3 class="qty-card-text_">Qty: {{item_in_cart.quantity}}</h3>
                         </div>
                     </div>
                     
@@ -83,7 +83,7 @@
 
 
     <!-- Price Info-->
-    <div class="col-lg-3" style="padding-right:100px;">
+    <div class="col-lg-3 padding-right_" >
         <div class="mr-auto box-element">
             <br>
             <div class="row">
@@ -91,23 +91,23 @@
                     <h5>Subtotal: </h5>
                 </div>
                 <div class="col-lg-6">
-                    <p style="text-align: right;">$ {{total}}</p>
+                    <p class="text-right_" >$ {{total}}</p>
                 </div>
                 <div class="col-lg-6">
                     <h5>Tax: </h5>
                 </div>
                 <div class="col-lg-6">
-                    <p style="text-align: right;">$ {{tax}}</p>
+                    <p class="text-right_">$ {{tax}}</p>
                 </div>
                 <div>
-                    <hr style="padding:0 17px 0 17px;">
+                    <hr class="line_">
                 </div>
 
                 <div class="col-lg-6">
                     <h5>Total: </h5>
                 </div>
                 <div class="col-lg-6">
-                    <p style="text-align: right;">$ {{grand_total}}</p>
+                    <p class="text-right_">$ {{grand_total}}</p>
                 </div>
             </div>
             <p class="text-center mb-3">
@@ -133,7 +133,7 @@
 <br>
 <hr>
 
-<div style="text-align: center;">
+<div class="text-center_">
     <p>The price and availability of items are subject to change. The Cart is a temporary place to store a list of
         your items and reflects each item's most recent price. </p>
 </div>
