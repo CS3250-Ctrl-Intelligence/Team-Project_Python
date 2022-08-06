@@ -9,9 +9,9 @@ from django.views import View
 from django.conf import settings
 from django.contrib import messages
 from django.core.exceptions import ObjectDoesNotExist
-from django.core.mail import EmailMessage,EmailMultiAlternatives,send_mail
+from django.core.mail import send_mail
 from django.template.loader import render_to_string
-from django.template import loader
+
 
 
 from ci_cart.models import CartItem,Cart
@@ -97,18 +97,12 @@ def payments(request):
     subtotal = round(subtotal,2)
     
     # Send email to customer
-    
     context={'user':request.user,'order':order,'order_detail':order_detail,'subtotal':subtotal,'recommendation':products_based_on_supplier}
+    html_message = render_to_string('order_comfirmation.html', context)
+    
+    send_mail('Thank You For Your Order!',html_message,"bounces+28347242@em9511.ctrlintel.shop",[request.user.email])
 
-    html_template = 'order_confirmation.html'
-    html_message = render_to_string(html_template, context)
-    subject = 'Thank You For Your Order!'
-    email_from = settings.EMAIL_HOST_USER
-    recipient_list = [request.user.email]
-    message = EmailMessage(subject, html_message,
-                            email_from, recipient_list)
-    message.content_subtype = 'html'
-    message.send()
+
     # Send order number and payment transaction id back to sendData function via JsonResponse and populate Thank you page
     data={
         'order_number':order.order_number,

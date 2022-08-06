@@ -58,8 +58,8 @@ textarea {
 
 .background-pict_ {
   height: 1000px;
-  position:relative;
-  text-align:center;
+  position: relative;
+  text-align: center;
   padding-top: 5%;
 }
 
@@ -75,7 +75,6 @@ textarea {
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
- 
   z-index:-1;
   
 }

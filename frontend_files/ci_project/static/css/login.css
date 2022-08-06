@@ -16,12 +16,13 @@ form {
     text-align: center;
     margin: 20px auto;
    }
-.login-background_ {
-    height: 1200px;
 
-    position:relative;
-    text-align:center;
-    padding-top:5%;
+.login-background_ {
+    height: 1270px;
+    width: 100%;
+    position: relative;
+    text-align: center;
+    padding-top: 5%;
   }
   
 .login-background_:before {
@@ -44,7 +45,7 @@ form {
     z-index:1;
 }
 
-.blur2 {
+.register-background-2_ {
     height: 1000px;
 
     position:relative;
@@ -52,7 +53,7 @@ form {
     padding-top:5%;
   }
   
-.blur2:before {
+.register-background-2_:before {
     content: "";
     position: absolute;
     top: 0;
@@ -67,7 +68,7 @@ form {
     z-index:-1;
     
 }
-.blur2 span {
+.register-background-2_ span {
     position:relative;
     z-index:1;
 }
@@ -91,8 +92,15 @@ form {
 .margin-bot_ {
     margin-bottom: 10px;
 }
-@media(max-width:768px){
-    .login-background_{
-        height: 700px;
-    }
+
+@media(max-width:400px){
+  .login-background_{
+      height: 750px;
+  }
 }
+
+@media(max-width:400px){
+    .register-background-2_{
+        height: 400px;
+    }
+  }

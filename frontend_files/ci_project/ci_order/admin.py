@@ -1,5 +1,5 @@
 from django.contrib import admin
-from django.core.mail import EmailMessage
+from django.core.mail import send_mail
 from django.template.loader import render_to_string
 from django.conf import settings
 
@@ -15,11 +15,8 @@ def make_refund_acccepted(modeladmin,request,queryset):
         
         else:
             i.refund_requested = False
-
             i.refund_granted= True
             i.save()    
-            
-
 
             # loop through items in order to add product quantity back to inventory
             order= Order.objects.get(order_number=i.order_number)
@@ -31,28 +28,11 @@ def make_refund_acccepted(modeladmin,request,queryset):
                 product.save()
 
             # Send refund confirmation email to customer
-            # mail_subject = 'Your order has been refunded'
-            # message = render_to_string('refundGranted.html',{
-            #         'first_name':i.first_name,
-            #         'order_number':i.order_number,  
-            #         'last_name':i.last_name,  
-            #         })
-            # to_email = i.email
-
-            # send_email = EmailMessage(mail_subject, message, to=[to_email])
-            # send_email.send()
-
+            
             context={'user':request.user,'order':order}
-
-            html_template = 'refundGranted.html'
-            html_message = render_to_string(html_template, context)
+            html_message = render_to_string('refundGranted.html', context)
             subject = 'Refund Confirmation'
-            email_from = settings.EMAIL_HOST_USER
-            recipient_list = [i.email]
-            message = EmailMessage(subject, html_message,
-                                    email_from, recipient_list)
-            message.content_subtype = 'html'
-            message.send()
+            send_mail('Refund Confirmation',html_message,"bounces+28347242@em9511.ctrlintel.shop",[i.email])
 
 make_refund_acccepted.short_description='Approve refund'
 

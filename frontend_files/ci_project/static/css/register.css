@@ -28,7 +28,7 @@
 }
 
 .register-card_ {
-    max-width:520px; 
+    max-width:500px; 
     margin-top:40px;  
     background-color: rgba(0, 0, 0, 0.5); 
 }
@@ -36,3 +36,15 @@
     width: 70%;
     margin:auto;
 }
+
+@media(max-width:415px){
+    .background-pict_{
+        height: 750px;
+    }
+
+    .register-card_ {
+        max-width:350px; 
+        margin-top:40px;  
+        background-color: rgba(0, 0, 0, 0.5); 
+    }
+  }
