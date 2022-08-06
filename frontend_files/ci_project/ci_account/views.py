@@ -12,8 +12,7 @@ from django.template.loader import render_to_string
 from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 from django.utils.encoding import force_bytes
 from django.contrib.auth.tokens import default_token_generator
-from django.core.mail import EmailMessage,EmailMultiAlternatives
-from django.template import loader
+from django.core.mail import send_mail
 
 
 from ci_account.forms import RegistrationForm,UserProfileForm,UserForm
@@ -55,10 +54,9 @@ def register(request):
                     'uid': urlsafe_base64_encode(force_bytes(user.pk)),
                     'token': default_token_generator.make_token(user)
             })
-            to_email = email
-            send_email = EmailMessage(mail_subject, message, to=[to_email])
-            send_email.send()
-            #messages.success(request,'Please check your email to verify your account.')
+
+            send_mail(mail_subject,message,'bounces+28347242@em9511.ctrlintel.shop',[email])
+           
             # redirect to login page
             return redirect('/account/login/?command=verification&email='+email)
     else:

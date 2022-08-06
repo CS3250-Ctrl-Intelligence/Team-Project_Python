@@ -30,9 +30,9 @@
 }
 
 .background-pict_ {
-    height: 850px;
-    position:relative;
-    text-align:center;
+    height: 1000px;
+    position: relative;
+    text-align: center;
     padding-top: 17%;
   }
   
@@ -43,14 +43,13 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-image: linear-gradient(to top left, rgba(241,248,250,1),rgba(241, 248, 250, 0.1)),url('/static/images/headphones.png');
+    background-image: url('/static/images/black-headphones.jpg');
     background-repeat: no-repeat;
     background-position: center;
     background-attachment: fixed;
-    background-size: contain;
-    filter: blur(2px);
-    z-index:0;
-    opacity: .35;
+    background-size: cover;
+    z-index:-1;
+    
 }
 
 .background-pict_ span {
@@ -64,6 +63,7 @@
         font-size: 7.5em;
         width: 100%;
         height: auto;
+        color: white;
     }
 }
 
@@ -73,18 +73,23 @@
         font-size: 3.5em;
         width: 100%;
         height: auto;
+        color: white;
     }
 }
 
 
 .sub-title_ {
     text-align: center; 
-    font-size: 4vw; 
-    font-weight: bold;
+    font-size: 2.5vw; 
+   
+    font-family: Helvetica, sans-serif;
 }
 
-@media(max-width:768px){
+@media(max-width:400px){
     .background-pict_{
-        height: 500px;
+        height: 750px;
+        position: relative;
+        text-align: center;
+        padding-top: 17%;
     }
 }
