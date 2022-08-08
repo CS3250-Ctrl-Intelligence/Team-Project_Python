@@ -4,6 +4,7 @@
 
 <link rel="stylesheet" href="{% static 'css/cart.css' %}">
 
+<div class="set-height_">
 
 {% if not cart_items %}
     <h2 class="heading">Shopping Cart</h2>
@@ -127,9 +128,9 @@
         <p>The price and availability of items are subject to change. The Cart is a temporary place to store a list of
             your items and reflects each item's most recent price. </p>
     </div>
-    
+
 
     {% endif %}
-
+</div>
 
     {% endblock %}
