@@ -15,6 +15,10 @@
     display: inline-block;
 }
 
+.set-height_ {
+    min-height: 900px;
+  }
+
 .item-card_ {
     border: 1px; 
     border-style: solid;

@@ -74,14 +74,13 @@
         width: 100%;
         height: auto;
         color: white;
+        margin-top: 150px;
     }
 }
-
 
 .sub-title_ {
     text-align: center; 
     font-size: 2.5vw; 
-   
     font-family: Helvetica, sans-serif;
 }
 
