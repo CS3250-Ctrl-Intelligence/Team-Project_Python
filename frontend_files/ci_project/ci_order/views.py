@@ -97,7 +97,12 @@ def payments(request):
     subtotal = round(subtotal,2)
     
     # Send email to customer
-    context={'user':request.user,'order':order,'order_detail':order_detail,'subtotal':subtotal,'recommendation':products_based_on_supplier}
+    context={
+        'user':request.user,
+        'order':order,
+        'order_detail':order_detail,
+        'subtotal':subtotal,
+        'recommendation':products_based_on_supplier}
     html_message = render_to_string('order_comfirmation.html', context)
     
     send_mail('Thank You For Your Order!',html_message,"bounces+28347242@em9511.ctrlintel.shop",[request.user.email])
