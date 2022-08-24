@@ -7,50 +7,51 @@
 
 
 <h2 class="heading"> Payment Successful</h2>
-
-<div class="box-element card_">
-    <div class="text_">
-        <h5>Invoiced To</h5>
-        <p>{{order.first_name}} {{order.last_name}}</p>
-        <p>{{order.address}}</p>
-        <p>{{order.city}}, {{order.state}} {{order.zipcode}}</p>
-    </div>
-    <div>
-        <h5>Order #: {{order_number}} </h5>
-        <h5>Transaction #: {{transId}}</h5>
-        <h5>Order Date: {{order.created_at}}</h5>
-        <h5>Status: {{payment.status}}</h5>
-
-    </div>
-    <table>
-        <thead>
-            <tr>
-                <th>Description</th>
-                <th>Qty</th>
-                <th>Price</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for items in ordered_items %}
-
-            <tr>
-                <td>{{items.product.product_id}}</td>
-                <td>{{items.quantity}}</td>
-                <td>{{items.price}}</td>
-            </tr>
-            {% endfor %}
+<div class="set-height_">
+    <div class="box-element card_">
+        <div class="text_">
+            <h5>Invoiced To</h5>
+            <p>{{order.first_name}} {{order.last_name}}</p>
+            <p>{{order.address}}</p>
+            <p>{{order.city}}, {{order.state}} {{order.zipcode}}</p>
+        </div>
+        <div>
+            <h5>Order #: {{order_number}} </h5>
+            <h5>Transaction #: {{transId}}</h5>
+            <h5>Order Date: {{order.created_at}}</h5>
+            <h5>Status: {{payment.status}}</h5>
             
-        </tbody>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Description</th>
+                    <th>Qty</th>
+                    <th>Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for items in ordered_items %}
+                
+                <tr>
+                    <td>{{items.product.product_id}}</td>
+                    <td>{{items.quantity}}</td>
+                    <td>{{items.price}}</td>
+                </tr>
+                {% endfor %}
+                
+            </tbody>
+            
+            
+        </table>
         
-
-    </table>
-    
-    <div class="text-right_">
-        <h5>Subtotal: $ {{subtotal}}</h5>
-        <h5>Tax: ${{order.tax}}</h5>
-        <h5>Total: ${{order.order_total}}</h5>
-
+        <div class="text-right_">
+            <h5>Subtotal: $ {{subtotal}}</h5>
+            <h5>Tax: ${{order.tax}}</h5>
+            <h5>Total: ${{order.order_total}}</h5>
+            
+        </div>
     </div>
 </div>
-
-{% endblock %}
+    
+    {% endblock %}

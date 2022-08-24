@@ -1,8 +1,13 @@
+
 .heading {
     padding-top: 15px;
     text-align: center;
     font-size: 4rem;
 }
+
+.set-height_ {
+    min-height: 900px;
+  }
 
 .dashboard-content-orders_ {
     text-align:center; 

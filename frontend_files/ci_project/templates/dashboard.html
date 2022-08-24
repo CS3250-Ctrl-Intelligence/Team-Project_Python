@@ -6,44 +6,48 @@
 
 
 <h2 class="heading">Dashboard</h2>
-<div class="container">
-    <div class="row justify-content-center align-items-center">
-        {% include 'dashboard_sidebar.html' %}
 
-        <main class="col-lg-9 ">
-            <div class="card">
-                <div class="card-header">
-                   <b> Logged in as :</b>  {{user.first_name}} {{ user.last_name}}
-                </div>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-lg-6 ">
-                            <div class="dashboard-content-orders_">
-                                <h5>Total Order </h5>
-                                <p>{{order_count}}</p>
-                                <a href="{% url 'my_orders' %}">View Orders</a>
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="border dashboard-content-info_">
-                                <img class="profile-pic_" src="{{userprofile.profile_picture.url}}" alt="Profile Picture">
-                                
-                                <p>{{user.email}}</p>
-                                <p>{{userprofile.address}} {{userprofile.city}}, {{userprofile.state}} {{userprofile.zip}}</p>
-
-                            </div>
-                        </div>
+<div class="set-height_">
+    
+    <div class="container">
+        <div class="row justify-content-center align-items-center">
+            {% include 'dashboard_sidebar.html' %}
+            
+            <main class="col-lg-9 ">
+                <div class="card">
+                    <div class="card-header">
+                        <b> Logged in as :</b>  {{user.first_name}} {{ user.last_name}}
                     </div>
-
-
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-lg-6 ">
+                                <div class="dashboard-content-orders_">
+                                    <h5>Total Order </h5>
+                                    <p>{{order_count}}</p>
+                                    <a href="{% url 'my_orders' %}">View Orders</a>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="border dashboard-content-info_">
+                                    <img class="profile-pic_" src="{{userprofile.profile_picture.url}}" alt="Profile Picture">
+                                    
+                                    <p>{{user.email}}</p>
+                                    <p>{{userprofile.address}} {{userprofile.city}}, {{userprofile.state}} {{userprofile.zip}}</p>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        
+                        
+                    </div>
                 </div>
-            </div>
-        </main>
+            </main>
+        </div>
+        
+        
     </div>
-
-
 </div>
-
-
-
-{% endblock %}
+    
+    
+    
+    {% endblock %}

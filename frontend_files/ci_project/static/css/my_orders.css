@@ -3,6 +3,10 @@
     box-sizing: border-box;
 }
 
+
+.set-height_{
+    min-height: 900px;
+}
 .order-text_ {
     text-decoration: none; 
     color: black;
