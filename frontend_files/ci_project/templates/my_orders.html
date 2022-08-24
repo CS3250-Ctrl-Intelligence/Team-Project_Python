@@ -7,52 +7,54 @@
 
 
 <h2 class="heading">My Order</h2>
-<div class="container" >
+<div class="set-height_">
+  <div class="container" >
     <div class="row justify-content-center">
-        {% include 'dashboard_sidebar.html' %}
-        <div class="col-lg-9 ">
-              <table class="table">
-                <thead>
-                  <th>Order #</th>
-                  <th>Billing Name</th>
-                  <th>Email</th>
-                  <th>Order Total</th>
-                  <th>Date</th>
-                  <th>Refund Request</th>
-                </thead>
-                <tbody>
-                  {% for order in orders %}
-                  <tr>
-                    <td data-label="Order #"> <a href="{% url 'order_detail' order.order_number %}">{{order.order_number}}</a></td>
-                    <td data-label="Billing Name">{{order.first_name}} {{order.last_name}}</td>
-                    <td data-label="Email">{{order.email}}</td>
-                    <td data-label="Order Total">$ {{order.order_total}}</td>
-                    <td data-label="Date">{{order.created_at}}</td>
-                    <td data-label="Refund Request"> 
-                      {% if order.refund_allow %}
-                      <a href="{% url 'refund_request' order.order_number %}" type="button" id="button-minus" class="btn btn-primary order-text_">
-                        Refund
-                      {% else %}
-                      <button type="button" class="btn btn-secondary" disabled>Non-Refundable</button>
-                      {% endif %}
-                    </a>
-                    </td>
-                  </tr>
-                  {% endfor %}
-              
-                </tbody>
-              
-              </table>
-           
-             
-        </div>
+      {% include 'dashboard_sidebar.html' %}
+      <div class="col-lg-9 ">
+        <table class="table">
+          <thead>
+            <th>Order #</th>
+            <th>Billing Name</th>
+            <th>Email</th>
+            <th>Order Total</th>
+            <th>Date</th>
+            <th>Refund Request</th>
+          </thead>
+          <tbody>
+            {% for order in orders %}
+            <tr>
+              <td data-label="Order #"> <a href="{% url 'order_detail' order.order_number %}">{{order.order_number}}</a></td>
+              <td data-label="Billing Name">{{order.first_name}} {{order.last_name}}</td>
+              <td data-label="Email">{{order.email}}</td>
+              <td data-label="Order Total">$ {{order.order_total}}</td>
+              <td data-label="Date">{{order.created_at}}</td>
+              <td data-label="Refund Request"> 
+                {% if order.refund_allow %}
+                <a href="{% url 'refund_request' order.order_number %}" type="button" id="button-minus" class="btn btn-primary order-text_">
+                  Refund
+                  {% else %}
+                  <button type="button" class="btn btn-secondary" disabled>Non-Refundable</button>
+                  {% endif %}
+                </a>
+              </td>
+            </tr>
+            {% endfor %}
+            
+          </tbody>
+          
+        </table>
+        
+        
+      </div>
     </div>
-
-
+    
+    
+  </div>
+  
 </div>
-
-
-
-
-{% endblock %}
-
+  
+  
+  
+  {% endblock %}
+  

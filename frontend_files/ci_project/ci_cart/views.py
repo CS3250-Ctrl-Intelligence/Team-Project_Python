@@ -39,25 +39,7 @@ def extract_time(time):
     return time
 
 
-def session_expired():
-    time = datetime.datetime.now()
-    now = extract_time(time)
-    cart = Cart.objects.all()
-    for id in cart:
-        print(id.date_added)
-        session_time=extract_time(id.date_added)
-        # print(now)
-        # print(now-session_time)
-        if(now-session_time >=1):
-            print("True")
-            cart_item = CartItem.objects.filter(cart=id)
-            for item in cart_item:
-                product = Product.objects.get(product_id=item.product.product_id)
-                print(product)
-                product.quantity += item.quantity
-                product.save()
-            id.delete()
-    
+
 
 def _cart_session(request):
     cart = request.session.session_key
@@ -106,8 +88,7 @@ def cart_add(request, product_id):
             else:
                 cart_items = CartItem.objects.create(product=product, quantity = 1, cart = cart)
             cart_items.save() # save new item
-        product.quantity -=1
-        product.save()
+        
         
     return redirect('cart')
 
@@ -122,8 +103,7 @@ def cart(request, total=0, quantity = 0, cart_items = None,tax=0, grand_total = 
             cart_items = CartItem.objects.filter(cart = cart, is_active= True)
         # loop through the items in cart to find total and quantity
         for cart_item in cart_items:
-            print(datetime.datetime.now())
-            print(cart_item.cart.date_added)
+
             total += (cart_item.product.sale_price * cart_item.quantity)
             quantity += cart_item.quantity
         tax = (2* total)/100 #.2 tax
@@ -158,9 +138,7 @@ def cart_remove(request,product_id):
         cart_item.save()
     else:
         cart_item.delete()
-    # if cart quantity is decreased, then increase cart 
-    product.quantity +=1
-    product.save()
+    
     return redirect('cart')
 
 def cart_item_remove(request,product_id):

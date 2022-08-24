@@ -67,9 +67,9 @@ def payments(request):
         customer_order.save()
 
         # Reduce the quantity of sold products in inventory
-        # product = Product.objects.get(id=items.product_id)
-        # product.quantity -= items.quantity
-        # product.save()
+        product = Product.objects.get(id=items.product_id)
+        product.quantity -= items.quantity
+        product.save()
 
     # filter most expensive item in order
     # most_expensive = OrderItem.objects.filter(user=request.user).order_by('-price')[:1].get()
@@ -80,7 +80,7 @@ def payments(request):
 
     # filter highest quantity in ordered history
     highest_quantity= OrderItem.objects.filter(user=request.user).order_by('-quantity')[:1].get()
-    print(highest_quantity)
+
     products_based_on_supplier = Product.objects.filter(supplier_id=highest_quantity.product.supplier_id).exclude(slug=highest_quantity.product.slug)[:8]
   
 
@@ -103,7 +103,7 @@ def payments(request):
         'order_detail':order_detail,
         'subtotal':subtotal,
         'recommendation':products_based_on_supplier}
-    html_message = render_to_string('order_comfirmation.html', context)
+    html_message = render_to_string('order_confirmation.html', context)
     
     send_mail('Thank You For Your Order!',html_message,"bounces+28347242@em9511.ctrlintel.shop",[request.user.email])
 

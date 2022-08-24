@@ -38,3 +38,6 @@ td,th {
 .text-right_ {
     text-align: right;
 }
+.set-height_ {
+    min-height: 800px;
+}
